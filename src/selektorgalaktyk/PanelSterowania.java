@@ -42,7 +42,7 @@ public class PanelSterowania extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MenuUstawieniaObrazu.setText("Menu Ustawienia Obrazu");
+        MenuUstawieniaObrazu.setText("Ustawienia Obrazu");
 
         NatezenieKolorow.setText("Natężenie Kolorów");
         MenuUstawieniaObrazu.add(NatezenieKolorow);
@@ -55,7 +55,7 @@ public class PanelSterowania extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuUstawieniaObrazu);
 
-        MenuUstawieniaSelekcji.setText("Menu Ustawienia Selekcji");
+        MenuUstawieniaSelekcji.setText("Ustawienia Selekcji");
 
         ParametryDetekcji.setText("Parametry Detekcji");
         MenuUstawieniaSelekcji.add(ParametryDetekcji);
@@ -124,22 +124,16 @@ public class PanelSterowania extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PanelSterowania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PanelSterowania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PanelSterowania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PanelSterowania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PanelSterowania().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PanelSterowania().setVisible(true);
         });
     }
 

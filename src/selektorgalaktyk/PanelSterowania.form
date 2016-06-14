@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="MenuUstawieniaObrazu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Menu Ustawienia Obrazu"/>
+            <Property name="text" type="java.lang.String" value="Ustawienia Obrazu"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="NatezenieKolorow">
@@ -28,7 +28,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuUstawieniaSelekcji">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Menu Ustawienia Selekcji"/>
+            <Property name="text" type="java.lang.String" value="Ustawienia Selekcji"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="ParametryDetekcji">
