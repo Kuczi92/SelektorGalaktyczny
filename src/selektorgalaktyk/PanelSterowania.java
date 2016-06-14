@@ -15,6 +15,7 @@ public class PanelSterowania extends javax.swing.JFrame {
      * Creates new form PanelSterowania
      */
     public PanelSterowania() {
+        super("Selektor Galaktyczny");
         initComponents();
     }
 
@@ -27,7 +28,63 @@ public class PanelSterowania extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        MenuUstawieniaObrazu = new javax.swing.JMenu();
+        NatezenieKolorow = new javax.swing.JMenuItem();
+        UstawieniaObrazu = new javax.swing.JMenuItem();
+        OperacjeNaObrazach = new javax.swing.JMenuItem();
+        MenuUstawieniaSelekcji = new javax.swing.JMenu();
+        ParametryDetekcji = new javax.swing.JMenuItem();
+        UstawieniaPłaskiPrzekątny = new javax.swing.JMenuItem();
+        UstawieniaPłaskiSymetryczny = new javax.swing.JMenuItem();
+        UstawieniaPełny = new javax.swing.JMenuItem();
+        UstawieniaNieregularne = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        MenuUstawieniaObrazu.setText("Menu Ustawienia Obrazu");
+
+        NatezenieKolorow.setText("Natężenie Kolorów");
+        MenuUstawieniaObrazu.add(NatezenieKolorow);
+
+        UstawieniaObrazu.setText("Ustawienia Obrazu");
+        MenuUstawieniaObrazu.add(UstawieniaObrazu);
+
+        OperacjeNaObrazach.setText("Operacje Na Obrazach");
+        MenuUstawieniaObrazu.add(OperacjeNaObrazach);
+
+        jMenuBar1.add(MenuUstawieniaObrazu);
+
+        MenuUstawieniaSelekcji.setText("Menu Ustawienia Selekcji");
+
+        ParametryDetekcji.setText("Parametry Detekcji");
+        MenuUstawieniaSelekcji.add(ParametryDetekcji);
+
+        UstawieniaPłaskiPrzekątny.setText("Ustawienia Płaski - Przekątny ");
+        UstawieniaPłaskiPrzekątny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UstawieniaPłaskiPrzekątnyActionPerformed(evt);
+            }
+        });
+        MenuUstawieniaSelekcji.add(UstawieniaPłaskiPrzekątny);
+
+        UstawieniaPłaskiSymetryczny.setText("Ustawienia Płaski - Symetryczny");
+        UstawieniaPłaskiSymetryczny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UstawieniaPłaskiSymetrycznyActionPerformed(evt);
+            }
+        });
+        MenuUstawieniaSelekcji.add(UstawieniaPłaskiSymetryczny);
+
+        UstawieniaPełny.setText("Ustawienia Pełny");
+        MenuUstawieniaSelekcji.add(UstawieniaPełny);
+
+        UstawieniaNieregularne.setText("Ustawienia Nieregularne");
+        MenuUstawieniaSelekcji.add(UstawieniaNieregularne);
+
+        jMenuBar1.add(MenuUstawieniaSelekcji);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +94,19 @@ public class PanelSterowania extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void UstawieniaPłaskiPrzekątnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UstawieniaPłaskiPrzekątnyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UstawieniaPłaskiPrzekątnyActionPerformed
+
+    private void UstawieniaPłaskiSymetrycznyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UstawieniaPłaskiSymetrycznyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UstawieniaPłaskiSymetrycznyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +144,16 @@ public class PanelSterowania extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuUstawieniaObrazu;
+    private javax.swing.JMenu MenuUstawieniaSelekcji;
+    private javax.swing.JMenuItem NatezenieKolorow;
+    private javax.swing.JMenuItem OperacjeNaObrazach;
+    private javax.swing.JMenuItem ParametryDetekcji;
+    private javax.swing.JMenuItem UstawieniaNieregularne;
+    private javax.swing.JMenuItem UstawieniaObrazu;
+    private javax.swing.JMenuItem UstawieniaPełny;
+    private javax.swing.JMenuItem UstawieniaPłaskiPrzekątny;
+    private javax.swing.JMenuItem UstawieniaPłaskiSymetryczny;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
