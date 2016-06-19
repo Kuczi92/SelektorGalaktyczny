@@ -73,6 +73,8 @@ public class PanelSterowania extends javax.swing.JFrame {
         jSlider3 = new javax.swing.JSlider();
         ButtonStworzPlikJPGzTeraźniejszymUstawieniem = new javax.swing.JButton();
         ButtonStworzPlikPDFzTerazniejszymUstawieniem = new javax.swing.JButton();
+        WartoscObrazuZapisanegoPoziom = new javax.swing.JTextField();
+        WartoscObrazuZapisanegoPion = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuUstawieniaObrazu = new javax.swing.JMenu();
         NatezenieKolorow = new javax.swing.JMenuItem();
@@ -253,12 +255,16 @@ public class PanelSterowania extends javax.swing.JFrame {
             OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OperacjeNaObrazachZakladkaLayout.createSequentialGroup()
                 .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelWielkoscObrazuZapisanegoPoziom)
                     .addComponent(LabelWielkoscObrazuPion)
-                    .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                    .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSlider3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(WartoscObrazuZapisanegoPoziom)
+                    .addComponent(WartoscObrazuZapisanegoPion, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         OperacjeNaObrazachZakladkaLayout.setVerticalGroup(
@@ -267,11 +273,15 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(LabelWielkoscObrazuZapisanegoPoziom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(WartoscObrazuZapisanegoPoziom)
+                    .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelWielkoscObrazuPion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(WartoscObrazuZapisanegoPion)
+                    .addComponent(jSlider3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -545,6 +555,8 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JMenuItem UstawieniaPłaskiSymetryczny;
     private javax.swing.JTextField WartoscJasnosc;
     private javax.swing.JTextField WartoscKontrast;
+    private javax.swing.JTextField WartoscObrazuZapisanegoPion;
+    private javax.swing.JTextField WartoscObrazuZapisanegoPoziom;
     private javax.swing.JTextField WartoscProgowa;
     private javax.swing.JSlider WielkoscObrazuX;
     private javax.swing.JButton WybierzFolderWyjsciowy;

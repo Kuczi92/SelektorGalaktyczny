@@ -506,12 +506,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="WielkoscObrazuX" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWielkoscObrazuZapisanegoPoziom" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWielkoscObrazuPion" min="-2" max="-2" attributes="0"/>
-                          <Component id="jSlider3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" alignment="0" max="32767" attributes="0"/>
                           <Component id="ButtonStworzPlikPDFzTerazniejszymUstawieniem" alignment="0" pref="297" max="32767" attributes="0"/>
+                          <Component id="WielkoscObrazuX" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSlider3" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="WartoscObrazuZapisanegoPoziom" max="32767" attributes="0"/>
+                          <Component id="WartoscObrazuZapisanegoPion" pref="111" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -523,11 +528,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelWielkoscObrazuZapisanegoPoziom" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="WielkoscObrazuX" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="WartoscObrazuZapisanegoPoziom" max="32767" attributes="0"/>
+                          <Component id="WielkoscObrazuX" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelWielkoscObrazuPion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jSlider3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="WartoscObrazuZapisanegoPion" max="32767" attributes="0"/>
+                          <Component id="jSlider3" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -561,6 +572,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Stw&#xf3;rz Plik PDF z Tera&#x17a;niejszym Ustawieniem"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="WartoscObrazuZapisanegoPoziom">
+            </Component>
+            <Component class="javax.swing.JTextField" name="WartoscObrazuZapisanegoPion">
             </Component>
           </SubComponents>
         </Container>
