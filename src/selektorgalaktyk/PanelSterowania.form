@@ -45,6 +45,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Parametry Detekcji"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ParametryDetekcjiActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="UstawieniaP&#x142;askiPrzek&#x105;tny">
               <Properties>
@@ -131,7 +134,7 @@
                       <Component id="ListaGalaktyk" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLayeredPane1" max="32767" attributes="0"/>
+                  <Component id="PanelGlowny" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -175,7 +178,7 @@
                           <Component id="ListaGalaktyk" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+                      <Component id="PanelGlowny" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -255,7 +258,7 @@
         <Property name="text" type="java.lang.String" value="Konsola komunikat&#xf3;w"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
+    <Container class="javax.swing.JLayeredPane" name="PanelGlowny">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -270,6 +273,9 @@
               <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                   <Component id="UstawieniaObrazuZakladka" alignment="1" max="32767" attributes="0"/>
               </Group>
+              <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
+                  <Component id="ParametryDetekcjiZakladka" alignment="1" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -280,6 +286,12 @@
               </Group>
               <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                   <Component id="UstawieniaObrazuZakladka" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="ParametryDetekcjiZakladka" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -333,7 +345,7 @@
                           <Component id="NatezenieNiebieski" max="32767" attributes="0"/>
                           <Component id="SliderNiebieski" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -511,7 +523,7 @@
                           <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" alignment="0" max="32767" attributes="0"/>
                           <Component id="ButtonStworzPlikPDFzTerazniejszymUstawieniem" alignment="0" pref="297" max="32767" attributes="0"/>
                           <Component id="WielkoscObrazuX" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSlider3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="WielkoscObrazuY" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -537,13 +549,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="WartoscObrazuZapisanegoPion" max="32767" attributes="0"/>
-                          <Component id="jSlider3" max="32767" attributes="0"/>
+                          <Component id="WielkoscObrazuY" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ButtonStworzPlikPDFzTerazniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -561,7 +573,7 @@
                 <Property name="text" type="java.lang.String" value="Wielko&#x15b;&#x107; obrazu zapisanego pion w %"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSlider" name="jSlider3">
+            <Component class="javax.swing.JSlider" name="WielkoscObrazuY">
             </Component>
             <Component class="javax.swing.JButton" name="ButtonStworzPlikJPGzTera&#x17a;niejszymUstawieniem">
               <Properties>
@@ -576,6 +588,124 @@
             <Component class="javax.swing.JTextField" name="WartoscObrazuZapisanegoPoziom">
             </Component>
             <Component class="javax.swing.JTextField" name="WartoscObrazuZapisanegoPion">
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="ParametryDetekcjiZakladka">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderRozmycie" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="WartoscRozmycie" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="LabelRozmycie" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelCzulosc" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderCzulosc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="WartoscCzulosc" min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="LabelMinWielkoscX" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderMinWielkoscX" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="WartoscMinimalnaX" min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="LabelMinWielkoscY" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderMinWielkoscY" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="WartoscMinimalnaY" min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="224" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelRozmycie" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SliderRozmycie" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="WartoscRozmycie" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelCzulosc" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SliderCzulosc" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="WartoscCzulosc" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelMinWielkoscX" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SliderMinWielkoscX" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="WartoscMinimalnaX" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelMinWielkoscY" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SliderMinWielkoscY" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="WartoscMinimalnaY" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JSlider" name="SliderRozmycie">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelRozmycie">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Rozmycie"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelCzulosc">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Czu&#x142;o&#x15b;&#x107;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSlider" name="SliderCzulosc">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelMinWielkoscX">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Minimalna Wielko&#x15b;&#x107; X"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSlider" name="SliderMinWielkoscX">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelMinWielkoscY">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Minimalna Wielko&#x15b;&#x107; Y"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSlider" name="SliderMinWielkoscY">
+            </Component>
+            <Component class="javax.swing.JTextField" name="WartoscRozmycie">
+            </Component>
+            <Component class="javax.swing.JTextField" name="WartoscCzulosc">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WartoscCzuloscActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="WartoscMinimalnaX">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WartoscMinimalnaXActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="WartoscMinimalnaY">
             </Component>
           </SubComponents>
         </Container>

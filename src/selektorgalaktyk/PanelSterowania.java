@@ -42,7 +42,7 @@ public class PanelSterowania extends javax.swing.JFrame {
         WykonanieSelekcjiPojedynczej = new javax.swing.JButton();
         ListaGalaktyk = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        PanelGlowny = new javax.swing.JLayeredPane();
         NatezenieKolorowZakladka = new javax.swing.JPanel();
         SliderCzerwony = new javax.swing.JSlider();
         LabelCzerwony = new javax.swing.JLabel();
@@ -70,11 +70,24 @@ public class PanelSterowania extends javax.swing.JFrame {
         WielkoscObrazuX = new javax.swing.JSlider();
         LabelWielkoscObrazuZapisanegoPoziom = new javax.swing.JLabel();
         LabelWielkoscObrazuPion = new javax.swing.JLabel();
-        jSlider3 = new javax.swing.JSlider();
+        WielkoscObrazuY = new javax.swing.JSlider();
         ButtonStworzPlikJPGzTeraźniejszymUstawieniem = new javax.swing.JButton();
         ButtonStworzPlikPDFzTerazniejszymUstawieniem = new javax.swing.JButton();
         WartoscObrazuZapisanegoPoziom = new javax.swing.JTextField();
         WartoscObrazuZapisanegoPion = new javax.swing.JTextField();
+        ParametryDetekcjiZakladka = new javax.swing.JPanel();
+        SliderRozmycie = new javax.swing.JSlider();
+        LabelRozmycie = new javax.swing.JLabel();
+        LabelCzulosc = new javax.swing.JLabel();
+        SliderCzulosc = new javax.swing.JSlider();
+        LabelMinWielkoscX = new javax.swing.JLabel();
+        SliderMinWielkoscX = new javax.swing.JSlider();
+        LabelMinWielkoscY = new javax.swing.JLabel();
+        SliderMinWielkoscY = new javax.swing.JSlider();
+        WartoscRozmycie = new javax.swing.JTextField();
+        WartoscCzulosc = new javax.swing.JTextField();
+        WartoscMinimalnaX = new javax.swing.JTextField();
+        WartoscMinimalnaY = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuUstawieniaObrazu = new javax.swing.JMenu();
         NatezenieKolorow = new javax.swing.JMenuItem();
@@ -160,7 +173,7 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(NatezenieNiebieski)
                     .addComponent(SliderNiebieski, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         LabelJasnosc.setText("Jasność");
@@ -260,7 +273,7 @@ public class PanelSterowania extends javax.swing.JFrame {
                     .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                     .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSlider3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(WielkoscObrazuY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WartoscObrazuZapisanegoPoziom)
@@ -281,37 +294,123 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WartoscObrazuZapisanegoPion)
-                    .addComponent(jSlider3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(WielkoscObrazuY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jLayeredPane1.setLayer(NatezenieKolorowZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(UstawieniaObrazuZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(OperacjeNaObrazachZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LabelRozmycie.setText("Rozmycie");
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        LabelCzulosc.setText("Czułość");
+
+        LabelMinWielkoscX.setText("Minimalna Wielkość X");
+
+        LabelMinWielkoscY.setText("Minimalna Wielkość Y");
+
+        WartoscCzulosc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WartoscCzuloscActionPerformed(evt);
+            }
+        });
+
+        WartoscMinimalnaX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WartoscMinimalnaXActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ParametryDetekcjiZakladkaLayout = new javax.swing.GroupLayout(ParametryDetekcjiZakladka);
+        ParametryDetekcjiZakladka.setLayout(ParametryDetekcjiZakladkaLayout);
+        ParametryDetekcjiZakladkaLayout.setHorizontalGroup(
+            ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ParametryDetekcjiZakladkaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(ParametryDetekcjiZakladkaLayout.createSequentialGroup()
+                        .addComponent(SliderRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WartoscRozmycie))
+                    .addComponent(LabelRozmycie)
+                    .addComponent(LabelCzulosc)
+                    .addGroup(ParametryDetekcjiZakladkaLayout.createSequentialGroup()
+                        .addComponent(SliderCzulosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WartoscCzulosc, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelMinWielkoscX)
+                    .addGroup(ParametryDetekcjiZakladkaLayout.createSequentialGroup()
+                        .addComponent(SliderMinWielkoscX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WartoscMinimalnaX, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelMinWielkoscY)
+                    .addGroup(ParametryDetekcjiZakladkaLayout.createSequentialGroup()
+                        .addComponent(SliderMinWielkoscY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WartoscMinimalnaY, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+        ParametryDetekcjiZakladkaLayout.setVerticalGroup(
+            ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ParametryDetekcjiZakladkaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelRozmycie)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SliderRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WartoscRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LabelCzulosc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SliderCzulosc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WartoscCzulosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LabelMinWielkoscX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SliderMinWielkoscX, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WartoscMinimalnaX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LabelMinWielkoscY)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ParametryDetekcjiZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SliderMinWielkoscY, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WartoscMinimalnaY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PanelGlowny.setLayer(NatezenieKolorowZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelGlowny.setLayer(UstawieniaObrazuZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelGlowny.setLayer(OperacjeNaObrazachZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelGlowny.setLayer(ParametryDetekcjiZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout PanelGlownyLayout = new javax.swing.GroupLayout(PanelGlowny);
+        PanelGlowny.setLayout(PanelGlownyLayout);
+        PanelGlownyLayout.setHorizontalGroup(
+            PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(OperacjeNaObrazachZakladka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+            .addGroup(PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelGlownyLayout.createSequentialGroup()
                     .addComponent(NatezenieKolorowZakladka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(UstawieniaObrazuZakladka, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(ParametryDetekcjiZakladka, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelGlownyLayout.setVerticalGroup(
+            PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(OperacjeNaObrazachZakladka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(NatezenieKolorowZakladka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(UstawieniaObrazuZakladka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelGlownyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelGlownyLayout.createSequentialGroup()
+                    .addComponent(ParametryDetekcjiZakladka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         MenuUstawieniaObrazu.setText("Ustawienia Obrazu");
@@ -350,6 +449,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         MenuUstawieniaSelekcji.setText("Ustawienia Selekcji");
 
         ParametryDetekcji.setText("Parametry Detekcji");
+        ParametryDetekcji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ParametryDetekcjiActionPerformed(evt);
+            }
+        });
         MenuUstawieniaSelekcji.add(ParametryDetekcji);
 
         UstawieniaPłaskiPrzekątny.setText("Ustawienia Płaski - Przekątny ");
@@ -408,7 +512,7 @@ public class PanelSterowania extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ListaGalaktyk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator2)
-                    .addComponent(jLayeredPane1))
+                    .addComponent(PanelGlowny))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -443,7 +547,7 @@ public class PanelSterowania extends javax.swing.JFrame {
                             .addComponent(WykonanieSelekcjiPojedynczej)
                             .addComponent(ListaGalaktyk))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanelGlowny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -464,6 +568,7 @@ public class PanelSterowania extends javax.swing.JFrame {
     NatezenieKolorowZakladka.setVisible(true);
     UstawieniaObrazuZakladka.setVisible(false);
     OperacjeNaObrazachZakladka.setVisible(false);
+    ParametryDetekcjiZakladka.setVisible(false);
     
     
     }//GEN-LAST:event_NatezenieKolorowActionPerformed
@@ -475,14 +580,31 @@ public class PanelSterowania extends javax.swing.JFrame {
     private void UstawieniaObrazuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UstawieniaObrazuActionPerformed
     NatezenieKolorowZakladka.setVisible(false);
     UstawieniaObrazuZakladka.setVisible(true);
-    OperacjeNaObrazachZakladka.setVisible(false);    // TODO add your handling code here:
+    OperacjeNaObrazachZakladka.setVisible(false);  
+    ParametryDetekcjiZakladka.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_UstawieniaObrazuActionPerformed
 
     private void OperacjeNaObrazachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OperacjeNaObrazachActionPerformed
     NatezenieKolorowZakladka.setVisible(false);
     UstawieniaObrazuZakladka.setVisible(false); 
-    OperacjeNaObrazachZakladka.setVisible(true);// TODO add your handling code here:
+    OperacjeNaObrazachZakladka.setVisible(true);
+    ParametryDetekcjiZakladka.setVisible(false);
     }//GEN-LAST:event_OperacjeNaObrazachActionPerformed
+
+    private void WartoscCzuloscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WartoscCzuloscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_WartoscCzuloscActionPerformed
+
+    private void WartoscMinimalnaXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WartoscMinimalnaXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_WartoscMinimalnaXActionPerformed
+
+    private void ParametryDetekcjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParametryDetekcjiActionPerformed
+     NatezenieKolorowZakladka.setVisible(false);
+    UstawieniaObrazuZakladka.setVisible(false); 
+    OperacjeNaObrazachZakladka.setVisible(false);
+    ParametryDetekcjiZakladka.setVisible(true);
+    }//GEN-LAST:event_ParametryDetekcjiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,9 +640,13 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JButton ButtonStworzPlikPDFzTerazniejszymUstawieniem;
     private javax.swing.JTextArea Konsola;
     private javax.swing.JLabel LabelCzerwony;
+    private javax.swing.JLabel LabelCzulosc;
     private javax.swing.JLabel LabelJasnosc;
     private javax.swing.JLabel LabelKontrast;
+    private javax.swing.JLabel LabelMinWielkoscX;
+    private javax.swing.JLabel LabelMinWielkoscY;
     private javax.swing.JLabel LabelNiebieski;
+    private javax.swing.JLabel LabelRozmycie;
     private javax.swing.JLabel LabelWartoscProgowa;
     private javax.swing.JLabel LabelWielkoscObrazuPion;
     private javax.swing.JLabel LabelWielkoscObrazuZapisanegoPoziom;
@@ -536,12 +662,18 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JButton OknoEdycjiDlaPojedynczegoObrazu;
     private javax.swing.JMenuItem OperacjeNaObrazach;
     private javax.swing.JPanel OperacjeNaObrazachZakladka;
+    private javax.swing.JLayeredPane PanelGlowny;
     private javax.swing.JMenuItem ParametryDetekcji;
+    private javax.swing.JPanel ParametryDetekcjiZakladka;
     private javax.swing.JMenu Pomoc;
     private javax.swing.JSlider SliderCzerwony;
+    private javax.swing.JSlider SliderCzulosc;
     private javax.swing.JSlider SliderJasnosc;
     private javax.swing.JSlider SliderKontrast;
+    private javax.swing.JSlider SliderMinWielkoscX;
+    private javax.swing.JSlider SliderMinWielkoscY;
     private javax.swing.JSlider SliderNiebieski;
+    private javax.swing.JSlider SliderRozmycie;
     private javax.swing.JSlider SliderWartoscProgowa;
     private javax.swing.JSlider SliderZielony;
     private javax.swing.JToggleButton ToggleEfektPrzyciemniania;
@@ -553,12 +685,17 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JMenuItem UstawieniaPełny;
     private javax.swing.JMenuItem UstawieniaPłaskiPrzekątny;
     private javax.swing.JMenuItem UstawieniaPłaskiSymetryczny;
+    private javax.swing.JTextField WartoscCzulosc;
     private javax.swing.JTextField WartoscJasnosc;
     private javax.swing.JTextField WartoscKontrast;
+    private javax.swing.JTextField WartoscMinimalnaX;
+    private javax.swing.JTextField WartoscMinimalnaY;
     private javax.swing.JTextField WartoscObrazuZapisanegoPion;
     private javax.swing.JTextField WartoscObrazuZapisanegoPoziom;
     private javax.swing.JTextField WartoscProgowa;
+    private javax.swing.JTextField WartoscRozmycie;
     private javax.swing.JSlider WielkoscObrazuX;
+    private javax.swing.JSlider WielkoscObrazuY;
     private javax.swing.JButton WybierzFolderWyjsciowy;
     private javax.swing.JButton WybierzFolderZrodlowy;
     private javax.swing.JButton WykonanieSelekcjiMasowej;
@@ -567,11 +704,9 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JButton ZaladujPojedynczyObraz;
     private javax.swing.JButton ZapiszWynikoweObrazy;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSlider jSlider3;
     // End of variables declaration//GEN-END:variables
 }
