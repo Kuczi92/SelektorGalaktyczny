@@ -386,12 +386,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jSlider2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="SliderWartoscProgowa" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="WartoscProgowa" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="SliderKontrast" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="WartoscKontrast" max="32767" attributes="0"/>
                                   </Group>
@@ -434,7 +434,7 @@
                       <Component id="LabelKontrast" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                          <Component id="SliderKontrast" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="ToggleEfektRozjasniania" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="WartoscKontrast" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -444,7 +444,7 @@
                       <Component id="LabelWartoscProgowa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSlider2" min="-2" max="-2" attributes="0"/>
+                          <Component id="SliderWartoscProgowa" min="-2" max="-2" attributes="0"/>
                           <Component id="WartoscProgowa" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -467,14 +467,14 @@
                 <Property name="text" type="java.lang.String" value="Konstrast"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSlider" name="jSlider1">
+            <Component class="javax.swing.JSlider" name="SliderKontrast">
             </Component>
             <Component class="javax.swing.JLabel" name="LabelWartoscProgowa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Wartosc Progowa"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSlider" name="jSlider2">
+            <Component class="javax.swing.JSlider" name="SliderWartoscProgowa">
             </Component>
             <Component class="javax.swing.JToggleButton" name="ToggleProgowanie">
               <Properties>
@@ -504,15 +504,65 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="WielkoscObrazuX" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWielkoscObrazuZapisanegoPoziom" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWielkoscObrazuPion" min="-2" max="-2" attributes="0"/>
+                          <Component id="jSlider3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" alignment="0" max="32767" attributes="0"/>
+                          <Component id="ButtonStworzPlikPDFzTerazniejszymUstawieniem" alignment="0" pref="297" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="201" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelWielkoscObrazuZapisanegoPoziom" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="WielkoscObrazuX" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelWielkoscObrazuPion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSlider3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ButtonStworzPlikPDFzTerazniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JSlider" name="WielkoscObrazuX">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelWielkoscObrazuZapisanegoPoziom">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Wielko&#x15b;&#x107; obrazu zapisanego poziom w %"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelWielkoscObrazuPion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Wielko&#x15b;&#x107; obrazu zapisanego pion w %"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSlider" name="jSlider3">
+            </Component>
+            <Component class="javax.swing.JButton" name="ButtonStworzPlikJPGzTera&#x17a;niejszymUstawieniem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Stw&#xf3;rz Plik JPG z Tera&#x17a;niejszym ustawieniem"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="ButtonStworzPlikPDFzTerazniejszymUstawieniem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Stw&#xf3;rz Plik PDF z Tera&#x17a;niejszym Ustawieniem"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
