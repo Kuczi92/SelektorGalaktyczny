@@ -69,11 +69,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ustawienia Pe&#x142;ny"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UstawieniaPe&#x142;nyActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="UstawieniaNieregularne">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ustawienia Nieregularne"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UstawieniaNieregularneActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -265,16 +271,25 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="OperacjeNaObrazachZakladka" alignment="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="NatezenieKolorowZakladka" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="NatezenieKolorowZakladka" alignment="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                   <Component id="UstawieniaObrazuZakladka" alignment="1" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                   <Component id="ParametryDetekcjiZakladka" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaPlaskiPrzekatnyZakladka" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="5" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaPłaskiSymetrycznyZakladka" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="6" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaPelnyZakladka" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="7" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaNieregularneZakladka" alignment="1" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -292,6 +307,18 @@
                       <Component id="ParametryDetekcjiZakladka" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+              </Group>
+              <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaPlaskiPrzekatnyZakladka" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="5" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaPłaskiSymetrycznyZakladka" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="6" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaPelnyZakladka" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="7" groupAlignment="0" attributes="0">
+                  <Component id="UstawieniaNieregularneZakladka" alignment="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -317,7 +344,7 @@
                           <Component id="NatezenieNiebieski" alignment="0" pref="107" max="32767" attributes="0"/>
                           <Component id="NatezenieCzerwony" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="167" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="206" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -530,7 +557,7 @@
                           <Component id="WartoscObrazuZapisanegoPoziom" max="32767" attributes="0"/>
                           <Component id="WartoscObrazuZapisanegoPion" pref="111" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -708,6 +735,166 @@
             <Component class="javax.swing.JTextField" name="WartoscMinimalnaY">
             </Component>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="UstawieniaPlaskiPrzekatnyZakladka">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" alignment="0" pref="349" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="LabelPlaskiProcentZapelnieniapikselamiJasnymiSoczewkowate" min="-2" pref="52" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" pref="85" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="LabelPlaskiProcentZapelnieniapikselamiBialymiSoczewkowate" min="-2" pref="52" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" min="-2" pref="85" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" alignment="0" pref="349" max="32767" attributes="0"/>
+                                  <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPlaskiProcentZapelnieniapikselamiJasnymiSpiralne" min="-2" pref="52" max="-2" attributes="0"/>
+                              <EmptySpace pref="31" max="32767" attributes="0"/>
+                              <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                          <Component id="LabelPlaskiProcentZapelnieniapikselamiJasnymiSpiralne" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" max="32767" attributes="0"/>
+                              <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="LabelPlaskiProcentZapelnieniapikselamiJasnymiSoczewkowate" min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" max="32767" attributes="0"/>
+                              <Component id="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="LabelPlaskiProcentZapelnieniapikselamiBialymiSoczewkowate" min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Procent zape&#x142;nienia jasnymi pikselami dla galaktyk Spiralnych"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Procent zape&#x142;niania jasnymi pikselami dla galaktyk Soczewkowatych"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Procent zape&#x142;niania bia&#x142;ymi pikselami dla galaktyk Soczewkowatych"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata">
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata">
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata">
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPlaskiProcentZapelnieniapikselamiJasnymiSpiralne">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPlaskiProcentZapelnieniapikselamiJasnymiSoczewkowate">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPlaskiProcentZapelnieniapikselamiBialymiSoczewkowate">
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="UstawieniaP&#x142;askiSymetrycznyZakladka">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="539" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="211" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="UstawieniaPelnyZakladka">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="539" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="211" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="UstawieniaNieregularneZakladka">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="539" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="211" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
       </SubComponents>
     </Container>
