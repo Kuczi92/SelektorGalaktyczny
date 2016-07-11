@@ -1195,15 +1195,87 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="539" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderNieregularnaProgRozmycie" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelNieregularnaRozmycie" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="309" max="32767" attributes="0"/>
+                              <Component id="TextFieldNieregularnaProgRozmycie" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelNieregularnaProgRozmycie" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelNieregularnaProgJasnosci" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderNieregularnaProgJasnosc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelNieregularnaJansosc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="TextFieldNieregularnaProgJasnosc" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="277" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="LabelNieregularnaProgRozmycie" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="SliderNieregularnaProgRozmycie" min="-2" max="-2" attributes="0"/>
+                          <Component id="TextFieldNieregularnaProgRozmycie" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelNieregularnaRozmycie" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="LabelNieregularnaProgJasnosci" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="SliderNieregularnaProgJasnosc" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="TextFieldNieregularnaProgJasnosc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="LabelNieregularnaJansosc" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JSlider" name="SliderNieregularnaProgRozmycie">
+            </Component>
+            <Component class="javax.swing.JSlider" name="SliderNieregularnaProgJasnosc">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelNieregularnaProgRozmycie">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Rozmycie "/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelNieregularnaProgJasnosci">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pr&#xf3;g Jasno&#x15b;ci"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextFieldNieregularnaProgRozmycie">
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextFieldNieregularnaProgJasnosc">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelNieregularnaJansosc">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelNieregularnaRozmycie">
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

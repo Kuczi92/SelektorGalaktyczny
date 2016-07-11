@@ -143,6 +143,14 @@ public class PanelSterowania extends javax.swing.JFrame {
         TextFieldPelnyLiczbaJasnychObiektow = new javax.swing.JTextField();
         TextFieldPelnyProcentZapelnieniaBialymiEliptyczna = new javax.swing.JTextField();
         UstawieniaNieregularneZakladka = new javax.swing.JPanel();
+        SliderNieregularnaProgRozmycie = new javax.swing.JSlider();
+        SliderNieregularnaProgJasnosc = new javax.swing.JSlider();
+        LabelNieregularnaProgRozmycie = new javax.swing.JLabel();
+        LabelNieregularnaProgJasnosci = new javax.swing.JLabel();
+        TextFieldNieregularnaProgRozmycie = new javax.swing.JTextField();
+        TextFieldNieregularnaProgJasnosc = new javax.swing.JTextField();
+        LabelNieregularnaJansosc = new javax.swing.JLabel();
+        LabelNieregularnaRozmycie = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuUstawieniaObrazu = new javax.swing.JMenu();
         NatezenieKolorow = new javax.swing.JMenuItem();
@@ -716,15 +724,56 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        LabelNieregularnaProgRozmycie.setText("Rozmycie ");
+
+        LabelNieregularnaProgJasnosci.setText("Próg Jasności");
+
         javax.swing.GroupLayout UstawieniaNieregularneZakladkaLayout = new javax.swing.GroupLayout(UstawieniaNieregularneZakladka);
         UstawieniaNieregularneZakladka.setLayout(UstawieniaNieregularneZakladkaLayout);
         UstawieniaNieregularneZakladkaLayout.setHorizontalGroup(
             UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGroup(UstawieniaNieregularneZakladkaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UstawieniaNieregularneZakladkaLayout.createSequentialGroup()
+                        .addComponent(SliderNieregularnaProgRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LabelNieregularnaRozmycie)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
+                        .addComponent(TextFieldNieregularnaProgRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UstawieniaNieregularneZakladkaLayout.createSequentialGroup()
+                        .addGroup(UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabelNieregularnaProgRozmycie)
+                            .addComponent(LabelNieregularnaProgJasnosci))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(UstawieniaNieregularneZakladkaLayout.createSequentialGroup()
+                        .addComponent(SliderNieregularnaProgJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LabelNieregularnaJansosc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TextFieldNieregularnaProgJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         UstawieniaNieregularneZakladkaLayout.setVerticalGroup(
             UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(UstawieniaNieregularneZakladkaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(LabelNieregularnaProgRozmycie)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SliderNieregularnaProgRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldNieregularnaProgRozmycie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelNieregularnaRozmycie))
+                .addGap(34, 34, 34)
+                .addGroup(UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(UstawieniaNieregularneZakladkaLayout.createSequentialGroup()
+                        .addComponent(LabelNieregularnaProgJasnosci)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SliderNieregularnaProgJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UstawieniaNieregularneZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TextFieldNieregularnaProgJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelNieregularnaJansosc)))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         PanelGlowny.setLayer(NatezenieKolorowZakladka, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1102,6 +1151,10 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMinWielkoscX;
     private javax.swing.JLabel LabelMinWielkoscY;
     private javax.swing.JLabel LabelNiebieski;
+    private javax.swing.JLabel LabelNieregularnaJansosc;
+    private javax.swing.JLabel LabelNieregularnaProgJasnosci;
+    private javax.swing.JLabel LabelNieregularnaProgRozmycie;
+    private javax.swing.JLabel LabelNieregularnaRozmycie;
     private javax.swing.JLabel LabelPelnyLiczbaJasnychObiektow;
     private javax.swing.JLabel LabelPelnyLiczbaJasnychProgObiektow;
     private javax.swing.JLabel LabelPelnyProcentZapelnieniaBialymiEliptyczna;
@@ -1152,6 +1205,8 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JSlider SliderMinWielkoscX;
     private javax.swing.JSlider SliderMinWielkoscY;
     private javax.swing.JSlider SliderNiebieski;
+    private javax.swing.JSlider SliderNieregularnaProgJasnosc;
+    private javax.swing.JSlider SliderNieregularnaProgRozmycie;
     private javax.swing.JSlider SliderPelnyLiczbaJasnychProgObiektow;
     private javax.swing.JSlider SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna;
     private javax.swing.JSlider SliderPelnyProcentZapelnieniaBiałymiProgKarlowata;
@@ -1169,6 +1224,8 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JSlider SliderRozmycie;
     private javax.swing.JSlider SliderWartoscProgowa;
     private javax.swing.JSlider SliderZielony;
+    private javax.swing.JTextField TextFieldNieregularnaProgJasnosc;
+    private javax.swing.JTextField TextFieldNieregularnaProgRozmycie;
     private javax.swing.JTextField TextFieldPelnyLiczbaJasnychObiektow;
     private javax.swing.JTextField TextFieldPelnyProcentZapelnieniaBialymiEliptyczna;
     private javax.swing.JTextField TextFieldPelnyProcentZapelnieniaBialymiSpiralna;
