@@ -5,6 +5,9 @@
  */
 package selektorgalaktyk;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Norbert
@@ -177,6 +180,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         ZapiszWynikoweObrazy.setText("Zapisz Wynikowe Obrazy");
 
         ZaladujPojedynczyObraz.setText("Załaduj pojedyńczy Obraz");
+        ZaladujPojedynczyObraz.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ZaladujPojedynczyObrazMouseClicked(evt);
+            }
+        });
 
         OknoEdycjiDlaPojedynczegoObrazu.setText("Okno edycji dla jednego obrazu");
 
@@ -1107,6 +1115,21 @@ public class PanelSterowania extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextFieldPelnyProcentZapelnieniaJasnymiKarlowataActionPerformed
 
+    private void ZaladujPojedynczyObrazMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazMouseClicked
+       WyborPliku W = new WyborPliku();
+       W.setResizable(false);
+       W.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+      
+       FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "JPG & GIF Images", "jpg", "gif");
+        W.WybieraczPliku.setFileFilter(filter);
+         int returnVal = W.WybieraczPliku.showOpenDialog(null);
+         if(returnVal == JFileChooser.APPROVE_OPTION) {
+          System.out.println("You chose to open this file: " +
+            W.WybieraczPliku.getSelectedFile().getName());
+    
+    }//GEN-LAST:event_ZaladujPojedynczyObrazMouseClicked
+    }
     /**
      * @param args the command line arguments
      */
@@ -1265,7 +1288,7 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JButton WykonanieSelekcjiMasowej;
     private javax.swing.JButton WykonanieSelekcjiPojedynczej;
     private javax.swing.JButton ZaladowanieOryginalu;
-    private javax.swing.JButton ZaladujPojedynczyObraz;
+    public javax.swing.JButton ZaladujPojedynczyObraz;
     private javax.swing.JButton ZapiszWynikoweObrazy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;

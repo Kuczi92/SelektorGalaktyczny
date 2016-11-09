@@ -15,8 +15,10 @@ public class SelektorGalaktyk {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PanelSterowania PanelGlowny= new PanelSterowania();
+        PanelSterowania PanelGlowny = new PanelSterowania();
         PanelGlowny.setVisible(true);
+        
+        
     }
     
 }
