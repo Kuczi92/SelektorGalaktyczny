@@ -214,6 +214,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Wybierz folder &#x17c;r&#xf3;d&#x142;owy"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="WybierzFolderZrodlowyMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="WybierzFolderWyjsciowy">
       <Properties>

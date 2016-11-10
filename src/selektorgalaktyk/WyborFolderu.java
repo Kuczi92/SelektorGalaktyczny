@@ -5,24 +5,19 @@
  */
 package selektorgalaktyk;
 
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 /**
  *
  * @author Quchi
  */
-public class WyborPliku extends javax.swing.JFrame {
+public class WyborFolderu extends javax.swing.JFrame {
 
-    FileNameExtensionFilter f_sel;/**
-     * Creates new form WyborPliku
+    /**
+     * Creates new form WyborFolderu
      */
-    public  WyborPliku() {
-       
+    public WyborFolderu() {
         initComponents();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,43 +27,29 @@ public class WyborPliku extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        WybieraczPliku = new javax.swing.JFileChooser();
+        WybieraczFolderu = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        WybieraczPliku.setDialogTitle("Wybór pliku z obrazem Galaktyki");
-        WybieraczPliku.addChoosableFileFilter( new FileNameExtensionFilter( "png", "png") );
-        WybieraczPliku.addChoosableFileFilter( new FileNameExtensionFilter( "jpeg", "jpg", "jpeg" ) );
-        WybieraczPliku.addChoosableFileFilter( new FileNameExtensionFilter( "gif", "gif" ) );
-        WybieraczPliku.addChoosableFileFilter( new FileNameExtensionFilter( "tga", "tga" ) );
-        WybieraczPliku.addChoosableFileFilter( new FileNameExtensionFilter( "tiff", "tif", "tiff" ) );
-        WybieraczPliku.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WybieraczPlikuActionPerformed(evt);
-            }
-        });
+        WybieraczFolderu.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(WybieraczPliku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(WybieraczFolderu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(WybieraczPliku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(WybieraczFolderu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void WybieraczPlikuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WybieraczPlikuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_WybieraczPlikuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,27 +68,27 @@ public class WyborPliku extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WyborPliku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WyborFolderu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WyborPliku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WyborFolderu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WyborPliku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WyborFolderu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WyborPliku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WyborFolderu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            WyborPliku W =   new WyborPliku();
+            WyborFolderu W =   new WyborFolderu();
             W.setVisible(true);
             W.setResizable(false);
             W.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-           
+            
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JFileChooser WybieraczPliku;
+    public javax.swing.JFileChooser WybieraczFolderu;
     // End of variables declaration//GEN-END:variables
 }

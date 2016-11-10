@@ -174,6 +174,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Konsola);
 
         WybierzFolderZrodlowy.setText("Wybierz folder żródłowy");
+        WybierzFolderZrodlowy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WybierzFolderZrodlowyMouseClicked(evt);
+            }
+        });
 
         WybierzFolderWyjsciowy.setText("Wybierz folder wyjściowy");
 
@@ -1116,19 +1121,21 @@ public class PanelSterowania extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldPelnyProcentZapelnieniaJasnymiKarlowataActionPerformed
 
     private void ZaladujPojedynczyObrazMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazMouseClicked
-       WyborPliku W = new WyborPliku();
-       W.setResizable(false);
-       W.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-      
-       FileNameExtensionFilter filter = new FileNameExtensionFilter(
-        "JPG & GIF Images", "jpg", "gif");
-        W.WybieraczPliku.setFileFilter(filter);
-         int returnVal = W.WybieraczPliku.showOpenDialog(null);
-         if(returnVal == JFileChooser.APPROVE_OPTION) {
-          System.out.println("You chose to open this file: " +
-            W.WybieraczPliku.getSelectedFile().getName());
-    
+        WyborPliku W = new WyborPliku();
+          int returnVal = W.WybieraczPliku.showOpenDialog(null);
+           if(returnVal == JFileChooser.APPROVE_OPTION) {
+           System.out.println("You chose to open this file: " +
+            W.WybieraczPliku.getSelectedFile().getAbsolutePath());
+  
     }//GEN-LAST:event_ZaladujPojedynczyObrazMouseClicked
+    }
+    private void WybierzFolderZrodlowyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WybierzFolderZrodlowyMouseClicked
+        WyborFolderu W = new WyborFolderu();
+          int returnVal = W.WybieraczFolderu.showOpenDialog(null);
+           if(returnVal == JFileChooser.APPROVE_OPTION) {
+           System.out.println("You chose to open this file: " +
+            W.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+    }//GEN-LAST:event_WybierzFolderZrodlowyMouseClicked
     }
     /**
      * @param args the command line arguments
