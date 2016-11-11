@@ -14,9 +14,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class PanelSterowania extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PanelSterowania
-     */
+    
+    
+    public String ScieszkaWybranyPlikObrazu;
+    public String ScieszkaWybranyFolderWejscia;
+    public String ScieszkaWybranyFolderWyjscia;
+    
+     
+    WyborPliku WybranyPlikObrazu; 
+    WyborFolderu WybranyFolderWejscia; 
+    WyborFolderu WybranyFolderWyjscia; 
+    
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
@@ -181,6 +189,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         });
 
         WybierzFolderWyjsciowy.setText("Wybierz folder wyjściowy");
+        WybierzFolderWyjsciowy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WybierzFolderWyjsciowyMouseClicked(evt);
+            }
+        });
 
         ZapiszWynikoweObrazy.setText("Zapisz Wynikowe Obrazy");
 
@@ -194,6 +207,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         OknoEdycjiDlaPojedynczegoObrazu.setText("Okno edycji dla jednego obrazu");
 
         ZaladowanieOryginalu.setText("Załadowanie Oryginału");
+        ZaladowanieOryginalu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ZaladowanieOryginaluMouseClicked(evt);
+            }
+        });
 
         WykonanieSelekcjiMasowej.setText("Wykonanie Selekcji Masowej");
 
@@ -1121,23 +1139,41 @@ public class PanelSterowania extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldPelnyProcentZapelnieniaJasnymiKarlowataActionPerformed
 
     private void ZaladujPojedynczyObrazMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazMouseClicked
-        WyborPliku W = new WyborPliku();
-          int returnVal = W.WybieraczPliku.showOpenDialog(null);
+        WybranyPlikObrazu = new WyborPliku();
+          int returnVal = WybranyPlikObrazu.WybieraczPliku.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            System.out.println("You chose to open this file: " +
-            W.WybieraczPliku.getSelectedFile().getAbsolutePath());
+            WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath());
+           ScieszkaWybranyPlikObrazu=WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath();
   
     }//GEN-LAST:event_ZaladujPojedynczyObrazMouseClicked
     }
     private void WybierzFolderZrodlowyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WybierzFolderZrodlowyMouseClicked
-        WyborFolderu W = new WyborFolderu();
-          int returnVal = W.WybieraczFolderu.showOpenDialog(null);
+        WybranyFolderWejscia = new WyborFolderu();
+          int returnVal = WybranyFolderWejscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            System.out.println("You chose to open this file: " +
-            W.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+            WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+           }
     }//GEN-LAST:event_WybierzFolderZrodlowyMouseClicked
-    }
-    /**
+    
+    private void WybierzFolderWyjsciowyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WybierzFolderWyjsciowyMouseClicked
+     WybranyFolderWyjscia = new WyborFolderu();
+          int returnVal = WybranyFolderWyjscia.WybieraczFolderu.showOpenDialog(null);
+           if(returnVal == JFileChooser.APPROVE_OPTION) {
+           System.out.println("You chose to open this file: " +
+            WybranyFolderWyjscia.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+           }
+    }//GEN-LAST:event_WybierzFolderWyjsciowyMouseClicked
+
+    private void ZaladowanieOryginaluMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladowanieOryginaluMouseClicked
+       WyświetlenieObrazu Wyświetl = new WyświetlenieObrazu(ScieszkaWybranyPlikObrazu);
+       Wyświetl.setVisible(true);
+       
+    }//GEN-LAST:event_ZaladowanieOryginaluMouseClicked
+    
+
+/**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
