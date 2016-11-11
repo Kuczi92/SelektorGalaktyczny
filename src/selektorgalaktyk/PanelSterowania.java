@@ -6,7 +6,6 @@
 package selektorgalaktyk;
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -61,9 +60,9 @@ public class PanelSterowania extends javax.swing.JFrame {
         SliderZielony = new javax.swing.JSlider();
         LabelNiebieski = new javax.swing.JLabel();
         SliderNiebieski = new javax.swing.JSlider();
-        NatezenieCzerwony = new javax.swing.JTextField();
-        NatezenieZielony = new javax.swing.JTextField();
-        NatezenieNiebieski = new javax.swing.JTextField();
+        LabelZielonyWartosc = new javax.swing.JLabel();
+        LabelCzerwonyWartosc = new javax.swing.JLabel();
+        LabelNiebieskiWartosc = new javax.swing.JLabel();
         UstawieniaObrazuZakladka = new javax.swing.JPanel();
         SliderJasnosc = new javax.swing.JSlider();
         LabelJasnosc = new javax.swing.JLabel();
@@ -74,9 +73,9 @@ public class PanelSterowania extends javax.swing.JFrame {
         ToggleProgowanie = new javax.swing.JToggleButton();
         ToggleEfektPrzyciemniania = new javax.swing.JToggleButton();
         ToggleEfektRozjasniania = new javax.swing.JToggleButton();
-        WartoscJasnosc = new javax.swing.JTextField();
-        WartoscKontrast = new javax.swing.JTextField();
-        WartoscProgowa = new javax.swing.JTextField();
+        LabelWartoscJasnosc = new javax.swing.JLabel();
+        LabelWartoscKontrast = new javax.swing.JLabel();
+        LabelWartoscWartoscProgowa = new javax.swing.JLabel();
         OperacjeNaObrazachZakladka = new javax.swing.JPanel();
         WielkoscObrazuX = new javax.swing.JSlider();
         LabelWielkoscObrazuZapisanegoPoziom = new javax.swing.JLabel();
@@ -84,8 +83,8 @@ public class PanelSterowania extends javax.swing.JFrame {
         WielkoscObrazuY = new javax.swing.JSlider();
         ButtonStworzPlikJPGzTeraźniejszymUstawieniem = new javax.swing.JButton();
         ButtonStworzPlikPDFzTerazniejszymUstawieniem = new javax.swing.JButton();
-        WartoscObrazuZapisanegoPoziom = new javax.swing.JTextField();
-        WartoscObrazuZapisanegoPion = new javax.swing.JTextField();
+        LabelWielkoscObrazuX = new javax.swing.JLabel();
+        LabelWielkoscObrazuY = new javax.swing.JLabel();
         ParametryDetekcjiZakladka = new javax.swing.JPanel();
         SliderRozmycie = new javax.swing.JSlider();
         LabelRozmycie = new javax.swing.JLabel();
@@ -221,11 +220,39 @@ public class PanelSterowania extends javax.swing.JFrame {
 
         jLabel1.setText("Konsola komunikatów");
 
+        SliderCzerwony.setMaximum(255);
+        SliderCzerwony.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderCzerwonyStateChanged(evt);
+            }
+        });
+
         LabelCzerwony.setText("Czerwony");
 
         LabelZielony.setText("Zielony");
 
+        SliderZielony.setMaximum(255);
+        SliderZielony.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderZielonyStateChanged(evt);
+            }
+        });
+
         LabelNiebieski.setText("Niebieski");
+
+        SliderNiebieski.setMaximum(255);
+        SliderNiebieski.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderNiebieskiStateChanged(evt);
+            }
+        });
+
+        LabelZielonyWartosc.setText(String.valueOf(SliderZielony.getValue()));
+
+        LabelCzerwonyWartosc.setText(String.valueOf(SliderCzerwony.getValue()));
+        LabelCzerwonyWartosc.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+
+        LabelNiebieskiWartosc.setText(String.valueOf(SliderNiebieski.getValue()));
 
         javax.swing.GroupLayout NatezenieKolorowZakladkaLayout = new javax.swing.GroupLayout(NatezenieKolorowZakladka);
         NatezenieKolorowZakladka.setLayout(NatezenieKolorowZakladkaLayout);
@@ -233,18 +260,18 @@ public class PanelSterowania extends javax.swing.JFrame {
             NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NatezenieKolorowZakladkaLayout.createSequentialGroup()
                 .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SliderCzerwony, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                     .addComponent(LabelCzerwony)
                     .addComponent(LabelZielony)
-                    .addComponent(SliderZielony, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LabelNiebieski)
+                    .addComponent(SliderCzerwony, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                    .addComponent(SliderZielony, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SliderNiebieski, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(NatezenieZielony)
-                    .addComponent(NatezenieNiebieski, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(NatezenieCzerwony, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(0, 206, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelZielonyWartosc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelNiebieskiWartosc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelCzerwonyWartosc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         NatezenieKolorowZakladkaLayout.setVerticalGroup(
             NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,34 +280,63 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addComponent(LabelCzerwony)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(NatezenieCzerwony)
+                    .addComponent(LabelCzerwonyWartosc)
                     .addComponent(SliderCzerwony, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelZielony)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(NatezenieZielony)
+                    .addComponent(LabelZielonyWartosc)
                     .addComponent(SliderZielony, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelNiebieski)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(NatezenieKolorowZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(NatezenieNiebieski)
+                    .addComponent(LabelNiebieskiWartosc)
                     .addComponent(SliderNiebieski, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
+
+        SliderJasnosc.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderJasnoscStateChanged(evt);
+            }
+        });
 
         LabelJasnosc.setText("Jasność");
 
         LabelKontrast.setText("Konstrast");
 
+        SliderKontrast.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderKontrastStateChanged(evt);
+            }
+        });
+
         LabelWartoscProgowa.setText("Wartosc Progowa");
 
+        SliderWartoscProgowa.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderWartoscProgowaStateChanged(evt);
+            }
+        });
+
         ToggleProgowanie.setText("Progowanie");
+        ToggleProgowanie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToggleProgowanieActionPerformed(evt);
+            }
+        });
 
         ToggleEfektPrzyciemniania.setText("Efekt Przyciemniania");
 
         ToggleEfektRozjasniania.setText("Efekt Rozjaśniania");
+
+        LabelWartoscJasnosc.setText(String.valueOf(SliderJasnosc.getValue()));
+
+        LabelWartoscKontrast.setText(String.valueOf(SliderKontrast.getValue()));
+
+        LabelWartoscWartoscProgowa.setText(String.valueOf(SliderWartoscProgowa.getValue()));
 
         javax.swing.GroupLayout UstawieniaObrazuZakladkaLayout = new javax.swing.GroupLayout(UstawieniaObrazuZakladka);
         UstawieniaObrazuZakladka.setLayout(UstawieniaObrazuZakladkaLayout);
@@ -290,33 +346,33 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
                         .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelJasnosc)
-                            .addComponent(LabelKontrast)
-                            .addComponent(LabelWartoscProgowa))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
+                                .addComponent(SliderJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelWartoscJasnosc))
+                            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
+                                .addComponent(SliderKontrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelWartoscKontrast)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                        .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ToggleEfektPrzyciemniania, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addComponent(ToggleEfektRozjasniania, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                        .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelKontrast)
+                                    .addComponent(LabelJasnosc)
+                                    .addComponent(LabelWartoscProgowa)))
+                            .addComponent(ToggleProgowanie)
                             .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
                                 .addComponent(SliderWartoscProgowa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(WartoscProgowa))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                                .addComponent(SliderKontrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(WartoscKontrast))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                                .addComponent(SliderJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(WartoscJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ToggleEfektPrzyciemniania, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(ToggleEfektRozjasniania, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(LabelWartoscWartoscProgowa)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ToggleProgowanie)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         UstawieniaObrazuZakladkaLayout.setVerticalGroup(
             UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,51 +384,74 @@ public class PanelSterowania extends javax.swing.JFrame {
                     .addComponent(SliderJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ToggleEfektPrzyciemniania)
-                        .addComponent(WartoscJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LabelWartoscJasnosc)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelKontrast)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SliderKontrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ToggleEfektRozjasniania)
-                        .addComponent(WartoscKontrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LabelWartoscKontrast))
+                    .addComponent(SliderKontrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addComponent(LabelWartoscProgowa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(SliderWartoscProgowa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(WartoscProgowa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(LabelWartoscWartoscProgowa))
+                .addGap(18, 18, 18)
                 .addComponent(ToggleProgowanie)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
+
+        WielkoscObrazuX.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                WielkoscObrazuXStateChanged(evt);
+            }
+        });
 
         LabelWielkoscObrazuZapisanegoPoziom.setText("Wielkość obrazu zapisanego poziom w %");
 
         LabelWielkoscObrazuPion.setText("Wielkość obrazu zapisanego pion w %");
 
+        WielkoscObrazuY.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                WielkoscObrazuYStateChanged(evt);
+            }
+        });
+
         ButtonStworzPlikJPGzTeraźniejszymUstawieniem.setText("Stwórz Plik JPG z Teraźniejszym ustawieniem");
 
         ButtonStworzPlikPDFzTerazniejszymUstawieniem.setText("Stwórz Plik PDF z Teraźniejszym Ustawieniem");
+
+        LabelWielkoscObrazuX.setText(String.valueOf(WielkoscObrazuX.getValue())
+        );
+
+        LabelWielkoscObrazuY.setText(String.valueOf(WielkoscObrazuY.getValue()));
 
         javax.swing.GroupLayout OperacjeNaObrazachZakladkaLayout = new javax.swing.GroupLayout(OperacjeNaObrazachZakladka);
         OperacjeNaObrazachZakladka.setLayout(OperacjeNaObrazachZakladkaLayout);
         OperacjeNaObrazachZakladkaLayout.setHorizontalGroup(
             OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OperacjeNaObrazachZakladkaLayout.createSequentialGroup()
-                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LabelWielkoscObrazuZapisanegoPoziom)
-                    .addComponent(LabelWielkoscObrazuPion)
-                    .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                    .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WielkoscObrazuY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(WartoscObrazuZapisanegoPoziom)
-                    .addComponent(WartoscObrazuZapisanegoPion, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-                .addGap(0, 125, Short.MAX_VALUE))
+                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(OperacjeNaObrazachZakladkaLayout.createSequentialGroup()
+                        .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LabelWielkoscObrazuZapisanegoPoziom)
+                            .addComponent(LabelWielkoscObrazuPion)
+                            .addComponent(WielkoscObrazuY, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                            .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabelWielkoscObrazuX, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LabelWielkoscObrazuY, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(OperacjeNaObrazachZakladkaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 222, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         OperacjeNaObrazachZakladkaLayout.setVerticalGroup(
             OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,20 +459,20 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(LabelWielkoscObrazuZapisanegoPoziom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(WartoscObrazuZapisanegoPoziom)
-                    .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(WielkoscObrazuX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelWielkoscObrazuX))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelWielkoscObrazuPion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(WartoscObrazuZapisanegoPion)
-                    .addComponent(WielkoscObrazuY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(OperacjeNaObrazachZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(WielkoscObrazuY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelWielkoscObrazuY))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         LabelRozmycie.setText("Rozmycie");
@@ -1171,6 +1250,42 @@ public class PanelSterowania extends javax.swing.JFrame {
        Wyświetl.setVisible(true);
        
     }//GEN-LAST:event_ZaladowanieOryginaluMouseClicked
+
+    private void SliderCzerwonyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderCzerwonyStateChanged
+     LabelCzerwonyWartosc.setText(String.valueOf(SliderCzerwony.getValue()));
+    }//GEN-LAST:event_SliderCzerwonyStateChanged
+
+    private void SliderZielonyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderZielonyStateChanged
+        LabelZielonyWartosc.setText(String.valueOf(SliderZielony.getValue()));
+    }//GEN-LAST:event_SliderZielonyStateChanged
+
+    private void SliderNiebieskiStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderNiebieskiStateChanged
+        LabelNiebieskiWartosc.setText(String.valueOf(SliderNiebieski.getValue()));
+    }//GEN-LAST:event_SliderNiebieskiStateChanged
+
+    private void ToggleProgowanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToggleProgowanieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ToggleProgowanieActionPerformed
+
+    private void SliderJasnoscStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderJasnoscStateChanged
+        LabelWartoscJasnosc.setText(String.valueOf(SliderJasnosc.getValue()));
+    }//GEN-LAST:event_SliderJasnoscStateChanged
+
+    private void SliderKontrastStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderKontrastStateChanged
+      LabelWartoscKontrast.setText(String.valueOf(SliderKontrast.getValue()));
+    }//GEN-LAST:event_SliderKontrastStateChanged
+
+    private void SliderWartoscProgowaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderWartoscProgowaStateChanged
+        LabelWartoscWartoscProgowa.setText(String.valueOf(SliderWartoscProgowa.getValue()));
+    }//GEN-LAST:event_SliderWartoscProgowaStateChanged
+
+    private void WielkoscObrazuXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_WielkoscObrazuXStateChanged
+        LabelWielkoscObrazuX.setText(String.valueOf(WielkoscObrazuX.getValue()));// TODO add your handling code here:
+    }//GEN-LAST:event_WielkoscObrazuXStateChanged
+
+    private void WielkoscObrazuYStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_WielkoscObrazuYStateChanged
+       LabelWielkoscObrazuY.setText(String.valueOf(WielkoscObrazuY.getValue()));
+    }//GEN-LAST:event_WielkoscObrazuYStateChanged
     
 
 /**
@@ -1212,12 +1327,14 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JLabel LabePlaskiSymProcentZapelenieniaJasnymiSoczewkowata;
     private javax.swing.JLabel LabePlaskiSymProcentZapelenieniaJasnymiSpiralna;
     private javax.swing.JLabel LabelCzerwony;
+    private javax.swing.JLabel LabelCzerwonyWartosc;
     private javax.swing.JLabel LabelCzulosc;
     private javax.swing.JLabel LabelJasnosc;
     private javax.swing.JLabel LabelKontrast;
     private javax.swing.JLabel LabelMinWielkoscX;
     private javax.swing.JLabel LabelMinWielkoscY;
     private javax.swing.JLabel LabelNiebieski;
+    private javax.swing.JLabel LabelNiebieskiWartosc;
     private javax.swing.JLabel LabelNieregularnaJansosc;
     private javax.swing.JLabel LabelNieregularnaProgJasnosci;
     private javax.swing.JLabel LabelNieregularnaProgRozmycie;
@@ -1246,18 +1363,21 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JLabel LabelPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata;
     private javax.swing.JLabel LabelPlaskiSymProcentZapelnieniaJasnymiProgSpiralna;
     private javax.swing.JLabel LabelRozmycie;
+    private javax.swing.JLabel LabelWartoscJasnosc;
+    private javax.swing.JLabel LabelWartoscKontrast;
     private javax.swing.JLabel LabelWartoscProgowa;
+    private javax.swing.JLabel LabelWartoscWartoscProgowa;
     private javax.swing.JLabel LabelWielkoscObrazuPion;
+    private javax.swing.JLabel LabelWielkoscObrazuX;
+    private javax.swing.JLabel LabelWielkoscObrazuY;
     private javax.swing.JLabel LabelWielkoscObrazuZapisanegoPoziom;
     private javax.swing.JLabel LabelZielony;
+    private javax.swing.JLabel LabelZielonyWartosc;
     private javax.swing.JButton ListaGalaktyk;
     private javax.swing.JMenu MenuUstawieniaObrazu;
     private javax.swing.JMenu MenuUstawieniaSelekcji;
-    private javax.swing.JTextField NatezenieCzerwony;
     private javax.swing.JMenuItem NatezenieKolorow;
     private javax.swing.JPanel NatezenieKolorowZakladka;
-    private javax.swing.JTextField NatezenieNiebieski;
-    private javax.swing.JTextField NatezenieZielony;
     private javax.swing.JButton OknoEdycjiDlaPojedynczegoObrazu;
     private javax.swing.JMenuItem OperacjeNaObrazach;
     private javax.swing.JPanel OperacjeNaObrazachZakladka;
@@ -1316,13 +1436,8 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JMenuItem UstawieniaPłaskiSymetryczny;
     private javax.swing.JPanel UstawieniaPłaskiSymetrycznyZakladka;
     private javax.swing.JTextField WartoscCzulosc;
-    private javax.swing.JTextField WartoscJasnosc;
-    private javax.swing.JTextField WartoscKontrast;
     private javax.swing.JTextField WartoscMinimalnaX;
     private javax.swing.JTextField WartoscMinimalnaY;
-    private javax.swing.JTextField WartoscObrazuZapisanegoPion;
-    private javax.swing.JTextField WartoscObrazuZapisanegoPoziom;
-    private javax.swing.JTextField WartoscProgowa;
     private javax.swing.JTextField WartoscRozmycie;
     private javax.swing.JSlider WielkoscObrazuX;
     private javax.swing.JSlider WielkoscObrazuY;
