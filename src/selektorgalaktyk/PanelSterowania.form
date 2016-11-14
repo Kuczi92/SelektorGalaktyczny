@@ -872,15 +872,15 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate" min="-2" pref="52" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Component id="LabelPZJPGS" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelPZBPGS" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Component id="LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate" min="-2" pref="52" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" min="-2" pref="85" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -891,12 +891,12 @@
                                   <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPZJPGSpi" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace pref="37" max="32767" attributes="0"/>
-                              <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="103" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -906,30 +906,32 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="LabelPZJPGSpi" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" max="32767" attributes="0"/>
-                              <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" max="32767" attributes="0"/>
+                          <Component id="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="LabelPZJPGS" min="-2" max="-2" attributes="0"/>
+                              <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata" max="32767" attributes="0"/>
-                              <Component id="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata" max="32767" attributes="0"/>
+                          <Component id="LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="LabelPZBPGS" min="-2" max="-2" attributes="0"/>
+                              <Component id="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="116" max="32767" attributes="0"/>
                   </Group>
@@ -938,6 +940,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralnaStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
               <Properties>
@@ -950,6 +955,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata">
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata">
               <Properties>
@@ -957,21 +965,36 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata">
-            </Component>
-            <Component class="javax.swing.JTextField" name="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataActionPerformed"/>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowataStateChanged"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata">
-            </Component>
-            <Component class="javax.swing.JTextField" name="TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
             </Component>
             <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne">
             </Component>
             <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate">
             </Component>
             <Component class="javax.swing.JLabel" name="LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate">
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPZJPGSpi">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="String.valueOf(SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue())&#xd;&#xa;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPZJPGS">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="String.valueOf(SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue())&#xd;&#xa;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelPZBPGS">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="String.valueOf(SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue())&#xd;&#xa;" type="code"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

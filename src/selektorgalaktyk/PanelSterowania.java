@@ -105,12 +105,12 @@ public class PanelSterowania extends javax.swing.JFrame {
         SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata = new javax.swing.JSlider();
         LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata = new javax.swing.JLabel();
         SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata = new javax.swing.JSlider();
-        TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata = new javax.swing.JTextField();
-        TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata = new javax.swing.JTextField();
-        TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna = new javax.swing.JTextField();
         LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne = new javax.swing.JLabel();
         LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate = new javax.swing.JLabel();
         LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate = new javax.swing.JLabel();
+        LabelPZJPGSpi = new javax.swing.JLabel();
+        LabelPZJPGS = new javax.swing.JLabel();
+        LabelPZBPGS = new javax.swing.JLabel();
         UstawieniaPłaskiSymetrycznyZakladka = new javax.swing.JPanel();
         LabelPlaskiSymProcentZapelnieniaJasnymiProgKarlowata = new javax.swing.JLabel();
         LabelPlaskiSymProcentZapelnieniaJasnymiProgSpiralna = new javax.swing.JLabel();
@@ -572,17 +572,38 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
+        SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralnaStateChanged(evt);
+            }
+        });
+
         LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.setText("Procent zapełnienia jasnymi pikselami dla galaktyk Spiralnych");
 
         LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.setText("Procent zapełniania jasnymi pikselami dla galaktyk Soczewkowatych");
 
-        LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata.setText("Procent zapełniania białymi pikselami dla galaktyk Soczewkowatych");
-
-        TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataActionPerformed(evt);
+        SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataStateChanged(evt);
             }
         });
+
+        LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata.setText("Procent zapełniania białymi pikselami dla galaktyk Soczewkowatych");
+
+        SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowataStateChanged(evt);
+            }
+        });
+
+        LabelPZJPGSpi.setText(String.valueOf(SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue())
+        );
+
+        LabelPZJPGS.setText(String.valueOf(SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue())
+        );
+
+        LabelPZBPGS.setText(String.valueOf(SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue())
+        );
 
         javax.swing.GroupLayout UstawieniaPlaskiPrzekatnyZakladkaLayout = new javax.swing.GroupLayout(UstawieniaPlaskiPrzekatnyZakladka);
         UstawieniaPlaskiPrzekatnyZakladka.setLayout(UstawieniaPlaskiPrzekatnyZakladkaLayout);
@@ -597,24 +618,24 @@ public class PanelSterowania extends javax.swing.JFrame {
                             .addComponent(LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UstawieniaPlaskiPrzekatnyZakladkaLayout.createSequentialGroup()
-                                .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UstawieniaPlaskiPrzekatnyZakladkaLayout.createSequentialGroup()
-                                .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(LabelPZJPGS)
+                            .addComponent(LabelPZBPGS))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createSequentialGroup()
                         .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                             .addComponent(SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(LabelPZJPGSpi)
+                        .addGap(8, 8, 8)
+                        .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         UstawieniaPlaskiPrzekatnyZakladkaLayout.setVerticalGroup(
             UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -622,26 +643,27 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(LabelPlaskiPPProcentZapelnieniaJasnymiProgSpiralna)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSpiralne, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelPZJPGSpi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata)
-                        .addComponent(SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(LabelPZJPGS)
+                        .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiJasnymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata)
-                        .addComponent(SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelPlaskiPPProcentZapelnieniapikselamiBialymiSoczewkowate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(UstawieniaPlaskiPrzekatnyZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(LabelPZBPGS)
+                        .addComponent(SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
 
@@ -1209,10 +1231,6 @@ public class PanelSterowania extends javax.swing.JFrame {
     UstawieniaPelnyZakladka.setVisible(false);
     }//GEN-LAST:event_UstawieniaNieregularneActionPerformed
 
-    private void TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataActionPerformed
-
     private void TextFieldPelnyProcentZapelnieniaBialymiEliptycznaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldPelnyProcentZapelnieniaBialymiEliptycznaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextFieldPelnyProcentZapelnieniaBialymiEliptycznaActionPerformed
@@ -1310,6 +1328,18 @@ public class PanelSterowania extends javax.swing.JFrame {
     private void SliderMinWielkoscXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderMinWielkoscXStateChanged
        LabelMinimalnaWielkoscXWartosc.setText(String.valueOf(SliderMinWielkoscX.getValue()));
     }//GEN-LAST:event_SliderMinWielkoscXStateChanged
+
+    private void SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralnaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralnaStateChanged
+        LabelPZJPGSpi.setText(String.valueOf(SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue()));
+    }//GEN-LAST:event_SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralnaStateChanged
+
+    private void SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataStateChanged
+       LabelPZJPGS.setText(String.valueOf(SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue()));
+    }//GEN-LAST:event_SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataStateChanged
+
+    private void SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowataStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowataStateChanged
+       LabelPZBPGS.setText(String.valueOf(SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue()));
+    }//GEN-LAST:event_SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowataStateChanged
     
 
 /**
@@ -1366,6 +1396,9 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNieregularnaProgJasnosci;
     private javax.swing.JLabel LabelNieregularnaProgRozmycie;
     private javax.swing.JLabel LabelNieregularnaRozmycie;
+    private javax.swing.JLabel LabelPZBPGS;
+    private javax.swing.JLabel LabelPZJPGS;
+    private javax.swing.JLabel LabelPZJPGSpi;
     private javax.swing.JLabel LabelPelnyLiczbaJasnychObiektow;
     private javax.swing.JLabel LabelPelnyLiczbaJasnychProgObiektow;
     private javax.swing.JLabel LabelPelnyProcentZapelnieniaBialymiEliptyczna;
@@ -1447,9 +1480,6 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JTextField TextFieldPelnyProcentZapelnieniaBiałymiKarlowata;
     private javax.swing.JTextField TextFieldPelnyProcentZapelnieniaJasnymiKarlowata;
     private javax.swing.JTextField TextFieldPelnyProcentZapelnieniaJasnymiSpiralna;
-    private javax.swing.JTextField TextFieldPlaskiPPProcentZapelnieniaBialymiProgSoczewkowata;
-    private javax.swing.JTextField TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata;
-    private javax.swing.JTextField TextFieldPlaskiPPProcentZapelnieniaJasnymiProgSpiralna;
     private javax.swing.JToggleButton ToggleEfektPrzyciemniania;
     private javax.swing.JToggleButton ToggleEfektRozjasniania;
     private javax.swing.JToggleButton ToggleProgowanie;
