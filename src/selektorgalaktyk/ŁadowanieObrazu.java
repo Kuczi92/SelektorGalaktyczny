@@ -17,6 +17,14 @@ public class ŁadowanieObrazu extends JPanel {
 
 	private BufferedImage image;
         private String Sciezka;
+        
+        public BufferedImage GetObraz(){
+            return image;
+        }
+        
+        public String GetSciezka(){
+            return Sciezka;
+        }
 
 	public ŁadowanieObrazu(String sciezka) {
 		super();
