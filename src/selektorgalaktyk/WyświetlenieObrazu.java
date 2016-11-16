@@ -13,15 +13,32 @@ import javax.swing.JFrame;
 public class WyświetlenieObrazu extends JFrame {
 
     private static String Sciezka;
+    private ŁadowanieObrazu RGB;
+
 
     /** Creates new form WyświetlenieObrazu
      * @param sciezka */
     public WyświetlenieObrazu(String sciezka) {
         Sciezka=sciezka;
         initComponents();
+        RGB = new ŁadowanieObrazu(Sciezka);
+        
+        
     }
 
+    
+   public int[][] pobierzTabliceRGB(){
+       return RGB.TablicaRgb;
+   }
    
+   public int pobierzX(){
+        return RGB.pobierzX();
+   }
+   
+   public int pobierzY()
+   {
+       return RGB.pobierzY();
+   }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -32,18 +49,18 @@ public class WyświetlenieObrazu extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new ŁadowanieObrazu(Sciezka);
+        Wyświetlacz = new ŁadowanieObrazu(Sciezka);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout WyświetlaczLayout = new javax.swing.GroupLayout(Wyświetlacz);
+        Wyświetlacz.setLayout(WyświetlaczLayout);
+        WyświetlaczLayout.setHorizontalGroup(
+            WyświetlaczLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        WyświetlaczLayout.setVerticalGroup(
+            WyświetlaczLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
@@ -51,11 +68,11 @@ public class WyświetlenieObrazu extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Wyświetlacz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Wyświetlacz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -92,7 +109,7 @@ public class WyświetlenieObrazu extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel Wyświetlacz;
     // End of variables declaration//GEN-END:variables
 
   

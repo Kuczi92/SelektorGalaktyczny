@@ -17,6 +17,16 @@ public class ŁadowanieObrazu extends JPanel {
 
 	private BufferedImage image;
         private String Sciezka;
+        public int[][] TablicaRgb;
+        
+        
+        public int pobierzX(){
+            return image.getWidth();
+        }
+        
+        public int pobierzY(){
+            return image.getHeight();
+        }
         
         public BufferedImage GetObraz(){
             return image;
@@ -38,12 +48,17 @@ public class ŁadowanieObrazu extends JPanel {
 
 		Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
 		setPreferredSize(dimension);
+                
+                
+                TablicaRgb=convertTo2DWithoutUsingGetRGB(image);
+                
 	}
 
        public  int[][] pobierzObraz(){
           return convertTo2DWithoutUsingGetRGB(image);
        }
-
+       
+       
        
        private static int[][] convertTo2DWithoutUsingGetRGB(BufferedImage image) {
 
