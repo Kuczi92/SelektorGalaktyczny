@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
  */
 public class PanelSterowania extends javax.swing.JFrame {
 
-    
+    Obraz eksperyment;
     
     public String ScieszkaWybranyPlikObrazu;
     public String ScieszkaWybranyFolderWejscia;
@@ -1384,6 +1384,10 @@ public class PanelSterowania extends javax.swing.JFrame {
     private void ZaladowanieOryginaluMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladowanieOryginaluMouseClicked
        WyświetlenieObrazu Wyświetl = new WyświetlenieObrazu(ScieszkaWybranyPlikObrazu);
        Wyświetl.setVisible(true);
+       eksperyment = new Obraz(Wyświetl.pobierzTabliceRGB());
+       
+       
+       
        int w[][] = Wyświetl.pobierzTabliceRGB();
        int x = Wyświetl.pobierzX();
        int y = Wyświetl.pobierzY();
