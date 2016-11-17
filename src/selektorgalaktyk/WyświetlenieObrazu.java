@@ -5,6 +5,7 @@
  */
 
 package selektorgalaktyk;
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 /**
  *
@@ -25,7 +26,40 @@ public class WyświetlenieObrazu extends JFrame {
         
         
     }
+    
+   public WyświetlenieObrazu(BufferedImage Obraz) {
+       
+       
+        Wyświetlacz = new ŁadowanieObrazu(Obraz);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        javax.swing.GroupLayout WyświetlaczLayout = new javax.swing.GroupLayout(Wyświetlacz);
+        Wyświetlacz.setLayout(WyświetlaczLayout);
+        WyświetlaczLayout.setHorizontalGroup(
+            WyświetlaczLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        WyświetlaczLayout.setVerticalGroup(
+            WyświetlaczLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Wyświetlacz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Wyświetlacz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+       
+        
+        
+    }
     
    public int[][] pobierzTabliceRGB(){
        return RGB.TablicaRgb;

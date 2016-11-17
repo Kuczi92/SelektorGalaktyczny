@@ -53,7 +53,9 @@ public class ŁadowanieObrazu extends JPanel {
                 TablicaRgb=convertTo2DWithoutUsingGetRGB(image);
                 
 	}
-
+       public ŁadowanieObrazu(BufferedImage obraz){
+          this.image=obraz; 
+       }
        public  int[][] pobierzObraz(){
           return convertTo2DWithoutUsingGetRGB(image);
        }
@@ -76,11 +78,11 @@ public class ŁadowanieObrazu extends JPanel {
             argb += ((int) pixels[pixel + 1] & 0xff); // blue
             argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
             argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
-            result[row][col] = argb;
-            col++;
-            if (col == width) {
-               col = 0;
-               row++;
+            result[col][row] = argb;
+            row++;
+            if (row == width) {
+               row = 0;
+               col++;
             }
          }
       } else {
@@ -91,11 +93,11 @@ public class ŁadowanieObrazu extends JPanel {
             argb += ((int) pixels[pixel] & 0xff); // blue
             argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
             argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
-            result[row][col] = argb;
-            col++;
-            if (col == width) {
-               col = 0;
-               row++;
+            result[col][row] = argb;
+            row++;
+            if (row == width) {
+               row = 0;
+               col++;
             }
          }
       }

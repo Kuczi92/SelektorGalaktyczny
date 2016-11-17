@@ -5,6 +5,7 @@
  */
 package selektorgalaktyk;
 
+import java.awt.image.BufferedImage;
 import javax.swing.JFileChooser;
 
 /**
@@ -14,6 +15,7 @@ import javax.swing.JFileChooser;
 public class PanelSterowania extends javax.swing.JFrame {
 
     Obraz eksperyment;
+    BufferedImage eksperyment2;
     
     public String ScieszkaWybranyPlikObrazu;
     public String ScieszkaWybranyFolderWejscia;
@@ -207,6 +209,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         });
 
         OknoEdycjiDlaPojedynczegoObrazu.setText("Okno edycji dla jednego obrazu");
+        OknoEdycjiDlaPojedynczegoObrazu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OknoEdycjiDlaPojedynczegoObrazuMouseClicked(evt);
+            }
+        });
 
         ZaladowanieOryginalu.setText("Załadowanie Oryginału");
         ZaladowanieOryginalu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1385,15 +1392,21 @@ public class PanelSterowania extends javax.swing.JFrame {
        WyświetlenieObrazu Wyświetl = new WyświetlenieObrazu(ScieszkaWybranyPlikObrazu);
        Wyświetl.setVisible(true);
        eksperyment = new Obraz(Wyświetl.pobierzTabliceRGB());
+       System.out.println(eksperyment.KanałRGB.length);
+       System.out.println(eksperyment.KanałRGB[0].length);
        
        
        
        int w[][] = Wyświetl.pobierzTabliceRGB();
        int x = Wyświetl.pobierzX();
        int y = Wyświetl.pobierzY();
-       Konsola.append(String.valueOf(w[4][4]));
-       
-       
+       System.out.println(x);
+       System.out.println(y);
+      //eksperyment.DodajCzerwony(100);
+       eksperyment2 = eksperyment.ObrazPrzetworzony();
+       System.out.println("wymiary obrazu");
+       System.out.println(eksperyment2.getHeight());
+       System.out.println(eksperyment2.getWidth());
        
     }//GEN-LAST:event_ZaladowanieOryginaluMouseClicked
 
@@ -1504,6 +1517,13 @@ public class PanelSterowania extends javax.swing.JFrame {
     private void SliderPelnyProcentZapelnieniaJasnymiProgKarlowataStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderPelnyProcentZapelnieniaJasnymiProgKarlowataStateChanged
         LabelPZBPGE.setText(String.valueOf(SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue()));
     }//GEN-LAST:event_SliderPelnyProcentZapelnieniaJasnymiProgKarlowataStateChanged
+
+    private void OknoEdycjiDlaPojedynczegoObrazuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
+
+               WyświetlenieObrazu EdytowalnyObraz = new WyświetlenieObrazu(eksperyment2);
+               EdytowalnyObraz.setVisible(true);
+             
+    }//GEN-LAST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
     
 
 /**
