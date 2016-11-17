@@ -120,13 +120,21 @@ public class Obraz {
         }
     }
     
-     public void DodajZielony(int x,int y,int wartośc)
+     public void DodajZielony(int wartośc)
      {
-        
+        for(int x = 0 ; x<Zielony.length;x++){
+            for(int y= 0;y<Zielony[0].length;y++ ){
+               Zielony[x][y] = (short) (Zielony[x][y]+wartośc);
+            }
+        }
      }
-      public void DodajNiebieski(int x,int y,int wartośc)
+      public void DodajNiebieski(int wartośc)
     {
-        
+        for(int x = 0 ; x<Niebieski.length;x++){
+            for(int y= 0;y<Niebieski[0].length;y++ ){
+               Niebieski[x][y] = (short) (Niebieski[x][y]+wartośc);
+            }
+        }
     }
       
       
