@@ -17,7 +17,7 @@ public class SelektorGalaktyk {
     public static void main(String[] args) {
         PanelSterowania PanelGlowny = new PanelSterowania();
         PanelGlowny.setVisible(true);
-        
+       
         
     }
     

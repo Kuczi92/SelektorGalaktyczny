@@ -5,22 +5,27 @@
  */
 package selektorgalaktyk;
 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Norbert
  */
-public class PanelSterowania extends javax.swing.JFrame {
-
-    Obraz eksperyment;
-    BufferedImage eksperyment2;
+public class PanelSterowania extends JFrame implements ActionListener {
+    ImageProcessing ImageProcessing;
     
+    public BufferedImage ObrazEdytowalny;
+    public WyświetlaczObraz OknoWyświetlOryginał;
+    public WyświetlaczObraz OknoEdytowalnyObraz;
     public String ScieszkaWybranyPlikObrazu;
     public String ScieszkaWybranyFolderWejscia;
     public String ScieszkaWybranyFolderWyjscia;
-    
+    ImageProcessing Panel;
      
     WyborPliku WybranyPlikObrazu; 
     WyborFolderu WybranyFolderWejscia; 
@@ -29,6 +34,7 @@ public class PanelSterowania extends javax.swing.JFrame {
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
+        
     }
 
     /**
@@ -234,9 +240,15 @@ public class PanelSterowania extends javax.swing.JFrame {
         PanelGlowny.setMaximumSize(new java.awt.Dimension(550, 277));
 
         SliderCzerwony.setMaximum(255);
+        SliderCzerwony.setValue(0);
         SliderCzerwony.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderCzerwonyStateChanged(evt);
+            }
+        });
+        SliderCzerwony.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderCzerwonyMouseReleased(evt);
             }
         });
 
@@ -245,18 +257,30 @@ public class PanelSterowania extends javax.swing.JFrame {
         LabelZielony.setText("Zielony");
 
         SliderZielony.setMaximum(255);
+        SliderZielony.setValue(0);
         SliderZielony.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderZielonyStateChanged(evt);
+            }
+        });
+        SliderZielony.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderZielonyMouseReleased(evt);
             }
         });
 
         LabelNiebieski.setText("Niebieski");
 
         SliderNiebieski.setMaximum(255);
+        SliderNiebieski.setValue(0);
         SliderNiebieski.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderNiebieskiStateChanged(evt);
+            }
+        });
+        SliderNiebieski.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderNiebieskiMouseReleased(evt);
             }
         });
 
@@ -310,9 +334,15 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addContainerGap(116, Short.MAX_VALUE))
         );
 
+        SliderJasnosc.setValue(0);
         SliderJasnosc.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderJasnoscStateChanged(evt);
+            }
+        });
+        SliderJasnosc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderJasnoscMouseReleased(evt);
             }
         });
 
@@ -372,15 +402,15 @@ public class PanelSterowania extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LabelKontrast)
-                            .addComponent(LabelJasnosc)
-                            .addComponent(LabelWartoscProgowa)))
+                            .addComponent(LabelWartoscProgowa)
+                            .addComponent(LabelJasnosc)))
                     .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
                         .addComponent(ToggleProgowanie)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ToggleEfektRozjasniania, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ToggleEfektPrzyciemniania, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         UstawieniaObrazuZakladkaLayout.setVerticalGroup(
             UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +421,6 @@ public class PanelSterowania extends javax.swing.JFrame {
                 .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SliderJasnosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelWartoscJasnosc))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelKontrast)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -428,6 +457,11 @@ public class PanelSterowania extends javax.swing.JFrame {
         });
 
         ButtonStworzPlikJPGzTeraźniejszymUstawieniem.setText("Stwórz Plik JPG z Teraźniejszym ustawieniem");
+        ButtonStworzPlikJPGzTeraźniejszymUstawieniem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed(evt);
+            }
+        });
 
         ButtonStworzPlikPDFzTerazniejszymUstawieniem.setText("Stwórz Plik PDF z Teraźniejszym Ustawieniem");
 
@@ -1367,7 +1401,11 @@ public class PanelSterowania extends javax.swing.JFrame {
            Konsola.append("Wybrałes ten plik z obrazem: " +
             WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath());
            ScieszkaWybranyPlikObrazu=WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath();
-  
+           //OnkoWyświetlOryginał = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Oryginalny");
+           OknoWyświetlOryginał = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Oryginalny");
+           OknoEdytowalnyObraz  = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Edytowalny");
+           
+           
     }//GEN-LAST:event_ZaladujPojedynczyObrazMouseClicked
     }
     private void WybierzFolderZrodlowyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WybierzFolderZrodlowyMouseClicked
@@ -1388,30 +1426,20 @@ public class PanelSterowania extends javax.swing.JFrame {
            }
     }//GEN-LAST:event_WybierzFolderWyjsciowyMouseClicked
 
+    
     private void ZaladowanieOryginaluMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladowanieOryginaluMouseClicked
-       WyświetlenieObrazu Wyświetl = new WyświetlenieObrazu(ScieszkaWybranyPlikObrazu);
-       Wyświetl.setVisible(true);
-       eksperyment = new Obraz(Wyświetl.pobierzTabliceRGB());
-       System.out.println(eksperyment.KanałRGB.length);
-       System.out.println(eksperyment.KanałRGB[0].length);
-       
-       
-       
-       int w[][] = Wyświetl.pobierzTabliceRGB();
-       int x = Wyświetl.pobierzX();
-       int y = Wyświetl.pobierzY();
-       System.out.println(x);
-       System.out.println(y);
-      //eksperyment.DodajCzerwony(100);
-       eksperyment2 = eksperyment.ObrazPrzetworzony();
-       System.out.println("wymiary obrazu");
-       System.out.println(eksperyment2.getHeight());
-       System.out.println(eksperyment2.getWidth());
+      
+      
+      OknoWyświetlOryginał.setVisible(true);
+      
+      
        
     }//GEN-LAST:event_ZaladowanieOryginaluMouseClicked
 
     private void SliderCzerwonyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderCzerwonyStateChanged
      LabelCzerwonyWartosc.setText(String.valueOf(SliderCzerwony.getValue()));
+     
+     
     }//GEN-LAST:event_SliderCzerwonyStateChanged
 
     private void SliderZielonyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderZielonyStateChanged
@@ -1520,10 +1548,35 @@ public class PanelSterowania extends javax.swing.JFrame {
 
     private void OknoEdycjiDlaPojedynczegoObrazuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
 
-               WyświetlenieObrazu EdytowalnyObraz = new WyświetlenieObrazu(eksperyment2);
-               EdytowalnyObraz.setVisible(true);
+          OknoEdytowalnyObraz.setVisible(true);
              
     }//GEN-LAST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
+
+    private void SliderCzerwonyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderCzerwonyMouseReleased
+        
+        OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderCzerwony.getValue(), SliderZielony.getValue(), SliderNiebieski.getValue()));
+        OknoEdytowalnyObraz.Odswierzenie();
+        
+    }//GEN-LAST:event_SliderCzerwonyMouseReleased
+
+    private void ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed
+
+    private void SliderZielonyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderZielonyMouseReleased
+        OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderCzerwony.getValue(), SliderZielony.getValue(), SliderNiebieski.getValue()));
+        OknoEdytowalnyObraz.Odswierzenie();
+    }//GEN-LAST:event_SliderZielonyMouseReleased
+
+    private void SliderNiebieskiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderNiebieskiMouseReleased
+       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderCzerwony.getValue(), SliderZielony.getValue(), SliderNiebieski.getValue()));
+       OknoEdytowalnyObraz.Odswierzenie();
+    }//GEN-LAST:event_SliderNiebieskiMouseReleased
+
+    private void SliderJasnoscMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJasnoscMouseReleased
+       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderJasnosc.getValue(), SliderJasnosc.getValue(), SliderJasnosc.getValue()));
+       OknoEdytowalnyObraz.Odswierzenie();
+    }//GEN-LAST:event_SliderJasnoscMouseReleased
     
 
 /**
@@ -1637,11 +1690,11 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JButton OknoEdycjiDlaPojedynczegoObrazu;
     private javax.swing.JMenuItem OperacjeNaObrazach;
     private javax.swing.JPanel OperacjeNaObrazachZakladka;
-    private javax.swing.JLayeredPane PanelGlowny;
+    public javax.swing.JLayeredPane PanelGlowny;
     private javax.swing.JMenuItem ParametryDetekcji;
     private javax.swing.JPanel ParametryDetekcjiZakladka;
     private javax.swing.JMenu Pomoc;
-    private javax.swing.JSlider SliderCzerwony;
+    public javax.swing.JSlider SliderCzerwony;
     private javax.swing.JSlider SliderCzulosc;
     private javax.swing.JSlider SliderJasnosc;
     private javax.swing.JSlider SliderKontrast;
@@ -1695,4 +1748,9 @@ public class PanelSterowania extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -296,6 +296,9 @@
           <Dimension value="[550, 277]"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -412,10 +415,15 @@
             <Component class="javax.swing.JSlider" name="SliderCzerwony">
               <Properties>
                 <Property name="maximum" type="int" value="255"/>
+                <Property name="value" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderCzerwonyStateChanged"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SliderCzerwonyMouseReleased"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelCzerwony">
               <Properties>
@@ -430,9 +438,11 @@
             <Component class="javax.swing.JSlider" name="SliderZielony">
               <Properties>
                 <Property name="maximum" type="int" value="255"/>
+                <Property name="value" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderZielonyStateChanged"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SliderZielonyMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelNiebieski">
@@ -443,9 +453,11 @@
             <Component class="javax.swing.JSlider" name="SliderNiebieski">
               <Properties>
                 <Property name="maximum" type="int" value="255"/>
+                <Property name="value" type="int" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderNiebieskiStateChanged"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SliderNiebieskiMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelZielonyWartosc">
@@ -497,8 +509,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -509,7 +521,7 @@
                               <Component id="ToggleEfektPrzyciemniania" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="121" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -523,7 +535,6 @@
                           <Component id="SliderJasnosc" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWartoscJasnosc" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelKontrast" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -550,8 +561,12 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JSlider" name="SliderJasnosc">
+              <Properties>
+                <Property name="value" type="int" value="0"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderJasnoscStateChanged"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SliderJasnoscMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelJasnosc">
@@ -703,6 +718,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Stw&#xf3;rz Plik JPG z Tera&#x17a;niejszym ustawieniem"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonStworzPlikJPGzTera&#x17a;niejszymUstawieniemActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonStworzPlikPDFzTerazniejszymUstawieniem">
               <Properties>
