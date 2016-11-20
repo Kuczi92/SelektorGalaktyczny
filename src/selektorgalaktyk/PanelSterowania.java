@@ -17,7 +17,7 @@ import javax.swing.JFrame;
  * @author Norbert
  */
 public class PanelSterowania extends JFrame implements ActionListener {
-    ImageProcessing ImageProcessing;
+   
     
     public BufferedImage ObrazEdytowalny;
     public WyświetlaczObraz OknoWyświetlOryginał;
@@ -25,7 +25,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     public String ScieszkaWybranyPlikObrazu;
     public String ScieszkaWybranyFolderWejscia;
     public String ScieszkaWybranyFolderWyjscia;
-    ImageProcessing Panel;
+  
      
     WyborPliku WybranyPlikObrazu; 
     WyborFolderu WybranyFolderWejscia; 
@@ -34,6 +34,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
+        
+       
         
     }
 
@@ -186,6 +188,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
         Pomoc = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GALAXY  - Sysem do wykrywania galaktyk na zdjęciach");
 
         Konsola.setColumns(20);
         Konsola.setRows(5);
@@ -206,11 +209,21 @@ public class PanelSterowania extends JFrame implements ActionListener {
         });
 
         ZapiszWynikoweObrazy.setText("Zapisz Wynikowe Obrazy");
+        ZapiszWynikoweObrazy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ZapiszWynikoweObrazyActionPerformed(evt);
+            }
+        });
 
         ZaladujPojedynczyObraz.setText("Załaduj pojedyńczy Obraz");
         ZaladujPojedynczyObraz.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ZaladujPojedynczyObrazMouseClicked(evt);
+            }
+        });
+        ZaladujPojedynczyObraz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ZaladujPojedynczyObrazActionPerformed(evt);
             }
         });
 
@@ -334,6 +347,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
                 .addContainerGap(116, Short.MAX_VALUE))
         );
 
+        SliderJasnosc.setMaximum(255);
         SliderJasnosc.setValue(0);
         SliderJasnosc.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -350,9 +364,17 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
         LabelKontrast.setText("Konstrast");
 
+        SliderKontrast.setMaximum(10000);
+        SliderKontrast.setSnapToTicks(true);
+        SliderKontrast.setValue(1000);
         SliderKontrast.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderKontrastStateChanged(evt);
+            }
+        });
+        SliderKontrast.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderKontrastMouseReleased(evt);
             }
         });
 
@@ -377,7 +399,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
         LabelWartoscJasnosc.setText(String.valueOf(SliderJasnosc.getValue()));
 
-        LabelWartoscKontrast.setText(String.valueOf(SliderKontrast.getValue()));
+        LabelWartoscKontrast.setText(String.valueOf(SliderKontrast.getValue()/1000));
 
         LabelWartoscWartoscProgowa.setText(String.valueOf(SliderWartoscProgowa.getValue()));
 
@@ -385,32 +407,30 @@ public class PanelSterowania extends JFrame implements ActionListener {
         UstawieniaObrazuZakladka.setLayout(UstawieniaObrazuZakladkaLayout);
         UstawieniaObrazuZakladkaLayout.setHorizontalGroup(
             UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SliderJasnosc, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
+                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(SliderJasnosc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SliderKontrast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(LabelKontrast)
+                                .addComponent(LabelWartoscProgowa)
+                                .addComponent(LabelJasnosc)))
+                        .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
+                            .addComponent(ToggleProgowanie)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ToggleEfektRozjasniania, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ToggleEfektPrzyciemniania, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(SliderWartoscProgowa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LabelWartoscWartoscProgowa, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LabelWartoscKontrast, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LabelWartoscJasnosc, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(178, 178, 178))
-            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelKontrast)
-                            .addComponent(LabelWartoscProgowa)
-                            .addComponent(LabelJasnosc)))
-                    .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                        .addComponent(ToggleProgowanie)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ToggleEfektRozjasniania, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ToggleEfektPrzyciemniania, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addComponent(LabelWartoscKontrast)
+                    .addComponent(LabelWartoscWartoscProgowa)
+                    .addComponent(LabelWartoscJasnosc))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         UstawieniaObrazuZakladkaLayout.setVerticalGroup(
             UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,7 +452,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
                 .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(SliderWartoscProgowa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelWartoscWartoscProgowa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ToggleProgowanie)
                     .addComponent(ToggleEfektRozjasniania)
@@ -1399,7 +1419,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
           int returnVal = WybranyPlikObrazu.WybieraczPliku.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            Konsola.append("Wybrałes ten plik z obrazem: " +
-            WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath());
+            WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath()+"\n");
            ScieszkaWybranyPlikObrazu=WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath();
            //OnkoWyświetlOryginał = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Oryginalny");
            OknoWyświetlOryginał = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Oryginalny");
@@ -1413,7 +1433,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
           int returnVal = WybranyFolderWejscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            Konsola.append("Wybrałes ten folder jako źródłowy: " +
-            WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+            WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
            }
     }//GEN-LAST:event_WybierzFolderZrodlowyMouseClicked
     
@@ -1422,7 +1442,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
           int returnVal = WybranyFolderWyjscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            Konsola.append("Wybrałes ten folder jako Wyjściowy: " +
-            WybranyFolderWyjscia.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+            WybranyFolderWyjscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
            }
     }//GEN-LAST:event_WybierzFolderWyjsciowyMouseClicked
 
@@ -1459,7 +1479,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderJasnoscStateChanged
 
     private void SliderKontrastStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderKontrastStateChanged
-      LabelWartoscKontrast.setText(String.valueOf(SliderKontrast.getValue()));
+      LabelWartoscKontrast.setText(String.valueOf(SliderKontrast.getValue()/1000.0));
     }//GEN-LAST:event_SliderKontrastStateChanged
 
     private void SliderWartoscProgowaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderWartoscProgowaStateChanged
@@ -1560,7 +1580,13 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderCzerwonyMouseReleased
 
     private void ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed
-        // TODO add your handling code here:
+        WyborPliku ZapisObrazu = new WyborPliku();
+        int returnVal = ZapisObrazu.WybieraczPliku.showOpenDialog(null);
+           if(returnVal == JFileChooser.APPROVE_OPTION) {
+           Konsola.append("Wybrałes ten folder jako Wyjściowy na zapis Zmodyfikowanego obrazu: " +
+            ZapisObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath()+"\n");
+           }
+        OknoEdytowalnyObraz.zapiszObraz(ZapisObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed
 
     private void SliderZielonyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderZielonyMouseReleased
@@ -1577,6 +1603,19 @@ public class PanelSterowania extends JFrame implements ActionListener {
        OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderJasnosc.getValue(), SliderJasnosc.getValue(), SliderJasnosc.getValue()));
        OknoEdytowalnyObraz.Odswierzenie();
     }//GEN-LAST:event_SliderJasnoscMouseReleased
+
+    private void SliderKontrastMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderKontrastMouseReleased
+      OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.WymnorzKoloryWKanaleRGB(SliderKontrast.getValue()/1000.0, SliderKontrast.getValue()/1000.0, SliderKontrast.getValue()/1000.0));
+      OknoEdytowalnyObraz.Odswierzenie();
+    }//GEN-LAST:event_SliderKontrastMouseReleased
+
+    private void ZapiszWynikoweObrazyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZapiszWynikoweObrazyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ZapiszWynikoweObrazyActionPerformed
+
+    private void ZaladujPojedynczyObrazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ZaladujPojedynczyObrazActionPerformed
     
 
 /**
@@ -1603,9 +1642,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new PanelSterowania().setVisible(true);
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package selektorgalaktyk;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import static java.awt.image.BufferedImage.TYPE_4BYTE_ABGR;
 import java.awt.image.DataBufferByte;
 import java.awt.image.PixelGrabber;
 import java.io.File;

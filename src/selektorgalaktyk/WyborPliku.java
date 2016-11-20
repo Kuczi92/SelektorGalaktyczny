@@ -5,7 +5,6 @@
  */
 package selektorgalaktyk;
 
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -17,12 +16,13 @@ public class WyborPliku extends javax.swing.JFrame {
     FileNameExtensionFilter f_sel;/**
      * Creates new form WyborPliku
      */
-    public  WyborPliku() {
-       
-        initComponents();
-    }
-
     
+
+     public  WyborPliku() {
+         
+        initComponents();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +66,9 @@ public class WyborPliku extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
     private void WybieraczPlikuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WybieraczPlikuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_WybieraczPlikuActionPerformed
@@ -94,13 +97,11 @@ public class WyborPliku extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            WyborPliku W =   new WyborPliku();
-            W.setVisible(true);
-            W.setResizable(true);
-            W.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+          java.awt.EventQueue.invokeLater(() -> {
+            new WyborPliku().setVisible(true);
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JFileChooser WybieraczPliku;

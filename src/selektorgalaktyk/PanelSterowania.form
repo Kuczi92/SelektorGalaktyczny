@@ -93,6 +93,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="&quot;GALAXY  - Sysem do wykrywania galaktyk na zdj&#x119;ciach&quot;" type="code"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -231,6 +234,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Zapisz Wynikowe Obrazy"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ZapiszWynikoweObrazyActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ZaladujPojedynczyObraz">
       <Properties>
@@ -238,6 +244,7 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ZaladujPojedynczyObrazMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ZaladujPojedynczyObrazActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -489,39 +496,36 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="SliderJasnosc" pref="302" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="SliderJasnosc" max="32767" attributes="0"/>
                           <Component id="SliderKontrast" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="ToggleProgowanie" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="ToggleEfektRozjasniania" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="ToggleEfektPrzyciemniania" min="-2" pref="164" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <Component id="SliderWartoscProgowa" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LabelWartoscWartoscProgowa" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelWartoscKontrast" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelWartoscJasnosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWartoscKontrast" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWartoscWartoscProgowa" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWartoscJasnosc" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="ToggleProgowanie" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ToggleEfektRozjasniania" min="-2" pref="164" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ToggleEfektPrzyciemniania" min="-2" pref="164" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="121" max="32767" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -548,7 +552,7 @@
                           <Component id="SliderWartoscProgowa" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWartoscWartoscProgowa" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                      <EmptySpace pref="85" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ToggleProgowanie" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ToggleEfektRozjasniania" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -562,6 +566,7 @@
           <SubComponents>
             <Component class="javax.swing.JSlider" name="SliderJasnosc">
               <Properties>
+                <Property name="maximum" type="int" value="255"/>
                 <Property name="value" type="int" value="0"/>
               </Properties>
               <Events>
@@ -580,8 +585,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderKontrast">
+              <Properties>
+                <Property name="maximum" type="int" value="10000"/>
+                <Property name="snapToTicks" type="boolean" value="true"/>
+                <Property name="value" type="int" value="1000"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderKontrastStateChanged"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SliderKontrastMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelWartoscProgowa">
@@ -622,7 +633,7 @@
             <Component class="javax.swing.JLabel" name="LabelWartoscKontrast">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="String.valueOf(SliderKontrast.getValue())" type="code"/>
+                  <Connection code="String.valueOf(SliderKontrast.getValue()/1000)" type="code"/>
                 </Property>
               </Properties>
             </Component>

@@ -42,7 +42,11 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
         
         
     }
-
+  
+   public void zapiszObraz(String Sciezka){
+       RGB.writeImage(Sciezka);
+   }
+   
    public WyświetlaczObraz(Obraz ObrazEdytowalny, String TytułOkna) {
        this.RGB=ObrazEdytowalny;
        this.tutułOkna=TytułOkna;
@@ -66,8 +70,8 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
    
    public int[] DodajKoloryWKanaleRGB(int czerwien,int zielen,int niebieski){
        
-       int height = RGB.getImageHeight();
-       int width = RGB.getWidth();
+       int height = pobierzX();
+       int width = pobierzY();
        @SuppressWarnings("MismatchedReadAndWriteOfArray")
        int KanalAlpha [] = RGB.getAlphaTable();
        @SuppressWarnings("MismatchedReadAndWriteOfArray")
@@ -123,11 +127,70 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
           return WyjsciowyRGB;
         } 
         
+   public int[] WymnorzKoloryWKanaleRGB(double czerwien,double zielen,double niebieski){
+       
+       int height = RGB.getImageHeight();
+       int width = RGB.getWidth();
+       @SuppressWarnings("MismatchedReadAndWriteOfArray")
+       int KanalAlpha [] = RGB.getAlphaTable();
+       @SuppressWarnings("MismatchedReadAndWriteOfArray")
+       int KolorCzerwony[] = RGB.getRedTable();
+       @SuppressWarnings("MismatchedReadAndWriteOfArray")
+       int KolorZielony[] = RGB.getGreenTable();
+       @SuppressWarnings("MismatchedReadAndWriteOfArray")
+       int KolorNiebieski[] = RGB.getBlueTable();
+       
+       
+       @SuppressWarnings("MismatchedReadAndWriteOfArray")
+       int WyjsciowyRGB[] = new int[RGB.getImageTotalPixels()];
+        
+       for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                if(KolorCzerwony[x+width*y]*czerwien>255){
+                    KolorCzerwony[x+width*y]=255;
+                 }
+                
+                else{
+                  KolorCzerwony[x+width*y]*=czerwien; 
+                }
+                
+                
+                if(KolorZielony[x+width*y]*zielen>255){
+                    KolorZielony[x+width*y]=255;
+                 }
+                
+                else{
+                  KolorZielony[x+width*y]*=zielen; 
+                }
+                
+                
+                if(KolorNiebieski[x+width*y]*niebieski>255){
+                    KolorNiebieski[x+width*y]=255;
+                 }
+                
+                else{
+                  KolorNiebieski[x+width*y]*=niebieski; 
+                }
+                
+                
+                
+                WyjsciowyRGB[x+width*y]= (KanalAlpha [x+width*y]<<24) | (KolorCzerwony[x+width*y]<<16) | (KolorZielony[x+width*y]<<8) | KolorNiebieski[x+width*y];
+                }
+            
+            
+            
+            }
+       
+       
+       
+          return WyjsciowyRGB;
+        }
+   
+   
         public void Odswierzenie(){
             // BufferedImage mask = new BufferedImage(RGB.getImageWidth(),RGB.getImageHeight(), BufferedImage.TYPE_4BYTE_ABGR);
                                       Graphics g  = RGB.Image().getGraphics();
                                       g.drawImage(RGB.Image(), 0, 0, this);
-                                     
                                       g.dispose();
                                       this.repaint();
         }
@@ -166,4 +229,6 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }
