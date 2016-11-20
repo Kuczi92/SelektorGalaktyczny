@@ -129,8 +129,8 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
         
    public int[] WymnorzKoloryWKanaleRGB(double czerwien,double zielen,double niebieski){
        
-       int height = RGB.getImageHeight();
-       int width = RGB.getWidth();
+       int height = pobierzX();
+       int width = pobierzY();
        @SuppressWarnings("MismatchedReadAndWriteOfArray")
        int KanalAlpha [] = RGB.getAlphaTable();
        @SuppressWarnings("MismatchedReadAndWriteOfArray")
