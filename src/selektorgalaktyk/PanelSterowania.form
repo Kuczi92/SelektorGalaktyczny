@@ -497,35 +497,38 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="SliderJasnosc" max="32767" attributes="0"/>
                           <Component id="SliderKontrast" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="ToggleProgowanie" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ToggleEfektRozjasniania" min="-2" pref="164" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ToggleEfektPrzyciemniania" min="-2" pref="164" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="ToggleProgowanie" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ToggleEfektRozjasniania" min="-2" pref="164" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ToggleEfektPrzyciemniania" min="-2" pref="164" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
-                          <Component id="SliderWartoscProgowa" max="32767" attributes="0"/>
+                          <Component id="SliderWartoscProgowa" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LabelWartoscKontrast" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelWartoscWartoscProgowa" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelWartoscJasnosc" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWartoscKontrast" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWartoscJasnosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWartoscWartoscProgowa" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -567,6 +570,7 @@
             <Component class="javax.swing.JSlider" name="SliderJasnosc">
               <Properties>
                 <Property name="maximum" type="int" value="255"/>
+                <Property name="minimum" type="int" value="-400"/>
                 <Property name="value" type="int" value="0"/>
               </Properties>
               <Events>

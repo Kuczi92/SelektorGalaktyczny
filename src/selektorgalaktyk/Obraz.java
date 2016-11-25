@@ -151,8 +151,7 @@ public final class Obraz extends JPanel  {
             }else{
                 imgType = ImageType.PNG;
             }
-            System.out.println(image.getWidth());
-            System.out.println(image.getHeight());
+           
             this.width = image.getWidth();
             this.height = image.getHeight();
             this.totalPixels = this.width * this.height;

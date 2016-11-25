@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author Quchi
@@ -25,32 +26,60 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
     public  JPanel Wyświetlacz;
     private BufferedImage ObrazNiezmodyfikowany;
     public String tutułOkna;
+    public String nazwapliku;
     
-    public WyświetlaczObraz(String sciezka, String TytułOkna) {
+    public WyświetlaczObraz(String sciezka, String TytułOkna,String nazwaPliku) {
         RGB = new Obraz(sciezka); 
         this.tutułOkna=TytułOkna;
         initComponents();
         Sciezka=sciezka;
-        
+        this.nazwapliku=nazwaPliku;
         
     }
     
-   public WyświetlaczObraz(BufferedImage Obraz, String TytułOkna) {
+   public WyświetlaczObraz(BufferedImage Obraz, String TytułOkna,String nazwaPliku) {
        RGB = new Obraz(Obraz);
        this.tutułOkna=TytułOkna;
        initComponents();
-        
+       this.nazwapliku=nazwaPliku;
+  
         
     }
   
-   public void zapiszObraz(String Sciezka){
-       RGB.writeImage(Sciezka);
-   }
+  
    
-   public WyświetlaczObraz(Obraz ObrazEdytowalny, String TytułOkna) {
+   public WyświetlaczObraz(Obraz ObrazEdytowalny, String TytułOkna,String nazwaPliku) {
        this.RGB=ObrazEdytowalny;
        this.tutułOkna=TytułOkna;
-       
+       this.nazwapliku=nazwaPliku;
+
+    }
+   
+   static String stripExtension (String str) {
+        // Handle null case specially.
+
+        if (str == null) return null;
+
+        // Get position of last '.'.
+
+        int pos = str.lastIndexOf(".");
+
+        // If there wasn't any '.' just return the string as is.
+
+        if (pos == -1) return str;
+
+        // Otherwise return the string, up to the dot.
+
+        return str.substring(0, pos);
+    }
+   public String pobierzNazwePliku(){
+       return stripExtension (nazwapliku);
+   }
+    public void zapiszObraz(String Sciezka){
+       RGB.writeImage(Sciezka);
+   }
+   public String pobierzSciezkePliku(){
+        return Sciezka;
     }
    public int[] pobierzTabliceRGB(){
        return RGB.getPixelArray();
@@ -68,7 +97,7 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
        RGB.setPixelArray(tablica);
    }
    
-   public int[] DodajKoloryWKanaleRGB(int czerwien,int zielen,int niebieski){
+   public int[] DodajKoloryWKanaleRGB(double czerwien,double zielen,double niebieski,double kontrast){
        
        int height = pobierzX();
        int width = pobierzY();
@@ -87,30 +116,41 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
         
        for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
-                if(KolorCzerwony[x+width*y]+czerwien>255){
+                if((KolorCzerwony[x+width*y]+czerwien)*kontrast>255){
                     KolorCzerwony[x+width*y]=255;
                  }
                 
+                else if((KolorCzerwony[x+width*y]+czerwien)*kontrast<0){
+                    
+                   KolorCzerwony[x+width*y]=0;
+                 }
+                
                 else{
-                  KolorCzerwony[x+width*y]+=czerwien; 
+                  KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast); 
                 }
                 
                 
-                if(KolorZielony[x+width*y]+zielen>255){
+                if((KolorZielony[x+width*y]+zielen)*kontrast>255){
                     KolorZielony[x+width*y]=255;
                  }
-                
+                else if((KolorZielony[x+width*y]+zielen)*kontrast<0){
+                    
+                   KolorZielony[x+width*y]=0;
+                 }
                 else{
-                  KolorZielony[x+width*y]+=zielen; 
+                  KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast); 
                 }
                 
                 
-                if(KolorNiebieski[x+width*y]+niebieski>255){
+                if((KolorNiebieski[x+width*y]+niebieski)*kontrast>255){
                     KolorNiebieski[x+width*y]=255;
                  }
-                
+                else if((KolorNiebieski[x+width*y]+niebieski)*kontrast<0){
+                    
+                   KolorNiebieski[x+width*y]=0;
+                 }
                 else{
-                  KolorNiebieski[x+width*y]+=niebieski; 
+                  KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast); 
                 }
                 
                 

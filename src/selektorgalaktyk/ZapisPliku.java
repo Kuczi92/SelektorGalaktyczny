@@ -5,6 +5,8 @@
  */
 package selektorgalaktyk;
 
+import java.io.File;
+
 /**
  *
  * @author Quchi
@@ -18,6 +20,37 @@ public class ZapisPliku extends javax.swing.JFrame {
         initComponents();
     }
 
+    ZapisPliku(String NazwaObrazu) {
+       initComponents(NazwaObrazu);
+    }
+
+    private void initComponents(String nazwapliku) {
+
+        WybieraczZapis = new javax.swing.JFileChooser();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        WybieraczZapis.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        WybieraczZapis.setSelectedFile(new File(nazwapliku+" Wyedytowany.png"));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(WybieraczZapis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(WybieraczZapis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +65,7 @@ public class ZapisPliku extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         WybieraczZapis.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        WybieraczZapis.setSelectedFile(new File("EdytowanyObraz.png"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,6 +115,6 @@ public class ZapisPliku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser WybieraczZapis;
+    public javax.swing.JFileChooser WybieraczZapis;
     // End of variables declaration//GEN-END:variables
 }
