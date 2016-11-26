@@ -11,6 +11,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.BRAK_PROGROWANIA;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.EFEKT_PRZYCIEMNAJACY;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.EFEKT_ROZJASNIAJACY;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.PROGOWANIE;
 
 /**
  *
@@ -31,6 +36,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
     WyborFolderu WybranyFolderWejscia; 
     WyborFolderu WybranyFolderWyjscia; 
     
+    
+    public RodzajeProgowania ZastosujProgowanie = BRAK_PROGROWANIA;
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
@@ -381,13 +388,34 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
         LabelWartoscProgowa.setText("Wartosc Progowa");
 
+        SliderWartoscProgowa.setMaximum(255);
         SliderWartoscProgowa.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderWartoscProgowaStateChanged(evt);
             }
         });
+        SliderWartoscProgowa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderWartoscProgowaMouseReleased(evt);
+            }
+        });
 
         ToggleProgowanie.setText("Progowanie");
+        ToggleProgowanie.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ToggleProgowanieStateChanged(evt);
+            }
+        });
+        ToggleProgowanie.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                ToggleProgowanieMouseDragged(evt);
+            }
+        });
+        ToggleProgowanie.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ToggleProgowanieMousePressed(evt);
+            }
+        });
         ToggleProgowanie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToggleProgowanieActionPerformed(evt);
@@ -395,8 +423,18 @@ public class PanelSterowania extends JFrame implements ActionListener {
         });
 
         ToggleEfektPrzyciemniania.setText("Efekt Przyciemniania");
+        ToggleEfektPrzyciemniania.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ToggleEfektPrzyciemnianiaMousePressed(evt);
+            }
+        });
 
         ToggleEfektRozjasniania.setText("Efekt Rozjaśniania");
+        ToggleEfektRozjasniania.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ToggleEfektRozjasnianiaMousePressed(evt);
+            }
+        });
 
         LabelWartoscJasnosc.setText(String.valueOf(SliderJasnosc.getValue()));
 
@@ -415,12 +453,9 @@ public class PanelSterowania extends JFrame implements ActionListener {
                     .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
                         .addGap(0, 30, Short.MAX_VALUE)
                         .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(UstawieniaObrazuZakladkaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabelKontrast)
-                                    .addComponent(LabelWartoscProgowa)
-                                    .addComponent(LabelJasnosc)))
+                            .addComponent(LabelKontrast)
+                            .addComponent(LabelWartoscProgowa)
+                            .addComponent(LabelJasnosc)
                             .addGroup(UstawieniaObrazuZakladkaLayout.createSequentialGroup()
                                 .addComponent(ToggleProgowanie)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1474,7 +1509,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderNiebieskiStateChanged
 
     private void ToggleProgowanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToggleProgowanieActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_ToggleProgowanieActionPerformed
 
     private void SliderJasnoscStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderJasnoscStateChanged
@@ -1577,7 +1612,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
     private void SliderCzerwonyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderCzerwonyMouseReleased
         
-       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0));
+       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
        OknoEdytowalnyObraz.Odswierzenie();
        
     }//GEN-LAST:event_SliderCzerwonyMouseReleased
@@ -1594,22 +1629,22 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed
 
     private void SliderZielonyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderZielonyMouseReleased
-        OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0));
+        OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
         OknoEdytowalnyObraz.Odswierzenie();
     }//GEN-LAST:event_SliderZielonyMouseReleased
 
     private void SliderNiebieskiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderNiebieskiMouseReleased
-       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0));
+       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
        OknoEdytowalnyObraz.Odswierzenie();
     }//GEN-LAST:event_SliderNiebieskiMouseReleased
 
     private void SliderJasnoscMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJasnoscMouseReleased
-       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0));
+       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
        OknoEdytowalnyObraz.Odswierzenie();
     }//GEN-LAST:event_SliderJasnoscMouseReleased
 
     private void SliderKontrastMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderKontrastMouseReleased
-      OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.DodajKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0));
+      OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
       OknoEdytowalnyObraz.Odswierzenie();
     }//GEN-LAST:event_SliderKontrastMouseReleased
 
@@ -1620,6 +1655,49 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void ZaladujPojedynczyObrazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ZaladujPojedynczyObrazActionPerformed
+
+    private void SliderWartoscProgowaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderWartoscProgowaMouseReleased
+      OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderJasnosc.getValue()+SliderCzerwony.getValue(), SliderJasnosc.getValue()+SliderZielony.getValue(), SliderJasnosc.getValue()+SliderNiebieski.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+      OknoEdytowalnyObraz.Odswierzenie();
+    }//GEN-LAST:event_SliderWartoscProgowaMouseReleased
+
+    private void ToggleProgowanieMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleProgowanieMouseDragged
+     
+    }//GEN-LAST:event_ToggleProgowanieMouseDragged
+
+    private void ToggleProgowanieStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ToggleProgowanieStateChanged
+      
+    }//GEN-LAST:event_ToggleProgowanieStateChanged
+
+    private void ToggleProgowanieMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleProgowanieMousePressed
+        ToggleEfektRozjasniania.setSelected(false);
+        ToggleEfektPrzyciemniania.setSelected(false);
+        ZastosujProgowanie=PROGOWANIE;  
+        if(OknoEdytowalnyObraz.isVisible()){
+            OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+            OknoEdytowalnyObraz.Odswierzenie();
+        }
+    }//GEN-LAST:event_ToggleProgowanieMousePressed
+
+    private void ToggleEfektRozjasnianiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleEfektRozjasnianiaMousePressed
+        ToggleProgowanie.setSelected(false);
+        ToggleEfektPrzyciemniania.setSelected(false);
+        ZastosujProgowanie=EFEKT_ROZJASNIAJACY;
+           if(OknoEdytowalnyObraz.isVisible()){
+            OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+            OknoEdytowalnyObraz.Odswierzenie();
+        }
+    }//GEN-LAST:event_ToggleEfektRozjasnianiaMousePressed
+
+    private void ToggleEfektPrzyciemnianiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleEfektPrzyciemnianiaMousePressed
+        ToggleProgowanie.setSelected(false);
+        ToggleEfektRozjasniania.setSelected(false);
+        ZastosujProgowanie=EFEKT_PRZYCIEMNAJACY;
+        if(OknoEdytowalnyObraz.isVisible()){
+            OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+            OknoEdytowalnyObraz.Odswierzenie();
+        }
+    }//GEN-LAST:event_ToggleEfektPrzyciemnianiaMousePressed
     
 
 /**

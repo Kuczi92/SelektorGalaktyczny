@@ -14,6 +14,10 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.BRAK_PROGROWANIA;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.EFEKT_PRZYCIEMNAJACY;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.EFEKT_ROZJASNIAJACY;
+import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.PROGOWANIE;
 
 
 /**
@@ -27,6 +31,8 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
     private BufferedImage ObrazNiezmodyfikowany;
     public String tutułOkna;
     public String nazwapliku;
+    
+   
     
     public WyświetlaczObraz(String sciezka, String TytułOkna,String nazwaPliku) {
         RGB = new Obraz(sciezka); 
@@ -97,7 +103,12 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
        RGB.setPixelArray(tablica);
    }
    
-   public int[] DodajKoloryWKanaleRGB(double czerwien,double zielen,double niebieski,double kontrast){
+   
+   public enum RodzajeProgowania {
+    EFEKT_ROZJASNIAJACY, EFEKT_PRZYCIEMNAJACY, PROGOWANIE,BRAK_PROGROWANIA;
+    }
+   
+   public int[] ModyfikujKoloryWKanaleRGB(double czerwien,double zielen,double niebieski,double kontrast,RodzajeProgowania progowanie,int wartoscprogujaca){
        
        int height = pobierzX();
        int width = pobierzY();
@@ -114,53 +125,189 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
        @SuppressWarnings("MismatchedReadAndWriteOfArray")
        int WyjsciowyRGB[] = new int[RGB.getImageTotalPixels()];
         
-       for(int y = 0; y < height; y++){
-            for(int x = 0; x < width; x++){
-                if((KolorCzerwony[x+width*y]+czerwien)*kontrast>255){
-                    KolorCzerwony[x+width*y]=255;
-                 }
+       for(int y = 0; y < height; y++)
+       
+       {
+            for(int x = 0; x < width; x++)
+            {
                 
-                else if((KolorCzerwony[x+width*y]+czerwien)*kontrast<0){
-                    
-                   KolorCzerwony[x+width*y]=0;
-                 }
-                
-                else{
-                  KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast); 
-                }
-                
-                
-                if((KolorZielony[x+width*y]+zielen)*kontrast>255){
-                    KolorZielony[x+width*y]=255;
-                 }
-                else if((KolorZielony[x+width*y]+zielen)*kontrast<0){
-                    
-                   KolorZielony[x+width*y]=0;
-                 }
-                else{
-                  KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast); 
-                }
+             ///Blok Dla koloru czerwonego   
+                            //blok kodu odpowiedzialny za zabezpieczenia które mają za zadanie zapobiec przepełnienia liczby poza skale 8 bitow
+                            if((KolorCzerwony[x+width*y]+czerwien)*kontrast>255)
+                                    {
+                                       KolorCzerwony[x+width*y]=255;
+                                    }
+                            else if((KolorCzerwony[x+width*y]+czerwien)*kontrast<0)
+                                    { 
+                                      KolorCzerwony[x+width*y]=0;
+                                    }
                 
                 
-                if((KolorNiebieski[x+width*y]+niebieski)*kontrast>255){
-                    KolorNiebieski[x+width*y]=255;
-                 }
-                else if((KolorNiebieski[x+width*y]+niebieski)*kontrast<0){
-                    
-                   KolorNiebieski[x+width*y]=0;
-                 }
-                else{
-                  KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast); 
-                }
+                            //Gdy wartość jest pomiędzy 0 - 255 jest tu ona zapisywana
+                            else
+                                    {
+
+                                      //obliczenie wartosci pikseli oraz operacje progowania  
+                                      if(null != progowanie)  
+                                        switch (progowanie) {
+                                            case BRAK_PROGROWANIA:
+                                                KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                break;
+                                            case PROGOWANIE:
+                                                if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                                {
+                                                    KolorCzerwony[x+width*y]=(int) ((255+czerwien)*kontrast);
+                                                }
+                                                else
+                                                {
+                                                    KolorCzerwony[x+width*y]=(int) ((0+czerwien)*kontrast);
+                                                }     break;
+                                            case EFEKT_ROZJASNIAJACY:
+                                                if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                                {
+                                                    KolorCzerwony[x+width*y]= 255;
+                                                }
+                                                else
+                                                {
+                                                    KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                }     break;
+                                            case EFEKT_PRZYCIEMNAJACY:
+                                                if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                                {
+                                                    KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                }
+                                                else
+                                                {
+                                                    KolorCzerwony[x+width*y]= 0;
+                                                }     break;
+                                            default:
+                                                break;  
+                                        }
+                  
+                             }
+             ///Koniec bloku dla koloru Czerwonego    
+                  
+                                 
                 
                 
+                
+             ///Blok odpowiedzialny za kolor Zielony   
+                            //blok kodu odpowiedzialny za zabezpieczenia które mają za zadanie zapobiec przepełnienia liczby poza skale 8 bitow
+                           if((KolorZielony[x+width*y]+zielen)*kontrast>255)
+                                    {
+                                       KolorZielony[x+width*y]=255;
+                                    }
+                           else if((KolorZielony[x+width*y]+zielen)*kontrast<0)
+                                    {
+
+                                      KolorZielony[x+width*y]=0;
+                                    }
+
+                           //Gdy wartość jest pomiędzy 0 - 255 jest tu ona zapisywana
+                           else
+                           {
+                                    //obliczenie wartosci pikseli oraz operacje progowania    
+                                   if(null != progowanie)  
+                                     switch (progowanie) {
+                                         case BRAK_PROGROWANIA:
+                                             KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
+                                             break;
+                                         case PROGOWANIE:
+                                             if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                             {
+                                                 KolorZielony[x+width*y]=(int) ((255+zielen)*kontrast);
+                                             }
+                                             else
+                                             {
+                                                 KolorZielony[x+width*y]=(int) ((0+zielen)*kontrast);
+                                             }     break;
+                                         case EFEKT_ROZJASNIAJACY:
+                                             if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                             {
+                                                 KolorZielony[x+width*y]= 255;
+                                             }
+                                             else
+                                             {
+                                                 KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
+                                             }     break;
+                                         case EFEKT_PRZYCIEMNAJACY:
+                                             if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                             {
+                                                 KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
+                                             }
+                                             else
+                                             {
+                                                 KolorZielony[x+width*y]= 0;
+                                             }     break;
+                                         default:
+                                             break;  
+                                     } 
+                           }
+                
+                
+             ////Koniec bloku dla koloru zielonego   
+                
+             ///Początek bloku dla koloru niebieskiego    
+                 //blok kodu odpowiedzialny za zabezpieczenia które mają za zadanie zapobiec przepełnienia liczby poza skale 8 bitow
+                if((KolorNiebieski[x+width*y]+niebieski)*kontrast>255)
+                        {
+                            KolorNiebieski[x+width*y]=255;
+                        }
+                else if((KolorNiebieski[x+width*y]+niebieski)*kontrast<0)
+                        { 
+                           KolorNiebieski[x+width*y]=0;
+                        }
+                
+                
+                
+                 //Gdy wartość jest pomiędzy 0 - 255 jest tu ona zapisywana
+                else
+                        {
+                          if(null != progowanie)  
+                            switch (progowanie) {
+                                case BRAK_PROGROWANIA:
+                                    KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
+                                    break;
+                                case PROGOWANIE:
+                                    if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                    {
+                                        KolorNiebieski[x+width*y]=(int) ((255+niebieski)*kontrast);
+                                    }
+                                    else
+                                    {
+                                        KolorNiebieski[x+width*y]=(int) ((0+niebieski)*kontrast);
+                                    }     break;
+                                case EFEKT_ROZJASNIAJACY:
+                                    if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                    {
+                                        KolorNiebieski[x+width*y]= 255;
+                                    }
+                                    else
+                                    {
+                                        KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
+                                    }     break;
+                                case EFEKT_PRZYCIEMNAJACY:
+                                    if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
+                                    {
+                                        KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
+                                    }
+                                    else
+                                    {
+                                        KolorNiebieski[x+width*y]= 0;
+                                    }     break;
+                                default:
+                                    break; 
+                             }
+
+                        }
+            ///Koniec bloku odpowiedzialnego za kolor niebieski     
                 
                 WyjsciowyRGB[x+width*y]= (KanalAlpha [x+width*y]<<24) | (KolorCzerwony[x+width*y]<<16) | (KolorZielony[x+width*y]<<8) | KolorNiebieski[x+width*y];
-                }
-            
-            
-            
             }
+            
+            
+            
+         }
        
        
        

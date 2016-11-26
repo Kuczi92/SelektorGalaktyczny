@@ -503,14 +503,9 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelWartoscProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelJasnosc" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="ToggleProgowanie" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -605,8 +600,12 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderWartoscProgowa">
+              <Properties>
+                <Property name="maximum" type="int" value="255"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderWartoscProgowaStateChanged"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SliderWartoscProgowaMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="ToggleProgowanie">
@@ -614,6 +613,9 @@
                 <Property name="text" type="java.lang.String" value="Progowanie"/>
               </Properties>
               <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="ToggleProgowanieStateChanged"/>
+                <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="ToggleProgowanieMouseDragged"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ToggleProgowanieMousePressed"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToggleProgowanieActionPerformed"/>
               </Events>
             </Component>
@@ -621,11 +623,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Efekt Przyciemniania"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ToggleEfektPrzyciemnianiaMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="ToggleEfektRozjasniania">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Efekt Rozja&#x15b;niania"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ToggleEfektRozjasnianiaMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelWartoscJasnosc">
               <Properties>
