@@ -18,6 +18,9 @@ public class SelektorGalaktyk {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         PanelSterowania PanelGlowny = new PanelSterowania();
         int width = (int) screenSize.getWidth();

@@ -251,6 +251,11 @@ public class PanelSterowania extends JFrame implements ActionListener {
         WykonanieSelekcjiMasowej.setText("Wykonanie Selekcji Masowej");
 
         WykonanieSelekcjiPojedynczej.setText("Wykonanie Selekcji Pojedyńczej");
+        WykonanieSelekcjiPojedynczej.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WykonanieSelekcjiPojedynczejMouseClicked(evt);
+            }
+        });
 
         ListaGalaktyk.setText("Lista Galaktyk ");
 
@@ -1698,6 +1703,18 @@ public class PanelSterowania extends JFrame implements ActionListener {
             OknoEdytowalnyObraz.Odswierzenie();
         }
     }//GEN-LAST:event_ToggleEfektPrzyciemnianiaMousePressed
+
+    private void WykonanieSelekcjiPojedynczejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiPojedynczejMouseClicked
+     OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+    
+        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(OknoEdytowalnyObraz.PobierzObraz());
+        System.out.println(Algorytm.asymetryczny(OknoEdytowalnyObraz.PobierzObraz(),20, 128));
+        
+        if(OknoEdytowalnyObraz.isVisible()){
+        OknoEdytowalnyObraz.UstawObraz(Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100));
+        OknoEdytowalnyObraz.Odswierzenie();
+        }
+    }//GEN-LAST:event_WykonanieSelekcjiPojedynczejMouseClicked
     
 
 /**

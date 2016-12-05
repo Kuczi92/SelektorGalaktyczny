@@ -279,6 +279,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Wykonanie Selekcji Pojedy&#x144;czej"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="WykonanieSelekcjiPojedynczejMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ListaGalaktyk">
       <Properties>
