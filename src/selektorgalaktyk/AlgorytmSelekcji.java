@@ -6,7 +6,7 @@
 package selektorgalaktyk;
 
 
-import java.awt.Color;
+import static java.awt.geom.Point2D.distance;
 import org.opencv.core.*;
 
 import java.awt.image.BufferedImage;
@@ -15,7 +15,6 @@ import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.imageio.ImageIO;
 import org.opencv.imgproc.Imgproc;
 
@@ -31,11 +30,27 @@ import org.opencv.imgproc.Imgproc;
 
 public class AlgorytmSelekcji {
     
-static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
-
-AlgorytmSelekcji(BufferedImage Obraz){
     
-}
+    
+    
+    
+    ArrayList<String> TypGalaktykiNazwa = new ArrayList<>();
+    ArrayList<BufferedImage> ListaGalaktyk=new ArrayList<>();
+    ArrayList<BufferedImage> ListaGalaktykBufor=new ArrayList<>();
+    ArrayList<String> WczytaneTypGalaktykiNazwa = new ArrayList<>();
+    ArrayList<BufferedImage> WczytaneListaGalaktyk=new ArrayList<>();
+    ArrayList<String> ZFolderuWczytaneTypGalaktykiNazwa = new ArrayList<>();
+    ArrayList<String> ZFolderuWczytaneListaGalaktyk=new ArrayList<>();
+    ArrayList<String> ZapisDoObrazu=new ArrayList<>();
+    ArrayList<Point> PGorny = new ArrayList<>();
+    ArrayList<Point> PDolny = new ArrayList<>();
+    ArrayList<Point> PPrawy = new ArrayList<>();
+    ArrayList<Point> PLewy = new ArrayList<>();
+    int wykrytych_galaktyk=0;
+    
+    
+    static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
+
 
 
  
@@ -53,6 +68,46 @@ AlgorytmSelekcji(BufferedImage Obraz){
     
     /** Total number of pixel in an image*/
     private int totalPixels;
+    
+     /// Ustawiena dla decyzyjnego wyboru z jaka galaktyka mamy do czynienia
+                                    
+                                    // dla plaskich po przekatnej
+                                                int plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata=80;
+                                                int plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata=10;
+                                                int plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna=60;
+                                                
+                                        // dla plaskich symetrycznie     
+                                                int plaskisym_procent_zapelnienia_jasnymi_prog_karlowata=10;
+                                                int plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna=85;
+                                                int plaskisym_procent_zapelnienia_bialymi_prog_Spiralna=5;
+                                                int plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata=90;
+                                                int plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata=10; 
+                                               
+                                          // dla pelnego widoku      
+                                                int pelny_procent_zapelnienia_jasnymi_prog_karlowata=16;
+                                              double pelny_procent_zapelnienia_bialymi_prog_karlowata= 0.5; 
+                                              
+                                                int pelny_procent_zapelnienia_jasnymi_prog_Spiralna=75;
+                                                int pelny_procent_zapelnienia_bialymi_prog_Spiralna=10;
+                                                
+                                                int pelny_liczba_jasnych_obiektow_Spiralna=3;
+                                                int pelny_procent_zapelnienia_bialymi_prog_Eliptyczna=10;
+                                                
+                                                
+                                           //dla nieregularnych    
+                                                int rozmycie_prog_Nieregularna=20;
+                                                int prog_jasnosci_Nieregularna=128;
+                                                
+                                                
+                                                 int rozmycie=30;
+                                                 int czulosc=40;
+                                                 int value = 5;
+                                                 int min_wielkoscx=50;
+                                                 int min_wielkoscy=50;
+                                                 
+                                                int jasnosc=-65;
+                                                double kontrast=5.05;
+                                                int Wartosc_Progowa=74;
     
     /** 
      * Image type example: jpg|png 
@@ -117,7 +172,38 @@ AlgorytmSelekcji(BufferedImage Obraz){
         }
     }
     
-    
+    int Najjasniejszy(BufferedImage src ,int rozmyciex,int rozmyciey)
+                                                    {
+                                                      int Max=0;
+                                                      if(rozmyciex==0||rozmyciey==0)
+                                                      {
+                                                      rozmyciex=1;
+                                                      rozmyciey=1;
+                                                      }
+                                                      
+                                                      byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
+                                                      Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
+                                                      opencv.put(0, 0, data);
+                                                      
+                                                      Imgproc.blur(opencv, opencv, new Size(rozmyciex, rozmyciey));
+                                                  
+                                                      for (int y = 0; y <(int)src.getHeight()/2; y++) 
+                                                                                                {
+                                                                                                  for (int x = 0; x<src.getWidth(); x++) 
+                                                                                                  {
+                                                                                                    double[] piksel = opencv.get(y, x);
+                                                                                                    float r = (float) piksel[0];
+                                                                                                    float g = (float) piksel[1];
+                                                                                                    float b = (float) piksel[2];
+                                                                                                    if((r+g+b)/3 >Max){
+                                                                                                        Max= (int)(r+g+b)/3;
+                                                                                                    }
+                                                                                                   
+                                                                                                  }
+                                                                                                }
+  
+                                                          return Max;
+                                                        }
     
     
     
@@ -238,7 +324,7 @@ AlgorytmSelekcji(BufferedImage Obraz){
     
     
     
-   public  BufferedImage liczba_jader(BufferedImage src,int rozmyciex,int rozmyciey ,int czulosc,int min_wielkoscx ,int min_wielkoscy)
+   public  int liczba_jader(BufferedImage src,int rozmyciex,int rozmyciey ,int czulosc,int min_wielkoscx ,int min_wielkoscy)
                                                                           {
                                                                           
                                                                             int iloscjader = 0;
@@ -255,8 +341,7 @@ AlgorytmSelekcji(BufferedImage Obraz){
                                                                             ArrayList<MatOfPoint> contours = new ArrayList<>(); 
                                                                             Mat hierarchy = new Mat();
                        
-                                                                            byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
-                                                                            
+                                                                            byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();  
                                                                             Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
                                                                             opencv.put(0, 0, data);
                                                                           
@@ -319,10 +404,7 @@ AlgorytmSelekcji(BufferedImage Obraz){
                                                                                                     
                                                                                                     }
                                                                                                System.out.println("MinX "+MinX+" MaxX "+MaxX+" MinY "+MinY+" MaxY "+MaxY); 
-                                                                                               Core.line(opencv, Prawo, Góra, new Scalar(250, 0, 0),2);
-                                                                                               Core.line(opencv, Góra, Lewo, new Scalar(250, 0, 0),2);
-                                                                                               Core.line(opencv, Lewo, Dół, new Scalar(250, 0, 0),2);
-                                                                                               Core.line(opencv, Dół, Prawo, new Scalar(250, 0, 0),2);
+                                                                                              
                                                                                                int Szerokosc=MaxX-MinX;
                                                                                                int Wysokosc=MaxY-MinY;
                                                                                                if(min_wielkoscx<Szerokosc||min_wielkoscy<Wysokosc)
@@ -333,7 +415,8 @@ AlgorytmSelekcji(BufferedImage Obraz){
                                                                                             }           
                                                                                       
                                                                            
-                                                                          return MatDoBufferedImage(opencv);
+                                                                          
+                                                                          return iloscjader;
                                                                           }
      
      
@@ -350,6 +433,404 @@ AlgorytmSelekcji(BufferedImage Obraz){
      return  Obraz;  
     }
    
+   
+   
+   
+   
+   
+   
+   int rozpoznanie(BufferedImage origin,BufferedImage src,int rozmycie, int czulosc,int min_wielkoscx ,int min_wielkoscy)
+{
+                                                
+                               if(PGorny.size()>0)
+                                                    {
+                                                      
+                                                                 PGorny.clear();
+                                                                 PDolny.clear();
+                                                                 PPrawy.clear();
+                                                                 PLewy.clear();
+                                                                 TypGalaktykiNazwa.clear();
+                                                                 ListaGalaktyk.clear();
+                                                                 ListaGalaktykBufor.clear();
+                                                                           
+                                                    }
+                                                
+                                                
+                                                int iloscgalaktyk=0;
+                                                
+                                        ArrayList<MatOfPoint> contours = new ArrayList<>(); 
+                                                                            Mat hierarchy = new Mat();
+                       
+                                                                            byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
+                                                                            
+                                                                            Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
+                                                                            opencv.put(0, 0, data);
+                                                                          
+                                                                                     
+                                                                                      if(!(rozmycie==0))
+                                                                                                              {
+                                                                                                              Imgproc.blur(opencv, opencv, new Size(rozmycie, rozmycie));
+                                                                                                              }
+                                                                            // macierz w skali szarosci          
+                                                                            Mat grayscaleMat  = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1); 
+                                                                            //konwert z koloru do szarosci
+                                                                            Imgproc.cvtColor(opencv, grayscaleMat, Imgproc.COLOR_BGR2GRAY);  
+                                                                            //inicjacja maski binarnej
+                                                                            Mat maskaobrazu = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1);
+                                                                            // fuckja tresholde wykorzystywana do wyodrebnienia obiektow         
+                                                                            Imgproc.threshold(grayscaleMat,maskaobrazu , czulosc,  255, Imgproc.THRESH_BINARY);
+                                                                            // funkcja find contours do znajodownia punktow oraz obiektow      
+                                                                            Imgproc.findContours(maskaobrazu, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);          
+                                                                                      
+// petla glowna dla rysowania wsztstkich galaktyk 
+                                    if (hierarchy.size().height > 0 && hierarchy.size().width > 0)
+                                                                                            {
+                                                                            int MinX = src.getWidth();
+                                                                            int MinY = src.getHeight();
+                                                                            int MaxX=0;
+                                                                            int MaxY=0;                   
+                                                                            Point Góra = null;
+                                                                            Point Dół = null;
+                                                                            Point Prawo = null;
+                                                                            Point Lewo = null;
+                                                                            int PoczatekX,PoczatekY,Wysokosc,Szerokosc;
+                                                                                                    // for each contour, display it in blue
+                                                                                                    for (int idx = 0; idx >= 0; idx = (int) hierarchy.get(0, idx)[0])
+                                                                                                    {
+                                                                                                           
+                                                                                                           //Imgproc.drawContours(opencv, contours, idx, new Scalar(250, 0, 0));
+                                                                                                           //System.out.println(contours.get(idx).size());
+                                                                                       
+                                                                                                           for( MatOfPoint mop: contours ){
+                                                                                                                        for( Point p: mop.toList() )
+                                                                                                                        {
+                                                                                                                           if(MaxX<p.x)
+                                                                                                                            {
+                                                                                                                             MaxX=(int)p.x;
+                                                                                                                             Prawo=p;
+                                                                                                                            }
+                                                                                                                            if(MaxY<p.y){
+                                                                                                                             MaxY=(int)p.y;
+                                                                                                                             Dół = p;
+                                                                                                                             }
+                                                                                                                            if(MinX>p.x)
+                                                                                                                            {
+                                                                                                                            MinX=(int)p.x;
+                                                                                                                            Lewo = p;
+                                                                                                                            }
+                                                                                                                            if(MinY>p.y)
+                                                                                                                            {
+                                                                                                                            MinY=(int)p.y;
+                                                                                                                            Góra = p;
+                                                                                                                            }                                                      
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                    
+                                                                                                    
+                                                                                                    }
+                                            PoczatekX=MinX;
+                                            PoczatekY=MinY;
+                                            Szerokosc=MaxX-MinX;
+                                            Wysokosc=MaxY-MinY;
+                                         
+                                           
+                                           if(min_wielkoscx<Szerokosc||min_wielkoscy<Wysokosc)
+                                         
+                                                                   {
+                                                                      ListaGalaktykBufor.add(MatDoBufferedImage(opencv).getSubimage(PoczatekX, PoczatekY, Szerokosc, Wysokosc));
+                                                                      ListaGalaktyk.add(origin.getSubimage(PoczatekX, PoczatekY, Szerokosc, Wysokosc));
+                                                                      PGorny.add(Góra);
+                                                                      PDolny.add(Dół);
+                                                                      PPrawy.add(Prawo);
+                                                                      PLewy.add(Lewo);
+                                                                      iloscgalaktyk++;
+                                                                   }
+                                            
+                                            
+                                           
+                                    }
+                          
+                 
+                            for(int i=0 ; i<ListaGalaktyk.size() ; i++)
+                                    {
+                                                String widok;
+                                                double prawygorny =  distance(PGorny.get(i).x,PGorny.get(i).y, PPrawy.get(i).x, PPrawy.get(i).y);
+                                                double lewygorny  = distance(PGorny.get(i).x,PGorny.get(i).y, PLewy.get(i).x, PLewy.get(i).y);
+                                                double prawydolny = distance(PDolny.get(i).x,PDolny.get(i).y, PPrawy.get(i).x, PPrawy.get(i).y);
+                                                double lewydolny  = distance(PDolny.get(i).x,PDolny.get(i).y, PLewy.get(i).x, PLewy.get(i).y);
+                                                double przekatnapion  = distance(PDolny.get(i).x,PDolny.get(i).y, PGorny.get(i).x, PGorny.get(i).y);
+                                                double przekatnapoziom = distance(PPrawy.get(i).x,PPrawy.get(i).y, PLewy.get(i).x, PLewy.get(i).y);
+                                                
+                                                ///od tąd trza posprawdzac;
+                                                
+                                                
+                                                //fragment kodu do znajdowania małych wyraznych gwiazd
+                                                int najasniejszypkt=Najjasniejszy(ListaGalaktyk.get(i),(int)(ListaGalaktyk.get(i).getWidth()*0.01),(int)(ListaGalaktyk.get(i).getHeight()*0.01));
+                                                int liczba_jader=liczba_jader(ListaGalaktyk.get(i),1,1,najasniejszypkt,(int)(ListaGalaktyk.get(i).getWidth()*0.01),(int)(ListaGalaktyk.get(i).getHeight()*0.01));
+                                                
+                                                
+                                                //fragment odpowiedzialny za znajdowania centra galaktyki
+                                                int najasniejszypkt_centrum=Najjasniejszy(ListaGalaktyk.get(i),0,0);
+                                                int liczba_jader_centrum=liczba_jader(ListaGalaktyk.get(i),(int)(ListaGalaktyk.get(i).getWidth()*0.1),(int)(ListaGalaktyk.get(i).getHeight()*0.1),najasniejszypkt_centrum,(int)(ListaGalaktyk.get(i).getWidth()*0.3),(int)(ListaGalaktyk.get(i).getHeight()*0.3));
+                                                            if(prawygorny>2*prawydolny&&lewydolny>2*lewygorny)
+                                                               {
+                                                                 widok="Płaski pod przekątną";     
+                                                               }
+                                                             else if(prawydolny>2*prawygorny&&lewygorny>2*lewydolny)
+                                                               {
+                                                                 widok="Płaski pod przekątną";     
+                                                               }
+                                                             else if(przekatnapion>2*przekatnapoziom||przekatnapoziom>2*przekatnapion)
+                                                               {
+                                                                 widok="Płaski symetrycznie";     
+                                                               }
+                                                            else
+                                                               {
+                                                                 widok = "Pełny";
+                                                               }
+                                                   
+                                                   
+                                                   
+                                                   
+                                                  int progowanie = 100;
+                                                  double pixele_jasne=0;
+                                                  double pixele_biale=0;
+                                                  
+                                                   
+                                                   //tu sie będzie trza pomęczyć 
+                                                  byte[] Maska = ((DataBufferByte) ListaGalaktykBufor.get(i).getRaster().getDataBuffer()).getData();  
+                                                  Mat maska = new Mat(ListaGalaktykBufor.get(i).getHeight(), ListaGalaktykBufor.get(i).getWidth(), CvType.CV_8UC3);
+                                                  maska.put(0, 0, Maska);
+                                                  
+                                                  byte[] Obraz = ((DataBufferByte) ListaGalaktyk.get(i).getRaster().getDataBuffer()).getData();  
+                                                  Mat Obiekt = new Mat(ListaGalaktyk.get(i).getHeight(), ListaGalaktyk.get(i).getWidth(), CvType.CV_8UC3);
+                                                  Obiekt.put(0, 0, Obraz);
+                                                  
+                                                  int Width =ListaGalaktyk.get(i).getWidth();
+                                                  int Height =ListaGalaktyk.get(i).getHeight();
+                                                  
+                                                  System.out.print(ListaGalaktyk.get(i).getType());
+                                                 // int[][] TablicaMaskiObrazu = convertTo2DWithoutUsingGetRGB(ListaGalaktykBufor.get(i));
+                                                  //int[][] TablicaOryginalnegoPobranegoObrazu = convertTo2DWithoutUsingGetRGB(ListaGalaktyk.get(i));
+                                                  
+                                                  double  liczbapixeliobiektu=0;
+                                                   for (int y = 0; y <Height; y++) 
+                                                            {
+                                                                  for (int x = 0; x<Width; x++) 
+                                                                      {
+                                                                       
+                                                                                  double r = (ListaGalaktykBufor.get(i).getRGB(x, y) >> 16) & 0xFF; 
+                                                                                  double g = (ListaGalaktykBufor.get(i).getRGB(x, y) >> 8) & 0xFF; 
+                                                                                  double b = ListaGalaktykBufor.get(i).getRGB(x, y) & 0xFF;  
+                                                                                    System.out.print(r+" "+g+" "+b+" ");
+                                                                                                if((r+g+b)/3.0>0){
+                                                                                                            liczbapixeliobiektu++;         
+                                                                                                                    
+                                                                                                                   r = (ListaGalaktyk.get(i).getRGB(x, y) >> 16) & 0xFF; 
+                                                                                                                   g = (ListaGalaktyk.get(i).getRGB(x, y) >> 8) & 0xFF; 
+                                                                                                                   b = ListaGalaktyk.get(i).getRGB(x, y) & 0xFF; 
+
+                                                                                                                          if((r+g+b)/3>progowanie)    
+                                                                                                                               {
+                                                                                                                                   //System.out.print(x+" "+ y);
+                                                                                                                                   pixele_jasne++;
+                                                                                                                               }
+
+
+                                                                                                                          if((r+g+b)/3>240)    
+                                                                                                                               {
+                                                                                                                                   pixele_biale++;
+                                                                                                                               }
+
+
+                                                                                                                }
+                                                                      }
+                                                                  System.out.println();
+                                                            }
+                                                  
+                                                 // int  liczbapixeliobiektu=0;
+                                                   
+                                               
+                                                  
+                                                  
+                                                //aż do tąd   
+                                                double procent_zapelnienia_jasnymi=pixele_jasne/liczbapixeliobiektu*100;
+                                                double procent_zapelnienia_bialymi=pixele_biale/liczbapixeliobiektu*100;
+                                                String typ_galaktyki="Niezakwalifikowany";
+                                                wykrytych_galaktyk++;
+                                                
+                                                
+                                                
+                                                 // ustalanie rodzaju galaktyki 
+                                                
+                                                 
+                                                        if(widok=="Płaski pod przekątną")
+                                                        {
+                                                                      if(procent_zapelnienia_jasnymi<plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna)
+                                                                                {
+                                                                                 typ_galaktyki="Spiralna";
+                                                                                  if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                }
+                                                                      else if(liczba_jader_centrum==1&&liczba_jader==1)
+                                                                                      {
+                                                                                      typ_galaktyki="Soczewkowata";
+                                                                                      }
+                                                                                
+                                                                      else if (procent_zapelnienia_jasnymi>plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata)
+                                                                                {
+                                                                                typ_galaktyki="Soczewkowata";
+                                                                                 if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                }
+                                                                                
+                                                                                else if (procent_zapelnienia_bialymi>plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata)
+                                                                                {
+                                                                                typ_galaktyki="Soczewkowata";
+                                                                                 if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                }
+                                                                                 
+                                                                               
+                                                                     else   
+                                                                                {
+                                                                                typ_galaktyki="Spiralna";
+                                                                                 if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                }
+                                                        }
+                                                     
+                                                      if( widok == "Płaski symetrycznie")
+                                                      {
+                                                                                if(procent_zapelnienia_jasnymi<plaskisym_procent_zapelnienia_jasnymi_prog_karlowata)
+                                                                                      {
+                                                                                      typ_galaktyki="Karłowata";
+                                                                                       if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                      }
+                                                                                else if(procent_zapelnienia_jasnymi<plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna&&procent_zapelnienia_bialymi<plaskisym_procent_zapelnienia_bialymi_prog_Spiralna)
+                                                                                      {
+                                                                                       typ_galaktyki="Spiralna";
+                                                                                        if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                      }
+                                                                                else if (procent_zapelnienia_bialymi>plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata||procent_zapelnienia_jasnymi>plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata) 
+                                                                                      {
+                                                                                      typ_galaktyki="Soczewkowata";
+                                                                                       if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                      
+                                                                                      }
+                                                                                       else if(liczba_jader_centrum==1&&liczba_jader==1)
+                                                                                      {
+                                                                                      typ_galaktyki="Soczewkowata";
+                                                                                      }
+                                                                                      else {
+                                                                                        
+                                                                                        
+                                                                                      typ_galaktyki="Spiralna";
+                                                                                      
+                                                                                      }
+                                                      }
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       if(widok =="Pełny")
+                                                       {
+                                                                             if(procent_zapelnienia_jasnymi<pelny_procent_zapelnienia_jasnymi_prog_karlowata&&procent_zapelnienia_bialymi<pelny_procent_zapelnienia_bialymi_prog_karlowata)
+                                                                             {
+                                                                                    typ_galaktyki="Nieregularna";
+                                                                                         if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                             }
+                                                                             
+                                                                             else if(liczba_jader_centrum==1&&liczba_jader==1)
+                                                                                      {
+                                                                                      typ_galaktyki="Eliptyczna";
+                                                                                      }
+                                                                             
+                                                                           else if(procent_zapelnienia_jasnymi < pelny_procent_zapelnienia_jasnymi_prog_Spiralna &&  procent_zapelnienia_bialymi<pelny_procent_zapelnienia_bialymi_prog_Spiralna&&liczba_jader>pelny_liczba_jasnych_obiektow_Spiralna&&!(liczba_jader_centrum==1&&liczba_jader==1))
+                                                                                      {
+                                                                                       typ_galaktyki="Spiralna";
+                                                                                         if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                       
+                                                                                      }
+                                                                                else if(procent_zapelnienia_bialymi>pelny_procent_zapelnienia_bialymi_prog_Eliptyczna)
+                                                                                      {
+                                                                                      typ_galaktyki="Eliptyczna";
+                                                                                         if(liczba_jader_centrum>1)
+                                                                                            {
+                                                                                              typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
+                                                                                            }
+                                                                                            
+                                                                                      }
+                                                                                  
+                                                                                  else if(liczba_jader_centrum==1&&liczba_jader==1)
+                                                                                      {
+                                                                                      typ_galaktyki="Eliptyczna";
+                                                                                      }    
+                                                                               
+                                                                                      else 
+                                                                                      {
+                                                                                      typ_galaktyki="Spialna";
+                                                                                      }
+                                                                      
+                                                                    
+                                                                  }
+                                                      
+                                                 
+                                                
+                                                System.out.println(ListaGalaktyk.get(i).getWidth()+ " Szerokosc");
+                                                System.out.println(ListaGalaktyk.get(i).getHeight()+ " Wysokosc");
+                                                if(asymetryczny ( ListaGalaktyk.get(i),rozmycie_prog_Nieregularna, prog_jasnosci_Nieregularna ))
+                                                {
+                                                typ_galaktyki="Nieregularna";
+                                                }
+                                                ZapisDoObrazu.add("W-"+widok+" T-"+typ_galaktyki+" PJ-"+String.format("%.2f", (float)procent_zapelnienia_jasnymi)+" PB-"+String.format("%.2f", (float)procent_zapelnienia_bialymi)+" LP-"+liczba_jader+" JG-"+liczba_jader_centrum); 
+                                                TypGalaktykiNazwa.add("Widok: "+widok+" Pixele Jasne:"+String.format("%.2f", (float)procent_zapelnienia_jasnymi)+" % Pixele białe:"+String.format("%.2f", (float)procent_zapelnienia_bialymi)+" %\nRodzaj Galaktyki: "+typ_galaktyki+"\nLiczba jasnych punktów: "+liczba_jader+" Jądra galaktyk: "+liczba_jader_centrum);
+                                                
+                              
+                                    
+                                    }
+ 
+
+         //loadPixels();
+        // src.loadPixels();
+        /// wynik = createImage(src.width, src.height, RGB);
+         //wynik.loadPixels();
+         
+ 
+            for(int t = 0; t<ListaGalaktyk.size() ; t++)
+                          {
+                           WczytaneListaGalaktyk.add(ListaGalaktyk.get(t));
+                           WczytaneTypGalaktykiNazwa.add(TypGalaktykiNazwa.get(t));
+                          }
+                          
+                          return iloscgalaktyk;
+  
+}
      
     /////////////////////////////////////// METHODS ////////////////////////////
     
@@ -667,6 +1148,12 @@ AlgorytmSelekcji(BufferedImage Obraz){
     private void ZaktualizujPikselWKoordynacie(int x, int y){
         image.setRGB(x, y, pixels[x+(y*width)]);
     }
+ 
+    public BufferedImage getImage(){
+        return image;
+    }
+    
+    
     
 @SuppressWarnings("empty-statement")
    public int[] ModyfikujKoloryWKanaleRGB(double czerwien,double zielen,double niebieski,double kontrast,WyświetlaczObraz.RodzajeProgowania progowanie,int wartoscprogujaca){
@@ -706,175 +1193,272 @@ AlgorytmSelekcji(BufferedImage Obraz){
                 
              ///Blok Dla koloru czerwonego   
                             //blok kodu odpowiedzialny za zabezpieczenia które mają za zadanie zapobiec przepełnienia liczby poza skale 8 bitow
-                            if((KolorCzerwony[x+width*y]+czerwien)*kontrast>255)
-                                    {
-                                       KolorCzerwony[x+width*y]=255;
-                                    }
-                            else if((KolorCzerwony[x+width*y]+czerwien)*kontrast<0)
-                                    { 
-                                      KolorCzerwony[x+width*y]=0;
-                                    }
-                
-                
-                            //Gdy wartość jest pomiędzy 0 - 255 jest tu ona zapisywana
-                            else
-                                    {
-
+                            
                                       //obliczenie wartosci pikseli oraz operacje progowania  
                                       if(null != progowanie)  
                                         switch (progowanie) {
                                             case BRAK_PROGROWANIA:
-                                                KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                
+                                                
+                                                                    if((KolorCzerwony[x+width*y]+czerwien)*kontrast>255)
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=255;
+                                                                            }
+                                                                    else if((KolorCzerwony[x+width*y]+czerwien)*kontrast<0)
+                                                                            { 
+                                                                              KolorCzerwony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                                            }
+                                                
+                                                
+                                                                    if((KolorZielony[x+width*y]+zielen)*kontrast>255)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=255;
+                                                                            }
+                                                                    else if((KolorZielony[x+width*y]+zielen)*kontrast<0)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                                KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
+                                                                            } 
+                                                                    
+                                                                    
+                                                                    
+                                                                    if((KolorNiebieski[x+width*y]+niebieski)*kontrast>255)
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=255;
+                                                                            }
+                                                                    else if((KolorNiebieski[x+width*y]+niebieski)*kontrast<0)
+                                                                            { 
+                                                                               KolorNiebieski[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
+                                                                            }
                                                 break;
+                                                
+                                               
+                                               
                                             case PROGOWANIE:
+                                              
                                                 if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                                {
-                                                    KolorCzerwony[x+width*y]=(int) ((255+czerwien)*kontrast);
+                                                {   
+                                                                    if(((255+czerwien)*kontrast)>255)
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((255+czerwien)*kontrast)<0)
+                                                                            { 
+                                                                              KolorCzerwony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=(int) ((255+czerwien)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    if(((255+zielen)*kontrast)>255)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((255+zielen)*kontrast)<0)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                                KolorZielony[x+width*y]=(int) ((255+zielen)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    if(((255+niebieski)*kontrast)>255)
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=255;
+                                                                            }
+                                                                    else if(((255+niebieski)*kontrast)<0)
+                                                                            { 
+                                                                               KolorNiebieski[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=(int) ((255+niebieski)*kontrast);
+                                                                            }
+                                                                    
+                                                    
                                                 }
+                                                
+                                                
+                                                
                                                 else
                                                 {
-                                                    KolorCzerwony[x+width*y]=(int) ((0+czerwien)*kontrast);
-                                                }     break;
+                                                                    if(((0+czerwien)*kontrast)>255)
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((0+czerwien)*kontrast)<0)
+                                                                            { 
+                                                                              KolorCzerwony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=(int) ((0+czerwien)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    if(((0+zielen)*kontrast)>255)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((0+zielen)*kontrast)<0)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                                KolorZielony[x+width*y]=(int) ((0+zielen)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    if(((0+niebieski)*kontrast)>255)
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=255;
+                                                                            }
+                                                                    else if(((0+niebieski)*kontrast)<0)
+                                                                            { 
+                                                                               KolorNiebieski[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=(int) ((0+niebieski)*kontrast);
+                                                                            }
+                                                }     
+                                                
+                                                
+                                                break;
                                             case EFEKT_ROZJASNIAJACY:
                                                 if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
                                                 {
                                                     KolorCzerwony[x+width*y]= 255;
+                                                    KolorZielony[x+width*y]=255;
+                                                    KolorNiebieski[x+width*y]=255;
                                                 }
                                                 else
                                                 {
-                                                    KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
-                                                }     break;
+                                                                    if(((KolorCzerwony[x+width*y]+czerwien)*kontrast)>255)
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((KolorCzerwony[x+width*y]+czerwien)*kontrast)<0)
+                                                                            { 
+                                                                              KolorCzerwony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    if(((KolorZielony[x+width*y]+zielen)*kontrast)>255)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((KolorZielony[x+width*y]+zielen)*kontrast)<0)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                                KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    if(((KolorNiebieski[x+width*y]+niebieski)*kontrast)>255)
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=255;
+                                                                            }
+                                                                    else if(((KolorNiebieski[x+width*y]+niebieski)*kontrast)<0)
+                                                                            { 
+                                                                               KolorNiebieski[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
+                                                                            }
+                                                                    
+                                                }    
+                                                break;
                                             case EFEKT_PRZYCIEMNAJACY:
                                                 if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
                                                 {
-                                                    KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                    if(((KolorCzerwony[x+width*y]+czerwien)*kontrast)>255)
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((KolorCzerwony[x+width*y]+czerwien)*kontrast)<0)
+                                                                            { 
+                                                                              KolorCzerwony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorCzerwony[x+width*y]=(int) ((KolorCzerwony[x+width*y]+czerwien)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    if(((KolorZielony[x+width*y]+zielen)*kontrast)>255)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=255;
+                                                                            }
+                                                                    else if(((KolorZielony[x+width*y]+zielen)*kontrast)<0)
+                                                                            {
+                                                                                KolorZielony[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                                KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    if(((KolorNiebieski[x+width*y]+niebieski)*kontrast)>255)
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=255;
+                                                                            }
+                                                                    else if(((KolorNiebieski[x+width*y]+niebieski)*kontrast)<0)
+                                                                            { 
+                                                                               KolorNiebieski[x+width*y]=0;
+                                                                            }
+                                                                    else
+                                                                            {
+                                                                               KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
+                                                                            }
+                                                                    
+                                                                    
+                                                                    
                                                 }
                                                 else
                                                 {
                                                     KolorCzerwony[x+width*y]= 0;
+                                                    KolorZielony[x+width*y]= 0;
+                                                    KolorNiebieski[x+width*y]= 0;
                                                 }     break;
                                             default:
                                                 break;  
                                         }
                   
-                             }
-             ///Koniec bloku dla koloru Czerwonego    
-                  
-                                 
-                
-                
-                
-             ///Blok odpowiedzialny za kolor Zielony   
-                            //blok kodu odpowiedzialny za zabezpieczenia które mają za zadanie zapobiec przepełnienia liczby poza skale 8 bitow
-                           if((KolorZielony[x+width*y]+zielen)*kontrast>255)
-                                    {
-                                       KolorZielony[x+width*y]=255;
-                                    }
-                           else if((KolorZielony[x+width*y]+zielen)*kontrast<0)
-                                    {
-
-                                      KolorZielony[x+width*y]=0;
-                                    }
-
-                           //Gdy wartość jest pomiędzy 0 - 255 jest tu ona zapisywana
-                           else
-                           {
-                                    //obliczenie wartosci pikseli oraz operacje progowania    
-                                   if(null != progowanie)  
-                                     switch (progowanie) {
-                                         case BRAK_PROGROWANIA:
-                                             KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
-                                             break;
-                                         case PROGOWANIE:
-                                             if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                             {
-                                                 KolorZielony[x+width*y]=(int) ((255+zielen)*kontrast);
-                                             }
-                                             else
-                                             {
-                                                 KolorZielony[x+width*y]=(int) ((0+zielen)*kontrast);
-                                             }     break;
-                                         case EFEKT_ROZJASNIAJACY:
-                                             if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                             {
-                                                 KolorZielony[x+width*y]= 255;
-                                             }
-                                             else
-                                             {
-                                                 KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
-                                             }     break;
-                                         case EFEKT_PRZYCIEMNAJACY:
-                                             if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                             {
-                                                 KolorZielony[x+width*y]=(int) ((KolorZielony[x+width*y]+zielen)*kontrast);
-                                             }
-                                             else
-                                             {
-                                                 KolorZielony[x+width*y]= 0;
-                                             }     break;
-                                         default:
-                                             break;  
-                                     } 
-                           }
-                
-                
-             ////Koniec bloku dla koloru zielonego   
-                
-             ///Początek bloku dla koloru niebieskiego    
-                 //blok kodu odpowiedzialny za zabezpieczenia które mają za zadanie zapobiec przepełnienia liczby poza skale 8 bitow
-                if((KolorNiebieski[x+width*y]+niebieski)*kontrast>255)
-                        {
-                            KolorNiebieski[x+width*y]=255;
-                        }
-                else if((KolorNiebieski[x+width*y]+niebieski)*kontrast<0)
-                        { 
-                           KolorNiebieski[x+width*y]=0;
-                        }
-                
-                
-                
-                 //Gdy wartość jest pomiędzy 0 - 255 jest tu ona zapisywana
-                else
-                        {
-                          if(null != progowanie)  
-                            switch (progowanie) {
-                                case BRAK_PROGROWANIA:
-                                    KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
-                                    break;
-                                case PROGOWANIE:
-                                    if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                    {
-                                        KolorNiebieski[x+width*y]=(int) ((255+niebieski)*kontrast);
-                                    }
-                                    else
-                                    {
-                                        KolorNiebieski[x+width*y]=(int) ((0+niebieski)*kontrast);
-                                    }     break;
-                                case EFEKT_ROZJASNIAJACY:
-                                    if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                    {
-                                        KolorNiebieski[x+width*y]= 255;
-                                    }
-                                    else
-                                    {
-                                        KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
-                                    }     break;
-                                case EFEKT_PRZYCIEMNAJACY:
-                                    if((KolorCzerwony[x+width*y]+KolorZielony[x+width*y]+KolorNiebieski[x+width*y])/3 > wartoscprogujaca)
-                                    {
-                                        KolorNiebieski[x+width*y]=(int) ((KolorNiebieski[x+width*y]+niebieski)*kontrast);
-                                    }
-                                    else
-                                    {
-                                        KolorNiebieski[x+width*y]= 0;
-                                    }     break;
-                                default:
-                                    break; 
-                             }
-
-                        }
-            ///Koniec bloku odpowiedzialnego za kolor niebieski     
-                
+                             
                 WyjsciowyRGB[x+width*y]= (KanalAlpha [x+width*y]<<24) | (KolorCzerwony[x+width*y]<<16) | (KolorZielony[x+width*y]<<8) | KolorNiebieski[x+width*y];
             }
             
@@ -886,6 +1470,8 @@ AlgorytmSelekcji(BufferedImage Obraz){
        
           return WyjsciowyRGB;
         }
+  
+  
    public int[][] PobierzTabliceZKanałami(){
         
        int[][] Tablica = new int[PobierzLiczbeWszystkichPikseliWObrazie()][3];
@@ -957,4 +1543,78 @@ AlgorytmSelekcji(BufferedImage Obraz){
            
            
            
+           
+           
+          
+ private static int[][] convertTo2DWithoutUsingGetRGB(BufferedImage image) {
+
+      final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+      final int width = image.getWidth();
+      final int height = image.getHeight();
+      final boolean hasAlphaChannel = image.getAlphaRaster() != null;
+
+      int[][] result = new int[height][width];
+      if (hasAlphaChannel) {
+         final int pixelLength = 4;
+         for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
+            int argb = 0;
+            argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
+            argb += ((int) pixels[pixel + 1] & 0xff); // blue
+            argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
+            argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
+            result[row][col] = argb;
+            col++;
+            if (col == width) {
+               col = 0;
+               row++;
+            }
+         }
+      } else {
+         final int pixelLength = 3;
+         for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
+            int argb = 0;
+            argb += -16777216; // 255 alpha
+            argb += ((int) pixels[pixel] & 0xff); // blue
+            argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
+            argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
+            result[row][col] = argb;
+            col++;
+            if (col == width) {
+               col = 0;
+               row++;
+            }
+         }
+      }
+
+      return result;
+   }    
+      
+      
+    
+    
+    
+    
+     public static  int[][][] PobierzKanałyARGB(BufferedImage image){
+       int[][][] Tablica = new int[image.getHeight()][image.getWidth()][4];
+       int[][] tablicaZObrazu =  convertTo2DWithoutUsingGetRGB(image);
+       
+       System.out.println("Nowy Obraz");
+       for(int y = 0; y < image.getHeight(); y++){
+           System.out.print(y);
+           
+            for(int x = 0; x < image.getWidth(); x++){
+                Tablica[y][x][0]=(tablicaZObrazu[y][x] >> 24) & 0xFF;
+                Tablica[y][x][1]=(tablicaZObrazu[y][x] >> 16) & 0xFF;
+                Tablica[y][x][2]=(tablicaZObrazu[y][x] >> 8) & 0xFF;
+                Tablica[y][x][3]=(tablicaZObrazu[y][x]) & 0xFF;
+                System.out.print(Tablica[y][x][0]+" ");
+                System.out.print(Tablica[y][x][1]+" ");
+                System.out.print(Tablica[y][x][2]+" ");
+                System.out.print(Tablica[y][x][3]+" ");
+                
+                }
+            System.out.println();
+            }
+       return Tablica;
+    }       
 }

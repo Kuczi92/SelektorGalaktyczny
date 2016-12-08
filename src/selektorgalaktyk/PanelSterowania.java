@@ -38,6 +38,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     
     
     public RodzajeProgowania ZastosujProgowanie = BRAK_PROGROWANIA;
+   
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
@@ -361,7 +362,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
         SliderJasnosc.setMaximum(255);
         SliderJasnosc.setMinimum(-400);
-        SliderJasnosc.setValue(0);
+        SliderJasnosc.setValue(-65);
         SliderJasnosc.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderJasnoscStateChanged(evt);
@@ -379,7 +380,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
         SliderKontrast.setMaximum(10000);
         SliderKontrast.setSnapToTicks(true);
-        SliderKontrast.setValue(1000);
+        SliderKontrast.setValue(5050);
         SliderKontrast.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderKontrastStateChanged(evt);
@@ -394,6 +395,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
         LabelWartoscProgowa.setText("Wartosc Progowa");
 
         SliderWartoscProgowa.setMaximum(255);
+        SliderWartoscProgowa.setValue(74);
         SliderWartoscProgowa.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SliderWartoscProgowaStateChanged(evt);
@@ -1611,8 +1613,10 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
     private void OknoEdycjiDlaPojedynczegoObrazuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
 
-          OknoEdytowalnyObraz.setVisible(true);
-             
+            OknoEdytowalnyObraz.setVisible(true);
+           // OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+           // OknoEdytowalnyObraz.Odswierzenie();
+        
     }//GEN-LAST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
 
     private void SliderCzerwonyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderCzerwonyMouseReleased
@@ -1677,7 +1681,17 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void ToggleProgowanieMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleProgowanieMousePressed
         ToggleEfektRozjasniania.setSelected(false);
         ToggleEfektPrzyciemniania.setSelected(false);
-        ZastosujProgowanie=PROGOWANIE;  
+        
+        if(ToggleProgowanie.isSelected())
+        {
+            ZastosujProgowanie=BRAK_PROGROWANIA;
+        }
+        else{
+           ZastosujProgowanie=PROGOWANIE;
+        }
+        
+        
+          
         if(OknoEdytowalnyObraz.isVisible()){
             OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
             OknoEdytowalnyObraz.Odswierzenie();
@@ -1687,7 +1701,15 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void ToggleEfektRozjasnianiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleEfektRozjasnianiaMousePressed
         ToggleProgowanie.setSelected(false);
         ToggleEfektPrzyciemniania.setSelected(false);
-        ZastosujProgowanie=EFEKT_ROZJASNIAJACY;
+        
+        if(ToggleEfektRozjasniania.isSelected())
+        {
+            ZastosujProgowanie=BRAK_PROGROWANIA;
+        }
+        else{
+            ZastosujProgowanie=EFEKT_ROZJASNIAJACY;
+        }
+        
            if(OknoEdytowalnyObraz.isVisible()){
             OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
             OknoEdytowalnyObraz.Odswierzenie();
@@ -1697,7 +1719,16 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void ToggleEfektPrzyciemnianiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleEfektPrzyciemnianiaMousePressed
         ToggleProgowanie.setSelected(false);
         ToggleEfektRozjasniania.setSelected(false);
-        ZastosujProgowanie=EFEKT_PRZYCIEMNAJACY;
+        if(ToggleEfektPrzyciemniania.isSelected())
+        {
+            ZastosujProgowanie=BRAK_PROGROWANIA;
+        }
+        else{
+            ZastosujProgowanie=EFEKT_PRZYCIEMNAJACY;
+        }  
+        
+        
+        
         if(OknoEdytowalnyObraz.isVisible()){
             OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
             OknoEdytowalnyObraz.Odswierzenie();
@@ -1707,13 +1738,17 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void WykonanieSelekcjiPojedynczejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiPojedynczejMouseClicked
      OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
     
-        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(OknoEdytowalnyObraz.PobierzObraz());
-        System.out.println(Algorytm.asymetryczny(OknoEdytowalnyObraz.PobierzObraz(),20, 128));
+        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji();
+        //System.out.println(Algorytm.asymetryczny(OknoEdytowalnyObraz.PobierzObraz(),20, 128));
         
-        if(OknoEdytowalnyObraz.isVisible()){
-        OknoEdytowalnyObraz.UstawObraz(Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100));
+        
+        //Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100);
+        Algorytm.rozpoznanie(OknoWyświetlOryginał.PobierzObraz(), OknoEdytowalnyObraz.PobierzObraz(), 30, 40, 50, 50);
+        OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktykBufor.get(0));
+        
+        Konsola.append(Algorytm.TypGalaktykiNazwa.get(0));
         OknoEdytowalnyObraz.Odswierzenie();
-        }
+        
     }//GEN-LAST:event_WykonanieSelekcjiPojedynczejMouseClicked
     
 

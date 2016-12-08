@@ -273,7 +273,7 @@ public final class Obraz extends JPanel  {
     
     public int[] getAlphaTable(){
         
-        int[] Tablica = new int[getImageTotalPixels()];
+       int[] Tablica = new int[getImageTotalPixels()];
        for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
                 Tablica[x+width*y]= (pixels[x+(y*width)] >> 24) & 0xFF;

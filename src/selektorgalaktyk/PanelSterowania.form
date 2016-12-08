@@ -569,7 +569,7 @@
               <Properties>
                 <Property name="maximum" type="int" value="255"/>
                 <Property name="minimum" type="int" value="-400"/>
-                <Property name="value" type="int" value="0"/>
+                <Property name="value" type="int" value="-65"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderJasnoscStateChanged"/>
@@ -590,7 +590,7 @@
               <Properties>
                 <Property name="maximum" type="int" value="10000"/>
                 <Property name="snapToTicks" type="boolean" value="true"/>
-                <Property name="value" type="int" value="1000"/>
+                <Property name="value" type="int" value="5050"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderKontrastStateChanged"/>
@@ -605,6 +605,7 @@
             <Component class="javax.swing.JSlider" name="SliderWartoscProgowa">
               <Properties>
                 <Property name="maximum" type="int" value="255"/>
+                <Property name="value" type="int" value="74"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderWartoscProgowaStateChanged"/>
