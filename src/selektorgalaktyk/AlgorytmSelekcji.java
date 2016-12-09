@@ -95,8 +95,8 @@ public class AlgorytmSelekcji {
                                                 
                                                 
                                            //dla nieregularnych    
-                                                int rozmycie_prog_Nieregularna=20;
-                                                int prog_jasnosci_Nieregularna=128;
+                                                int rozmycie_prog_Nieregularna=2;
+                                                int prog_jasnosci_Nieregularna=80;
                                                 
                                                 
                                                  int rozmycie=30;
@@ -212,7 +212,10 @@ public class AlgorytmSelekcji {
     boolean asymetryczny (BufferedImage src,int rozmycie, int czulosc )
                                             
                                             {   
-                                                                  
+                                                  int Height = src.getHeight();
+                                                  int Width = src.getWidth();
+                                                
+                                                
                                                                     byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
                                                                     Mat mat = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
                                                                     mat.put(0, 0, data);
@@ -228,9 +231,9 @@ public class AlgorytmSelekcji {
                                                                   
                                                                   
                                                                   
-                                                                                            for (int y = 0; y <(int)src.getHeight()/2; y++) 
+                                                                                            for (int y = 0; y <(int)Height/2; y++) 
                                                                                                 {
-                                                                                                  for (int x = 0; x<src.getWidth(); x++) 
+                                                                                                  for (int x = 0; x<Width; x++) 
                                                                                                   {
                                                                                                     double[] piksel = mat.get(y, x);
                                                                                                     float r = (float) piksel[0];
@@ -244,9 +247,9 @@ public class AlgorytmSelekcji {
                                                                                                 }
                                                                   
                                                                                               
-                                                                                           for (int y = (int)src.getHeight()/2; y <src.getHeight(); y++) 
+                                                                                           for (int y = (int)Height/2; y <Height; y++) 
                                                                                               {
-                                                                                                 for (int x = 0; x<src.getWidth(); x++) 
+                                                                                                 for (int x = 0; x<Width; x++) 
                                                                                                   {
                                                                                                   double[] piksel = mat.get(y, x);
                                                                                                     float r = (float) piksel[0];
@@ -261,9 +264,9 @@ public class AlgorytmSelekcji {
                                                                   
                                                                   
                                                                                                   
-                                                                                            for (int y = 0; y <src.getHeight(); y++) 
+                                                                                            for (int y = 0; y <Height; y++) 
                                                                                                   {
-                                                                                                    for ( int x = 0; x<(int)src.getWidth()/2; x++) 
+                                                                                                    for ( int x = 0; x<(int)Width/2; x++) 
                                                                                                     {
                                                                                                         double[] piksel = mat.get(y, x);
                                                                                                         float r = (float) piksel[0];
@@ -278,9 +281,9 @@ public class AlgorytmSelekcji {
                                                                   
                                                                   
                                                                   
-                                                                                             for ( int y = 0; y <src.getHeight(); y++) 
+                                                                                             for ( int y = 0; y <Height; y++) 
                                                                                                   {
-                                                                                                    for ( int x = (int)src.getWidth()/2; x<src.getWidth(); x++) 
+                                                                                                    for ( int x = (int)Width/2; x<Width; x++) 
                                                                                                     {
                                                                                                         double[] piksel = mat.get(y, x);
                                                                                                         float r = (float) piksel[0];
@@ -292,10 +295,10 @@ public class AlgorytmSelekcji {
                                                                                                               }
                                                                                                     }
                                                                                                   }
-                                                                                                  System.out.println("prawa połowa"+prawa_strona);
-                                                                                                  System.out.println("lewa połowa"+lewa_strona);
-                                                                                                  System.out.println("gorna połowa"+gorna_strona);
-                                                                                                  System.out.println("dolna połowa"+dolna_strona);
+                                                                                                 // System.out.println("prawa połowa"+prawa_strona);
+                                                                                                 // System.out.println("lewa połowa"+lewa_strona);
+                                                                                                 // System.out.println("gorna połowa"+gorna_strona);
+                                                                                                 // System.out.println("dolna połowa"+dolna_strona);
                                                                   
                                                                   
                                                                   boolean asymetria=false; 
@@ -374,7 +377,7 @@ public class AlgorytmSelekcji {
                                                                                                     {
                                                                                                            
                                                                                                            Imgproc.drawContours(opencv, contours, idx, new Scalar(250, 0, 0));
-                                                                                                           System.out.println(contours.get(idx).size());
+                                                                                                          /// System.out.println(contours.get(idx).size());
                                                                                        
                                                                                                            for( MatOfPoint mop: contours ){
                                                                                                                         for( Point p: mop.toList() )
@@ -403,7 +406,7 @@ public class AlgorytmSelekcji {
                                                                                                     
                                                                                                     
                                                                                                     }
-                                                                                               System.out.println("MinX "+MinX+" MaxX "+MaxX+" MinY "+MinY+" MaxY "+MaxY); 
+                                                                                               //System.out.println("MinX "+MinX+" MaxX "+MaxX+" MinY "+MinY+" MaxY "+MaxY); 
                                                                                               
                                                                                                int Szerokosc=MaxX-MinX;
                                                                                                int Wysokosc=MaxY-MinY;
@@ -430,6 +433,12 @@ public class AlgorytmSelekcji {
     // Get the BufferedImage's backing array and copy the pixels directly into it
      byte[] data = ((DataBufferByte) Obraz.getRaster().getDataBuffer()).getData();
      mat.get(0, 0, data);
+     
+     
+      //BufferedImage convertedImg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+     // convertedImg.getGraphics().drawImage(image, 0, 0, null);
+     // image= convertedImg;
+     
      return  Obraz;  
     }
    
@@ -465,7 +474,7 @@ public class AlgorytmSelekcji {
                                                                             
                                                                             Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
                                                                             opencv.put(0, 0, data);
-                                                                          
+                                                                            
                                                                                      
                                                                                       if(!(rozmycie==0))
                                                                                                               {
@@ -609,9 +618,9 @@ public class AlgorytmSelekcji {
                                                   int Width =ListaGalaktyk.get(i).getWidth();
                                                   int Height =ListaGalaktyk.get(i).getHeight();
                                                   
-                                                  System.out.print(ListaGalaktyk.get(i).getType());
-                                                 // int[][] TablicaMaskiObrazu = convertTo2DWithoutUsingGetRGB(ListaGalaktykBufor.get(i));
-                                                  //int[][] TablicaOryginalnegoPobranegoObrazu = convertTo2DWithoutUsingGetRGB(ListaGalaktyk.get(i));
+                                                  
+                                                  int[][] TablicaMaskiObrazu = convertTo2DWithoutUsingGetRGB(ListaGalaktykBufor.get(i));
+                                                  int[][] TablicaOryginalnegoPobranegoObrazu = convertTo2DWithoutUsingGetRGB(ListaGalaktyk.get(i));
                                                   
                                                   double  liczbapixeliobiektu=0;
                                                    for (int y = 0; y <Height; y++) 
@@ -619,16 +628,16 @@ public class AlgorytmSelekcji {
                                                                   for (int x = 0; x<Width; x++) 
                                                                       {
                                                                        
-                                                                                  double r = (ListaGalaktykBufor.get(i).getRGB(x, y) >> 16) & 0xFF; 
-                                                                                  double g = (ListaGalaktykBufor.get(i).getRGB(x, y) >> 8) & 0xFF; 
-                                                                                  double b = ListaGalaktykBufor.get(i).getRGB(x, y) & 0xFF;  
-                                                                                    System.out.print(r+" "+g+" "+b+" ");
+                                                                                  double r = (TablicaMaskiObrazu[y][x] >> 16) & 0xFF; 
+                                                                                  double g = (TablicaMaskiObrazu[y][x] >> 8) & 0xFF; 
+                                                                                  double b = TablicaMaskiObrazu[y][x] & 0xFF;  
+                                                                                    //System.out.print(r+" "+g+" "+b+" ");
                                                                                                 if((r+g+b)/3.0>0){
                                                                                                             liczbapixeliobiektu++;         
                                                                                                                     
-                                                                                                                   r = (ListaGalaktyk.get(i).getRGB(x, y) >> 16) & 0xFF; 
-                                                                                                                   g = (ListaGalaktyk.get(i).getRGB(x, y) >> 8) & 0xFF; 
-                                                                                                                   b = ListaGalaktyk.get(i).getRGB(x, y) & 0xFF; 
+                                                                                                                   r = (TablicaOryginalnegoPobranegoObrazu[y][x] >> 16) & 0xFF; 
+                                                                                                                   g = (TablicaOryginalnegoPobranegoObrazu[y][x] >> 8) & 0xFF; 
+                                                                                                                   b = TablicaOryginalnegoPobranegoObrazu[y][x] & 0xFF; 
 
                                                                                                                           if((r+g+b)/3>progowanie)    
                                                                                                                                {
@@ -645,7 +654,7 @@ public class AlgorytmSelekcji {
 
                                                                                                                 }
                                                                       }
-                                                                  System.out.println();
+                                                                  //System.out.println();
                                                             }
                                                   
                                                  // int  liczbapixeliobiektu=0;
@@ -802,8 +811,8 @@ public class AlgorytmSelekcji {
                                                       
                                                  
                                                 
-                                                System.out.println(ListaGalaktyk.get(i).getWidth()+ " Szerokosc");
-                                                System.out.println(ListaGalaktyk.get(i).getHeight()+ " Wysokosc");
+                                                //System.out.println(ListaGalaktyk.get(i).getWidth()+ " Szerokosc");
+                                                //System.out.println(ListaGalaktyk.get(i).getHeight()+ " Wysokosc");
                                                 if(asymetryczny ( ListaGalaktyk.get(i),rozmycie_prog_Nieregularna, prog_jasnosci_Nieregularna ))
                                                 {
                                                 typ_galaktyki="Nieregularna";
@@ -1547,14 +1556,18 @@ public class AlgorytmSelekcji {
            
           
  private static int[][] convertTo2DWithoutUsingGetRGB(BufferedImage image) {
-
+      if(image.getType()!=BufferedImage.TYPE_4BYTE_ABGR){
+      BufferedImage convertedImg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+      convertedImg.getGraphics().drawImage(image, 0, 0, null);
+      image= convertedImg;
+      }
+      
+      
       final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
       final int width = image.getWidth();
       final int height = image.getHeight();
-      final boolean hasAlphaChannel = image.getAlphaRaster() != null;
-
       int[][] result = new int[height][width];
-      if (hasAlphaChannel) {
+      
          final int pixelLength = 4;
          for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
             int argb = 0;
@@ -1569,23 +1582,6 @@ public class AlgorytmSelekcji {
                row++;
             }
          }
-      } else {
-         final int pixelLength = 3;
-         for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
-            int argb = 0;
-            argb += -16777216; // 255 alpha
-            argb += ((int) pixels[pixel] & 0xff); // blue
-            argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
-            argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
-            result[row][col] = argb;
-            col++;
-            if (col == width) {
-               col = 0;
-               row++;
-            }
-         }
-      }
-
       return result;
    }    
       
@@ -1594,27 +1590,5 @@ public class AlgorytmSelekcji {
     
     
     
-     public static  int[][][] PobierzKanałyARGB(BufferedImage image){
-       int[][][] Tablica = new int[image.getHeight()][image.getWidth()][4];
-       int[][] tablicaZObrazu =  convertTo2DWithoutUsingGetRGB(image);
-       
-       System.out.println("Nowy Obraz");
-       for(int y = 0; y < image.getHeight(); y++){
-           System.out.print(y);
-           
-            for(int x = 0; x < image.getWidth(); x++){
-                Tablica[y][x][0]=(tablicaZObrazu[y][x] >> 24) & 0xFF;
-                Tablica[y][x][1]=(tablicaZObrazu[y][x] >> 16) & 0xFF;
-                Tablica[y][x][2]=(tablicaZObrazu[y][x] >> 8) & 0xFF;
-                Tablica[y][x][3]=(tablicaZObrazu[y][x]) & 0xFF;
-                System.out.print(Tablica[y][x][0]+" ");
-                System.out.print(Tablica[y][x][1]+" ");
-                System.out.print(Tablica[y][x][2]+" ");
-                System.out.print(Tablica[y][x][3]+" ");
-                
-                }
-            System.out.println();
-            }
-       return Tablica;
-    }       
+            
 }

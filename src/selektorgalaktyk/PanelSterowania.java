@@ -1744,8 +1744,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
         
         //Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100);
         Algorytm.rozpoznanie(OknoWyświetlOryginał.PobierzObraz(), OknoEdytowalnyObraz.PobierzObraz(), 30, 40, 50, 50);
-        OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktykBufor.get(0));
-        
+        OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktyk.get(0));
+        System.out.println(Algorytm.asymetryczny(OknoEdytowalnyObraz.PobierzObraz(),2, 20));
         Konsola.append(Algorytm.TypGalaktykiNazwa.get(0));
         OknoEdytowalnyObraz.Odswierzenie();
         
