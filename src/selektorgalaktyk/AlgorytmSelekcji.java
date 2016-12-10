@@ -6,6 +6,7 @@
 package selektorgalaktyk;
 
 
+import java.awt.Graphics;
 import static java.awt.geom.Point2D.distance;
 import org.opencv.core.*;
 
@@ -171,7 +172,7 @@ public class AlgorytmSelekcji {
             }
         }
     }
-    
+ 
     int Najjasniejszy(BufferedImage src ,int rozmyciex,int rozmyciey)
                                                     {
                                                       int Max=0;
@@ -186,17 +187,20 @@ public class AlgorytmSelekcji {
                                                       opencv.put(0, 0, data);
                                                       
                                                       Imgproc.blur(opencv, opencv, new Size(rozmyciex, rozmyciey));
-                                                  
+                                                       
+                                                      
+                                                      
+                                                      
                                                       for (int y = 0; y <(int)src.getHeight()/2; y++) 
                                                                                                 {
                                                                                                   for (int x = 0; x<src.getWidth(); x++) 
                                                                                                   {
                                                                                                     double[] piksel = opencv.get(y, x);
-                                                                                                    float r = (float) piksel[0];
-                                                                                                    float g = (float) piksel[1];
-                                                                                                    float b = (float) piksel[2];
-                                                                                                    if((r+g+b)/3 >Max){
-                                                                                                        Max= (int)(r+g+b)/3;
+                                                                                                    double r = piksel[0];
+                                                                                                    double g = piksel[1];
+                                                                                                    double b = piksel[2];
+                                                                                                    if((0.2989 * r + 0.5870 * g + 0.1140 * b) >Max){
+                                                                                                        Max= (int)((0.2989 * r + 0.5870 * g + 0.1140 * b));
                                                                                                     }
                                                                                                    
                                                                                                   }
@@ -209,20 +213,15 @@ public class AlgorytmSelekcji {
     
     
 
-    boolean asymetryczny (BufferedImage src,int rozmycie, int czulosc )
+    boolean asymetryczny (BufferedImage src, int czulosc )
                                             
                                             {   
                                                   int Height = src.getHeight();
                                                   int Width = src.getWidth();
-                                                
-                                                
-                                                                    byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
-                                                                    Mat mat = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
-                                                                    mat.put(0, 0, data);
-                                                                    Imgproc.blur(mat, mat, new Size(rozmycie, rozmycie));
-                                                                    
-                                                                  
-                                                                    
+
+                                                                   int TablicaObrazu[][]=convertTo2DWithoutUsingGetRGB(src);
+                                                                   
+                                                                   
                                                                    int prawa_strona=0;
                                                                    int lewa_strona=0;
                                                                    int dolna_strona=0;
@@ -235,11 +234,12 @@ public class AlgorytmSelekcji {
                                                                                                 {
                                                                                                   for (int x = 0; x<Width; x++) 
                                                                                                   {
-                                                                                                    double[] piksel = mat.get(y, x);
-                                                                                                    float r = (float) piksel[0];
-                                                                                                    float g = (float) piksel[1];
-                                                                                                    float b = (float) piksel[2];
-                                                                                                    if((r+g+b)/3>czulosc)
+                                                                                                 
+                                                                                                   
+                                                                                                    int r = (TablicaObrazu[y][x] >> 16) & 0xFF; 
+                                                                                                    int g = (TablicaObrazu[y][x] >> 8) & 0xFF; 
+                                                                                                    int b = TablicaObrazu[y][x] & 0xFF;
+                                                                                                    if((0.2989 * r + 0.5870 * g + 0.1140 * b)>czulosc)
                                                                                                     {
                                                                                                       gorna_strona++;
                                                                                                     }
@@ -251,11 +251,11 @@ public class AlgorytmSelekcji {
                                                                                               {
                                                                                                  for (int x = 0; x<Width; x++) 
                                                                                                   {
-                                                                                                  double[] piksel = mat.get(y, x);
-                                                                                                    float r = (float) piksel[0];
-                                                                                                    float g = (float) piksel[1];
-                                                                                                    float b = (float) piksel[2];
-                                                                                                  if((r+g+b)/3>czulosc)
+                                                                                                  //double[] piksel = mat.get(y, x);
+                                                                                                    int r = (TablicaObrazu[y][x] >> 16) & 0xFF; 
+                                                                                                    int g = (TablicaObrazu[y][x] >> 8) & 0xFF; 
+                                                                                                    int b = TablicaObrazu[y][x] & 0xFF;
+                                                                                                  if((0.2989 * r + 0.5870 * g + 0.1140 * b)>czulosc)
                                                                                                   {
                                                                                                     dolna_strona++;
                                                                                                   }
@@ -268,11 +268,11 @@ public class AlgorytmSelekcji {
                                                                                                   {
                                                                                                     for ( int x = 0; x<(int)Width/2; x++) 
                                                                                                     {
-                                                                                                        double[] piksel = mat.get(y, x);
-                                                                                                        float r = (float) piksel[0];
-                                                                                                        float g = (float) piksel[1];
-                                                                                                        float b = (float) piksel[2];
-                                                                                                     if((r+g+b)/3>czulosc)
+                                                                                                       //double[] piksel = mat.get(y, x);
+                                                                                                        int r = (TablicaObrazu[y][x] >> 16) & 0xFF; 
+                                                                                                    int g = (TablicaObrazu[y][x] >> 8) & 0xFF; 
+                                                                                                    int b = TablicaObrazu[y][x] & 0xFF;
+                                                                                                     if((0.2989 * r + 0.5870 * g + 0.1140 * b)>czulosc)
                                                                                                       {
                                                                                                         lewa_strona++;
                                                                                                       }
@@ -285,20 +285,20 @@ public class AlgorytmSelekcji {
                                                                                                   {
                                                                                                     for ( int x = (int)Width/2; x<Width; x++) 
                                                                                                     {
-                                                                                                        double[] piksel = mat.get(y, x);
-                                                                                                        float r = (float) piksel[0];
-                                                                                                        float g = (float) piksel[1];
-                                                                                                        float b = (float) piksel[2];
-                                                                                                        if((r+g+b)/3>czulosc)
+                                                                                                        //double[] piksel = mat.get(y, x);
+                                                                                                    int r = (TablicaObrazu[y][x] >> 16) & 0xFF; 
+                                                                                                    int g = (TablicaObrazu[y][x] >> 8) & 0xFF; 
+                                                                                                    int b = TablicaObrazu[y][x] & 0xFF;
+                                                                                                        if((0.2989 * r + 0.5870 * g + 0.1140 * b)>czulosc)
                                                                                                               {
                                                                                                                 prawa_strona++;
                                                                                                               }
                                                                                                     }
                                                                                                   }
-                                                                                                 // System.out.println("prawa połowa"+prawa_strona);
-                                                                                                 // System.out.println("lewa połowa"+lewa_strona);
-                                                                                                 // System.out.println("gorna połowa"+gorna_strona);
-                                                                                                 // System.out.println("dolna połowa"+dolna_strona);
+                                                                                                  System.out.println("prawa połowa"+prawa_strona);
+                                                                                                  System.out.println("lewa połowa"+lewa_strona);
+                                                                                                  System.out.println("gorna połowa"+gorna_strona);
+                                                                                                  System.out.println("dolna połowa"+dolna_strona);
                                                                   
                                                                   
                                                                   boolean asymetria=false; 
@@ -336,25 +336,28 @@ public class AlgorytmSelekcji {
                                                                             int MaxX=0;
                                                                             int MaxY=0;
                                                                             
-                                                                            Point Góra = null;
-                                                                            Point Dół = null;
-                                                                            Point Prawo = null;
-                                                                            Point Lewo = null;
+                                                                            
                                                                             //inicjalizacja 
                                                                             ArrayList<MatOfPoint> contours = new ArrayList<>(); 
                                                                             Mat hierarchy = new Mat();
                        
-                                                                            byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();  
+                                                                            byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
+                                                                            
                                                                             Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
                                                                             opencv.put(0, 0, data);
-                                                                          
-                                                                                     
+                                                                            
+                                                                             
+                                                                           // image = MatDoBufferedImage(opencv); 
+                                                                                    
                                                                                       if(!(rozmyciex==0||rozmyciey==0))
                                                                                                               {
                                                                                                               Imgproc.blur(opencv, opencv, new Size(rozmyciex, rozmyciey));
                                                                                                               }
+                                                                                      
+                                                                                      
                                                                             // macierz w skali szarosci          
                                                                             Mat grayscaleMat  = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1); 
+                                                                            
                                                                             //konwert z koloru do szarosci
                                                                             Imgproc.cvtColor(opencv, grayscaleMat, Imgproc.COLOR_BGR2GRAY);  
                                                                             //inicjacja maski binarnej
@@ -362,60 +365,55 @@ public class AlgorytmSelekcji {
                                                                             // fuckja tresholde wykorzystywana do wyodrebnienia obiektow         
                                                                             Imgproc.threshold(grayscaleMat,maskaobrazu , czulosc,  255, Imgproc.THRESH_BINARY);
                                                                             // funkcja find contours do znajodownia punktow oraz obiektow      
-                                                                            Imgproc.findContours(maskaobrazu, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);          
-                                                                                      
-                                                                                      
-                                                                                   
-                                                                             
+                                                                          
+                                                                            Imgproc.findContours(maskaobrazu, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE); 
                                                                             
                                                                             
+                                                                           
+                                                                            image = MatDoBufferedImage(opencv);
                                                                             
-                                                                             if (hierarchy.size().height > 0 && hierarchy.size().width > 0)
-                                                                                            {
+                                                                            
+                                                                                for( MatOfPoint mop: contours )
+                                                                                {
                                                                                                     // for each contour, display it in blue
-                                                                                                    for (int idx = 0; idx >= 0; idx = (int) hierarchy.get(0, idx)[0])
-                                                                                                    {
+                                                                                                    
                                                                                                            
-                                                                                                           Imgproc.drawContours(opencv, contours, idx, new Scalar(250, 0, 0));
-                                                                                                          /// System.out.println(contours.get(idx).size());
-                                                                                       
-                                                                                                           for( MatOfPoint mop: contours ){
-                                                                                                                        for( Point p: mop.toList() )
-                                                                                                                        {
-                                                                                                                           if(MaxX<p.x)
-                                                                                                                            {
-                                                                                                                             MaxX=(int)p.x;
-                                                                                                                             Prawo=p;
-                                                                                                                            }
-                                                                                                                            if(MaxY<p.y){
-                                                                                                                             MaxY=(int)p.y;
-                                                                                                                             Dół = p;
-                                                                                                                             }
-                                                                                                                            if(MinX>p.x)
-                                                                                                                            {
-                                                                                                                            MinX=(int)p.x;
-                                                                                                                            Lewo = p;
-                                                                                                                            }
-                                                                                                                            if(MinY>p.y)
-                                                                                                                            {
-                                                                                                                            MinY=(int)p.y;
-                                                                                                                            Góra = p;
-                                                                                                                            }                                                      
-                                                                                                                        }
-                                                                                                                    }
+                                                                                        for( Point p: mop.toList() )
+                                                                                              {
+                                                                                                   if(MaxX<p.x)
+                                                                                                   {
+                                                                                                    MaxX=(int)p.x;
+                                                                                                   }
+                                                                                                   if(MaxY<p.y){
+                                                                                                   MaxY=(int)p.y;
+                                                                                                   }
+                                                                                                   if(MinX>p.x)
+                                                                                                   {
+                                                                                                    MinX=(int)p.x;
+                                                                                                   }
+                                                                                                   if(MinY>p.y)
+                                                                                                   {
+                                                                                                   MinY=(int)p.y; 
+                                                                                                   }                                                      
+                                                                                              }
+
+
+                                                                                                 int Szerokosc=MaxX-MinX;
+                                                                                                 int Wysokosc=MaxY-MinY;
+                                                                                                       if(min_wielkoscx<=Szerokosc||min_wielkoscy<=Wysokosc)
+                                                                                                           {      
+                                                                                                             iloscjader++;
+                                                                                                           }
+
+                                                                             }
                                                                                                     
                                                                                                     
-                                                                                                    }
+                                                                                                    
                                                                                                //System.out.println("MinX "+MinX+" MaxX "+MaxX+" MinY "+MinY+" MaxY "+MaxY); 
                                                                                               
-                                                                                               int Szerokosc=MaxX-MinX;
-                                                                                               int Wysokosc=MaxY-MinY;
-                                                                                               if(min_wielkoscx<Szerokosc||min_wielkoscy<Wysokosc)
-                                                                                               {      
-                                                                                                              iloscjader++;
-                                                                                               }   
+                                                                                                  
                                                                                                
-                                                                                            }           
+                                                                                                       
                                                                                       
                                                                            
                                                                           
@@ -424,23 +422,9 @@ public class AlgorytmSelekcji {
      
      
      
-   public BufferedImage MatDoBufferedImage(Mat mat)
-    {
-        
-        
-    BufferedImage Obraz = new BufferedImage(mat.width(), mat.height(), BufferedImage.TYPE_3BYTE_BGR);
-
-    // Get the BufferedImage's backing array and copy the pixels directly into it
-     byte[] data = ((DataBufferByte) Obraz.getRaster().getDataBuffer()).getData();
-     mat.get(0, 0, data);
+  
      
-     
-      //BufferedImage convertedImg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-     // convertedImg.getGraphics().drawImage(image, 0, 0, null);
-     // image= convertedImg;
-     
-     return  Obraz;  
-    }
+    
    
    
    
@@ -475,11 +459,13 @@ public class AlgorytmSelekcji {
                                                                             Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
                                                                             opencv.put(0, 0, data);
                                                                             
-                                                                                     
+                                                                                    
                                                                                       if(!(rozmycie==0))
                                                                                                               {
                                                                                                               Imgproc.blur(opencv, opencv, new Size(rozmycie, rozmycie));
                                                                                                               }
+                                                                                      
+                                                                                     
                                                                             // macierz w skali szarosci          
                                                                             Mat grayscaleMat  = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1); 
                                                                             //konwert z koloru do szarosci
@@ -487,13 +473,14 @@ public class AlgorytmSelekcji {
                                                                             //inicjacja maski binarnej
                                                                             Mat maskaobrazu = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1);
                                                                             // fuckja tresholde wykorzystywana do wyodrebnienia obiektow         
-                                                                            Imgproc.threshold(grayscaleMat,maskaobrazu , czulosc,  255, Imgproc.THRESH_BINARY);
+                                                                            Imgproc.threshold(grayscaleMat,maskaobrazu , czulosc,  czulosc, Imgproc.THRESH_BINARY);
                                                                             // funkcja find contours do znajodownia punktow oraz obiektow      
-                                                                            Imgproc.findContours(maskaobrazu, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);          
+                                                                            Imgproc.findContours(maskaobrazu, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);          
                                                                                       
 // petla glowna dla rysowania wsztstkich galaktyk 
-                                    if (hierarchy.size().height > 0 && hierarchy.size().width > 0)
-                                                                                            {
+
+
+                                    
                                                                             int MinX = src.getWidth();
                                                                             int MinY = src.getHeight();
                                                                             int MaxX=0;
@@ -504,60 +491,79 @@ public class AlgorytmSelekcji {
                                                                             Point Lewo = null;
                                                                             int PoczatekX,PoczatekY,Wysokosc,Szerokosc;
                                                                                                     // for each contour, display it in blue
-                                                                                                    for (int idx = 0; idx >= 0; idx = (int) hierarchy.get(0, idx)[0])
-                                                                                                    {
-                                                                                                           
+                                                                                                   
+                                                                                                   
                                                                                                            //Imgproc.drawContours(opencv, contours, idx, new Scalar(250, 0, 0));
                                                                                                            //System.out.println(contours.get(idx).size());
-                                                                                       
-                                                                                                           for( MatOfPoint mop: contours ){
-                                                                                                                        for( Point p: mop.toList() )
-                                                                                                                        {
-                                                                                                                           if(MaxX<p.x)
-                                                                                                                            {
-                                                                                                                             MaxX=(int)p.x;
-                                                                                                                             Prawo=p;
-                                                                                                                            }
-                                                                                                                            if(MaxY<p.y){
-                                                                                                                             MaxY=(int)p.y;
-                                                                                                                             Dół = p;
-                                                                                                                             }
-                                                                                                                            if(MinX>p.x)
-                                                                                                                            {
-                                                                                                                            MinX=(int)p.x;
-                                                                                                                            Lewo = p;
-                                                                                                                            }
-                                                                                                                            if(MinY>p.y)
-                                                                                                                            {
-                                                                                                                            MinY=(int)p.y;
-                                                                                                                            Góra = p;
-                                                                                                                            }                                                      
-                                                                                                                        }
-                                                                                                                    }
                                                                                                     
                                                                                                     
-                                                                                                    }
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                               for( MatOfPoint mop: contours )
+                                    {
+                                        
+                                     for( Point p: mop.toList() )
+                                            {
+                                                        if(MaxX<p.x)
+                                                        {
+                                                        MaxX=(int)p.x;
+                                                        Prawo=p;
+                                                        }
+                                                        if(MaxY<p.y)
+                                                        {
+                                                        MaxY=(int)p.y;
+                                                        Dół = p;
+                                                        }
+                                                        if(MinX>p.x)
+                                                        {
+                                                        MinX=(int)p.x;
+                                                        Lewo = p;
+                                                        }
+                                                        if(MinY>p.y)
+                                                        {
+                                                        MinY=(int)p.y;
+                                                        Góra = p;
+                                                        }                                                      
+                                            } 
                                             PoczatekX=MinX;
                                             PoczatekY=MinY;
                                             Szerokosc=MaxX-MinX;
                                             Wysokosc=MaxY-MinY;
-                                         
+                                            
+                                             
+                                           
+                                           
+                                           
                                            
                                            if(min_wielkoscx<Szerokosc||min_wielkoscy<Wysokosc)
                                          
                                                                    {
-                                                                      ListaGalaktykBufor.add(MatDoBufferedImage(opencv).getSubimage(PoczatekX, PoczatekY, Szerokosc, Wysokosc));
-                                                                      ListaGalaktyk.add(origin.getSubimage(PoczatekX, PoczatekY, Szerokosc, Wysokosc));
+                                                                       
+                                                                      ListaGalaktykBufor.add(PobierzWycinekObrazu(MatDoBufferedImage(opencv),PoczatekX, PoczatekY, Szerokosc, Wysokosc));
+                                                                      ListaGalaktyk.add(PobierzWycinekObrazu(origin,PoczatekX, PoczatekY, Szerokosc, Wysokosc));
                                                                       PGorny.add(Góra);
                                                                       PDolny.add(Dół);
                                                                       PPrawy.add(Prawo);
                                                                       PLewy.add(Lewo);
                                                                       iloscgalaktyk++;
                                                                    }
+                                                                          
+                                          MinX = src.getWidth();
+                                          MinY = src.getHeight();
+                                          MaxX=0;
+                                          MaxY=0;                                
+                                                                          
+                                     }
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                            
                                             
                                             
                                            
-                                    }
+                                    
                           
                  
                             for(int i=0 ; i<ListaGalaktyk.size() ; i++)
@@ -574,13 +580,13 @@ public class AlgorytmSelekcji {
                                                 
                                                 
                                                 //fragment kodu do znajdowania małych wyraznych gwiazd
-                                                int najasniejszypkt=Najjasniejszy(ListaGalaktyk.get(i),(int)(ListaGalaktyk.get(i).getWidth()*0.01),(int)(ListaGalaktyk.get(i).getHeight()*0.01));
+                                                int najasniejszypkt=Najjasniejszy(ListaGalaktyk.get(i),(int)(ListaGalaktyk.get(i).getWidth()*0.03),(int)(ListaGalaktyk.get(i).getHeight()*0.03));
                                                 int liczba_jader=liczba_jader(ListaGalaktyk.get(i),1,1,najasniejszypkt,(int)(ListaGalaktyk.get(i).getWidth()*0.01),(int)(ListaGalaktyk.get(i).getHeight()*0.01));
                                                 
                                                 
                                                 //fragment odpowiedzialny za znajdowania centra galaktyki
-                                                int najasniejszypkt_centrum=Najjasniejszy(ListaGalaktyk.get(i),0,0);
-                                                int liczba_jader_centrum=liczba_jader(ListaGalaktyk.get(i),(int)(ListaGalaktyk.get(i).getWidth()*0.1),(int)(ListaGalaktyk.get(i).getHeight()*0.1),najasniejszypkt_centrum,(int)(ListaGalaktyk.get(i).getWidth()*0.3),(int)(ListaGalaktyk.get(i).getHeight()*0.3));
+                                                int najasniejszypkt_centrum=Najjasniejszy(ListaGalaktyk.get(i),1,1);
+                                                int liczba_jader_centrum=liczba_jader(ListaGalaktyk.get(i),1,1,najasniejszypkt_centrum,0,0);
                                                             if(prawygorny>2*prawydolny&&lewydolny>2*lewygorny)
                                                                {
                                                                  widok="Płaski pod przekątną";     
@@ -601,19 +607,13 @@ public class AlgorytmSelekcji {
                                                    
                                                    
                                                    
-                                                  int progowanie = 100;
+                                                  int progowanie = 90;
                                                   double pixele_jasne=0;
                                                   double pixele_biale=0;
                                                   
                                                    
                                                    //tu sie będzie trza pomęczyć 
-                                                  byte[] Maska = ((DataBufferByte) ListaGalaktykBufor.get(i).getRaster().getDataBuffer()).getData();  
-                                                  Mat maska = new Mat(ListaGalaktykBufor.get(i).getHeight(), ListaGalaktykBufor.get(i).getWidth(), CvType.CV_8UC3);
-                                                  maska.put(0, 0, Maska);
                                                   
-                                                  byte[] Obraz = ((DataBufferByte) ListaGalaktyk.get(i).getRaster().getDataBuffer()).getData();  
-                                                  Mat Obiekt = new Mat(ListaGalaktyk.get(i).getHeight(), ListaGalaktyk.get(i).getWidth(), CvType.CV_8UC3);
-                                                  Obiekt.put(0, 0, Obraz);
                                                   
                                                   int Width =ListaGalaktyk.get(i).getWidth();
                                                   int Height =ListaGalaktyk.get(i).getHeight();
@@ -628,25 +628,25 @@ public class AlgorytmSelekcji {
                                                                   for (int x = 0; x<Width; x++) 
                                                                       {
                                                                        
-                                                                                  double r = (TablicaMaskiObrazu[y][x] >> 16) & 0xFF; 
-                                                                                  double g = (TablicaMaskiObrazu[y][x] >> 8) & 0xFF; 
-                                                                                  double b = TablicaMaskiObrazu[y][x] & 0xFF;  
+                                                                                  int r = (TablicaMaskiObrazu[y][x] >> 16) & 0xFF; 
+                                                                                  int g = (TablicaMaskiObrazu[y][x] >> 8) & 0xFF; 
+                                                                                  int b = TablicaMaskiObrazu[y][x] & 0xFF;  
                                                                                     //System.out.print(r+" "+g+" "+b+" ");
-                                                                                                if((r+g+b)/3.0>0){
+                                                                                                if((0.2989 * r + 0.5870 * g + 0.1140 * b)>0){
                                                                                                             liczbapixeliobiektu++;         
                                                                                                                     
                                                                                                                    r = (TablicaOryginalnegoPobranegoObrazu[y][x] >> 16) & 0xFF; 
                                                                                                                    g = (TablicaOryginalnegoPobranegoObrazu[y][x] >> 8) & 0xFF; 
                                                                                                                    b = TablicaOryginalnegoPobranegoObrazu[y][x] & 0xFF; 
 
-                                                                                                                          if((r+g+b)/3>progowanie)    
+                                                                                                                          if((0.2989 * r + 0.5870 * g + 0.1140 * b)>progowanie)    
                                                                                                                                {
                                                                                                                                    //System.out.print(x+" "+ y);
                                                                                                                                    pixele_jasne++;
                                                                                                                                }
 
 
-                                                                                                                          if((r+g+b)/3>240)    
+                                                                                                                          if((0.2989 * r + 0.5870 * g + 0.1140 * b)>220)    
                                                                                                                                {
                                                                                                                                    pixele_biale++;
                                                                                                                                }
@@ -803,7 +803,7 @@ public class AlgorytmSelekcji {
                                                                                
                                                                                       else 
                                                                                       {
-                                                                                      typ_galaktyki="Spialna";
+                                                                                      typ_galaktyki="Spiralna";
                                                                                       }
                                                                       
                                                                     
@@ -813,7 +813,7 @@ public class AlgorytmSelekcji {
                                                 
                                                 //System.out.println(ListaGalaktyk.get(i).getWidth()+ " Szerokosc");
                                                 //System.out.println(ListaGalaktyk.get(i).getHeight()+ " Wysokosc");
-                                                if(asymetryczny ( ListaGalaktyk.get(i),rozmycie_prog_Nieregularna, prog_jasnosci_Nieregularna ))
+                                                if(asymetryczny ( ListaGalaktykBufor.get(i), prog_jasnosci_Nieregularna ))
                                                 {
                                                 typ_galaktyki="Nieregularna";
                                                 }
@@ -840,7 +840,57 @@ public class AlgorytmSelekcji {
                           return iloscgalaktyk;
   
 }
-     
+   
+   public static BufferedImage PobierzWycinekObrazu(BufferedImage Obraz ,int startX, int startY, int endX,int  endY){
+       BufferedImage img = Obraz.getSubimage(startX, startY, endX, endY); //fill in the corners of the desired crop location here
+       BufferedImage copyOfImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+       Graphics g = copyOfImage.createGraphics();
+       g.drawImage(img, 0, 0, null);
+       return copyOfImage;
+   }
+   
+   
+   
+   
+    public static BufferedImage MatDoBufferedImage(Mat matrix)
+{
+    
+    BufferedImage bimg;
+    if ( matrix != null ) { 
+        int cols = matrix.cols();  
+        int rows = matrix.rows();  
+        int elemSize = (int)matrix.elemSize();  
+        byte[] data = new byte[cols * rows * elemSize];  
+        int type;  
+        matrix.get(0, 0, data);  
+        switch (matrix.channels()) {  
+        case 1:  
+            type = BufferedImage.TYPE_BYTE_GRAY;  
+            break;  
+        case 3:  
+            type = BufferedImage.TYPE_3BYTE_BGR;  
+            // bgr to rgb  
+            byte b;  
+            for(int i=0; i<data.length; i=i+3) {  
+                b = data[i];  
+                data[i] = data[i+2];  
+                data[i+2] = b;  
+            }  
+            break;  
+        default:  
+            return null;  
+        }  
+
+        // Reuse existing BufferedImage if possible
+        
+            bimg = new BufferedImage(cols, rows, type);
+               
+        bimg.getRaster().setDataElements(0, 0, cols, rows, data);
+    } else { // mat was null
+        bimg = null;
+    }
+    return bimg;  
+}   
     /////////////////////////////////////// METHODS ////////////////////////////
     
     /**

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package selektorgalaktyk;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -149,6 +150,13 @@ public final class Obraz extends JPanel  {
                 imgType = ImageType.JPG;
             }else{
                 imgType = ImageType.PNG;
+                
+                
+            BufferedImage newBufferedImage = new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+	    newBufferedImage.createGraphics().drawImage(image, 0, 0, Color.WHITE, null);
+            setImage(newBufferedImage);     
+                
+                
             }
            
             this.width = image.getWidth();

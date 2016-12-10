@@ -1736,7 +1736,10 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_ToggleEfektPrzyciemnianiaMousePressed
 
     private void WykonanieSelekcjiPojedynczejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiPojedynczejMouseClicked
-     OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+     
+        
+        ZastosujProgowanie = PROGOWANIE;
+        OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
     
         AlgorytmSelekcji Algorytm = new AlgorytmSelekcji();
         //System.out.println(Algorytm.asymetryczny(OknoEdytowalnyObraz.PobierzObraz(),20, 128));
@@ -1745,7 +1748,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
         //Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100);
         Algorytm.rozpoznanie(OknoWyświetlOryginał.PobierzObraz(), OknoEdytowalnyObraz.PobierzObraz(), 30, 40, 50, 50);
         OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktyk.get(0));
-        System.out.println(Algorytm.asymetryczny(OknoEdytowalnyObraz.PobierzObraz(),2, 20));
+        //System.out.println(Algorytm.asymetryczny(Algorytm.ListaGalaktyk.get(0),2, 20));
         Konsola.append(Algorytm.TypGalaktykiNazwa.get(0));
         OknoEdytowalnyObraz.Odswierzenie();
         
