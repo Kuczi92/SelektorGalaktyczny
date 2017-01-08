@@ -9,7 +9,10 @@ package selektorgalaktyk;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania;
@@ -40,6 +43,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     
     public RodzajeProgowania ZastosujProgowanie = BRAK_PROGROWANIA;
    
+    ArrayList <String> ListaObrazówWFolderze;
     
     public ArrayList <Galaktyka> PojedynczaSelekcja;
     private OknoListyGalaktyk OknoListyGalaktyk;
@@ -1488,8 +1492,17 @@ public class PanelSterowania extends JFrame implements ActionListener {
           int returnVal = WybranyFolderWejscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            Konsola.append("Wybrałes ten folder jako źródłowy: " +
-            WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
+           WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
            }
+        try 
+        {
+           ListaObrazówWFolderze = WybranyFolderWejscia.ListaPlikówWFolderze();
+           int a  = 0;
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
     }//GEN-LAST:event_WybierzFolderZrodlowyMouseClicked
     
     private void WybierzFolderWyjsciowyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WybierzFolderWyjsciowyMouseClicked

@@ -5,6 +5,14 @@
  */
 package selektorgalaktyk;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
 /**
  *
  * @author Quchi
@@ -17,7 +25,21 @@ public class WyborFolderu extends javax.swing.JFrame {
     public WyborFolderu() {
         initComponents();
     }
-
+    
+    
+    public ArrayList<String> ListaPlikówWFolderze() throws IOException{
+        ArrayList<String> ListaPlików = new ArrayList<>();
+        try(Stream<Path> paths = Files.walk(Paths.get(WybieraczFolderu.getSelectedFile().getAbsolutePath()))) {
+          paths.forEach((Path filePath) -> {
+        if (Files.isRegularFile(filePath)) {
+            System.out.println(filePath);
+            ListaPlików.add(filePath.toString());
+           }
+          });
+         }
+        return ListaPlików;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

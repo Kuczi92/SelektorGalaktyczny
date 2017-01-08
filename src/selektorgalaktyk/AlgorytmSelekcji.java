@@ -51,6 +51,8 @@ public class AlgorytmSelekcji {
     
     ArrayList<Galaktyka> DanaGalaktyka = new ArrayList<>();
     
+    
+    
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
 
 
