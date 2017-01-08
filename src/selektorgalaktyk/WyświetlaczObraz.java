@@ -423,7 +423,7 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
    
    
         public void Odswierzenie(){
-            // BufferedImage mask = new BufferedImage(RGB.getImageWidth(),RGB.getImageHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+                                      
                                       Graphics g  = RGB.Image().getGraphics();
                                       g.drawImage(RGB.Image(), 0, 0, this);
                                       g.dispose();

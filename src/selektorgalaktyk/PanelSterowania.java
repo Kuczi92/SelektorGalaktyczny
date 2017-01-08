@@ -9,6 +9,7 @@ package selektorgalaktyk;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania;
@@ -39,6 +40,10 @@ public class PanelSterowania extends JFrame implements ActionListener {
     
     public RodzajeProgowania ZastosujProgowanie = BRAK_PROGROWANIA;
    
+    
+    public ArrayList <Galaktyka> PojedynczaSelekcja;
+    private OknoListyGalaktyk OknoListyGalaktyk;
+    
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
@@ -259,6 +264,11 @@ public class PanelSterowania extends JFrame implements ActionListener {
         });
 
         ListaGalaktyk.setText("Lista Galaktyk ");
+        ListaGalaktyk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListaGalaktykMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Konsola komunikatów");
 
@@ -1746,13 +1756,20 @@ public class PanelSterowania extends JFrame implements ActionListener {
         
         
         //Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100);
-        Algorytm.rozpoznanie(OknoWyświetlOryginał.PobierzObraz(), OknoEdytowalnyObraz.PobierzObraz(), 30, 40, 50, 50);
-        OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktyk.get(0));
-        //System.out.println(Algorytm.asymetryczny(Algorytm.ListaGalaktyk.get(0),2, 20));
-        Konsola.append(Algorytm.TypGalaktykiNazwa.get(0));
-        OknoEdytowalnyObraz.Odswierzenie();
+        Algorytm.rozpoznanie(OknoWyświetlOryginał.PobierzObraz(), OknoEdytowalnyObraz.PobierzObraz(),OknoWyświetlOryginał.pobierzSciezkePliku(), 30, 40, 50, 50);
+        //OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktyk.get(3));
+       //System.out.println(Algorytm.asymetryczny(Algorytm.ListaGalaktyk.get(0),2, 20));
+        PojedynczaSelekcja = Algorytm.ListaWykrytychGalaktyk();
+        OknoListyGalaktyk = new OknoListyGalaktyk(PojedynczaSelekcja);
+        //Konsola.append(Algorytm.TypGalaktykiNazwa.get(3));
+        //OknoEdytowalnyObraz.Odswierzenie();
         
     }//GEN-LAST:event_WykonanieSelekcjiPojedynczejMouseClicked
+
+    private void ListaGalaktykMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaGalaktykMouseClicked
+       
+       OknoListyGalaktyk.setVisible(true);
+    }//GEN-LAST:event_ListaGalaktykMouseClicked
     
 
 /**

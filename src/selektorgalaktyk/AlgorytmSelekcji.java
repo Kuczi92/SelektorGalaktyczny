@@ -49,6 +49,7 @@ public class AlgorytmSelekcji {
     ArrayList<Point> PLewy = new ArrayList<>();
     int wykrytych_galaktyk=0;
     
+    ArrayList<Galaktyka> DanaGalaktyka = new ArrayList<>();
     
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
 
@@ -432,7 +433,7 @@ public class AlgorytmSelekcji {
    
    
    
-   int rozpoznanie(BufferedImage origin,BufferedImage src,int rozmycie, int czulosc,int min_wielkoscx ,int min_wielkoscy)
+   int rozpoznanie(BufferedImage origin,BufferedImage src,String Źródło,int rozmycie, int czulosc,int min_wielkoscx ,int min_wielkoscy)
 {
                                                 
                                if(PGorny.size()>0)
@@ -560,7 +561,7 @@ public class AlgorytmSelekcji {
                                                                                                     
                                                                                                     
                                             
-                                            
+                                          
                                             
                                            
                                     
@@ -568,6 +569,8 @@ public class AlgorytmSelekcji {
                  
                             for(int i=0 ; i<ListaGalaktyk.size() ; i++)
                                     {
+                                                Galaktyka WykrytaGalaktyka = new Galaktyka(Źródło,ListaGalaktyk.get(i));                                        
+                                                
                                                 String widok;
                                                 double prawygorny =  distance(PGorny.get(i).x,PGorny.get(i).y, PPrawy.get(i).x, PPrawy.get(i).y);
                                                 double lewygorny  = distance(PGorny.get(i).x,PGorny.get(i).y, PLewy.get(i).x, PLewy.get(i).y);
@@ -589,19 +592,23 @@ public class AlgorytmSelekcji {
                                                 int liczba_jader_centrum=liczba_jader(ListaGalaktyk.get(i),1,1,najasniejszypkt_centrum,0,0);
                                                             if(prawygorny>2*prawydolny&&lewydolny>2*lewygorny)
                                                                {
-                                                                 widok="Płaski pod przekątną";     
+                                                                 widok="Płaski pod przekątną"; 
+                                                                 WykrytaGalaktyka.setWidokNaGalaktyke(Widok.Płaski_pod_przekątną);
                                                                }
                                                              else if(prawydolny>2*prawygorny&&lewygorny>2*lewydolny)
                                                                {
-                                                                 widok="Płaski pod przekątną";     
+                                                                 widok="Płaski pod przekątną"; 
+                                                                 WykrytaGalaktyka.setWidokNaGalaktyke(Widok.Płaski_pod_przekątną);
                                                                }
                                                              else if(przekatnapion>2*przekatnapoziom||przekatnapoziom>2*przekatnapion)
                                                                {
-                                                                 widok="Płaski symetrycznie";     
+                                                                 widok="Płaski symetrycznie";  
+                                                                 WykrytaGalaktyka.setWidokNaGalaktyke(Widok.Płaski_symetrycznie);
                                                                }
                                                             else
                                                                {
                                                                  widok = "Pełny";
+                                                                 WykrytaGalaktyka.setWidokNaGalaktyke(Widok.Pełny);
                                                                }
                                                    
                                                    
@@ -665,6 +672,7 @@ public class AlgorytmSelekcji {
                                                 //aż do tąd   
                                                 double procent_zapelnienia_jasnymi=pixele_jasne/liczbapixeliobiektu*100;
                                                 double procent_zapelnienia_bialymi=pixele_biale/liczbapixeliobiektu*100;
+                                                WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Niezakwalifikowany);
                                                 String typ_galaktyki="Niezakwalifikowany";
                                                 wykrytych_galaktyk++;
                                                 
@@ -673,10 +681,11 @@ public class AlgorytmSelekcji {
                                                  // ustalanie rodzaju galaktyki 
                                                 
                                                  
-                                                        if(widok=="Płaski pod przekątną")
+                                                        if(WykrytaGalaktyka.getWidokNaGalaktyke()==Widok.Płaski_pod_przekątną)
                                                         {
                                                                       if(procent_zapelnienia_jasnymi<plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna)
                                                                                 {
+                                                                                 WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Spiralna);   
                                                                                  typ_galaktyki="Spiralna";
                                                                                   if(liczba_jader_centrum>1)
                                                                                             {
@@ -685,11 +694,13 @@ public class AlgorytmSelekcji {
                                                                                 }
                                                                       else if(liczba_jader_centrum==1&&liczba_jader==1)
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Soczewkowata);
                                                                                       typ_galaktyki="Soczewkowata";
                                                                                       }
                                                                                 
                                                                       else if (procent_zapelnienia_jasnymi>plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata)
                                                                                 {
+                                                                                WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Soczewkowata);    
                                                                                 typ_galaktyki="Soczewkowata";
                                                                                  if(liczba_jader_centrum>1)
                                                                                             {
@@ -699,6 +710,7 @@ public class AlgorytmSelekcji {
                                                                                 
                                                                                 else if (procent_zapelnienia_bialymi>plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata)
                                                                                 {
+                                                                                WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Soczewkowata);
                                                                                 typ_galaktyki="Soczewkowata";
                                                                                  if(liczba_jader_centrum>1)
                                                                                             {
@@ -709,6 +721,7 @@ public class AlgorytmSelekcji {
                                                                                
                                                                      else   
                                                                                 {
+                                                                                WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Spiralna);
                                                                                 typ_galaktyki="Spiralna";
                                                                                  if(liczba_jader_centrum>1)
                                                                                             {
@@ -717,10 +730,11 @@ public class AlgorytmSelekcji {
                                                                                 }
                                                         }
                                                      
-                                                      if( widok == "Płaski symetrycznie")
+                                                      if(WykrytaGalaktyka.getWidokNaGalaktyke()==Widok.Płaski_symetrycznie)
                                                       {
                                                                                 if(procent_zapelnienia_jasnymi<plaskisym_procent_zapelnienia_jasnymi_prog_karlowata)
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Karłowata);     
                                                                                       typ_galaktyki="Karłowata";
                                                                                        if(liczba_jader_centrum>1)
                                                                                             {
@@ -729,6 +743,7 @@ public class AlgorytmSelekcji {
                                                                                       }
                                                                                 else if(procent_zapelnienia_jasnymi<plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna&&procent_zapelnienia_bialymi<plaskisym_procent_zapelnienia_bialymi_prog_Spiralna)
                                                                                       {
+                                                                                       WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Spiralna);   
                                                                                        typ_galaktyki="Spiralna";
                                                                                         if(liczba_jader_centrum>1)
                                                                                             {
@@ -737,6 +752,7 @@ public class AlgorytmSelekcji {
                                                                                       }
                                                                                 else if (procent_zapelnienia_bialymi>plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata||procent_zapelnienia_jasnymi>plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata) 
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Soczewkowata);      
                                                                                       typ_galaktyki="Soczewkowata";
                                                                                        if(liczba_jader_centrum>1)
                                                                                             {
@@ -746,11 +762,12 @@ public class AlgorytmSelekcji {
                                                                                       }
                                                                                        else if(liczba_jader_centrum==1&&liczba_jader==1)
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Soczewkowata);     
                                                                                       typ_galaktyki="Soczewkowata";
                                                                                       }
                                                                                       else {
                                                                                         
-                                                                                        
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Spiralna);
                                                                                       typ_galaktyki="Spiralna";
                                                                                       
                                                                                       }
@@ -761,11 +778,12 @@ public class AlgorytmSelekcji {
                                                        
                                                        
                                                        
-                                                       if(widok =="Pełny")
+                                                       if(WykrytaGalaktyka.getWidokNaGalaktyke()==Widok.Pełny)
                                                        {
                                                                              if(procent_zapelnienia_jasnymi<pelny_procent_zapelnienia_jasnymi_prog_karlowata&&procent_zapelnienia_bialymi<pelny_procent_zapelnienia_bialymi_prog_karlowata)
                                                                              {
                                                                                     typ_galaktyki="Nieregularna";
+                                                                                    WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Nieregularna);
                                                                                          if(liczba_jader_centrum>1)
                                                                                             {
                                                                                               typ_galaktyki=typ_galaktyki+" galaktyka wielokrotna";
@@ -774,11 +792,13 @@ public class AlgorytmSelekcji {
                                                                              
                                                                              else if(liczba_jader_centrum==1&&liczba_jader==1)
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Eliptyczna);    
                                                                                       typ_galaktyki="Eliptyczna";
                                                                                       }
                                                                              
                                                                            else if(procent_zapelnienia_jasnymi < pelny_procent_zapelnienia_jasnymi_prog_Spiralna &&  procent_zapelnienia_bialymi<pelny_procent_zapelnienia_bialymi_prog_Spiralna&&liczba_jader>pelny_liczba_jasnych_obiektow_Spiralna&&!(liczba_jader_centrum==1&&liczba_jader==1))
                                                                                       {
+                                                                                       WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Spiralna);    
                                                                                        typ_galaktyki="Spiralna";
                                                                                          if(liczba_jader_centrum>1)
                                                                                             {
@@ -788,6 +808,7 @@ public class AlgorytmSelekcji {
                                                                                       }
                                                                                 else if(procent_zapelnienia_bialymi>pelny_procent_zapelnienia_bialymi_prog_Eliptyczna)
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Eliptyczna);     
                                                                                       typ_galaktyki="Eliptyczna";
                                                                                          if(liczba_jader_centrum>1)
                                                                                             {
@@ -798,16 +819,18 @@ public class AlgorytmSelekcji {
                                                                                   
                                                                                   else if(liczba_jader_centrum==1&&liczba_jader==1)
                                                                                       {
+                                                                                     WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Eliptyczna);        
                                                                                       typ_galaktyki="Eliptyczna";
                                                                                       }    
                                                                                
                                                                                       else 
                                                                                       {
+                                                                                      WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Spiralna);         
                                                                                       typ_galaktyki="Spiralna";
                                                                                       }
                                                                       
                                                                     
-                                                                  }
+                                                        }
                                                       
                                                  
                                                 
@@ -815,12 +838,17 @@ public class AlgorytmSelekcji {
                                                 //System.out.println(ListaGalaktyk.get(i).getHeight()+ " Wysokosc");
                                                 if(asymetryczny ( ListaGalaktykBufor.get(i), prog_jasnosci_Nieregularna ))
                                                 {
+                                                WykrytaGalaktyka.setTypGalaktyki(TypGalaktyki.Nieregularna);       
                                                 typ_galaktyki="Nieregularna";
                                                 }
                                                 ZapisDoObrazu.add("W-"+widok+" T-"+typ_galaktyki+" PJ-"+String.format("%.2f", (float)procent_zapelnienia_jasnymi)+" PB-"+String.format("%.2f", (float)procent_zapelnienia_bialymi)+" LP-"+liczba_jader+" JG-"+liczba_jader_centrum); 
                                                 TypGalaktykiNazwa.add("Widok: "+widok+" Pixele Jasne:"+String.format("%.2f", (float)procent_zapelnienia_jasnymi)+" % Pixele białe:"+String.format("%.2f", (float)procent_zapelnienia_bialymi)+" %\nRodzaj Galaktyki: "+typ_galaktyki+"\nLiczba jasnych punktów: "+liczba_jader+" Jądra galaktyk: "+liczba_jader_centrum);
+                                                WykrytaGalaktyka.setPikseleBiałe(procent_zapelnienia_bialymi);
+                                                WykrytaGalaktyka.setPikseleJasne(procent_zapelnienia_jasnymi);
+                                                WykrytaGalaktyka.setLiczbaJasnychPunktów(liczba_jader);
+                                                WykrytaGalaktyka.setLiczbaJąderGalaktyki(liczba_jader_centrum);
+                                                DanaGalaktyka.add(WykrytaGalaktyka);
                                                 
-                              
                                     
                                     }
  
@@ -841,7 +869,12 @@ public class AlgorytmSelekcji {
   
 }
    
-   public static BufferedImage PobierzWycinekObrazu(BufferedImage Obraz ,int startX, int startY, int endX,int  endY){
+   
+   public ArrayList<Galaktyka> ListaWykrytychGalaktyk(){
+       return DanaGalaktyka;
+   }
+   
+   private static BufferedImage PobierzWycinekObrazu(BufferedImage Obraz ,int startX, int startY, int endX,int  endY){
        BufferedImage img = Obraz.getSubimage(startX, startY, endX, endY); //fill in the corners of the desired crop location here
        BufferedImage copyOfImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
        Graphics g = copyOfImage.createGraphics();
