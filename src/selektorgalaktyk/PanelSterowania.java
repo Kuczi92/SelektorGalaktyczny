@@ -1476,7 +1476,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void ZaladujPojedynczyObrazMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazMouseClicked
         WybranyPlikObrazu = new WyborPliku();
           int returnVal = WybranyPlikObrazu.WybieraczPliku.showOpenDialog(null);
-           if(returnVal == JFileChooser.APPROVE_OPTION) {
+           if(returnVal == JFileChooser.APPROVE_OPTION) 
+          {
            Konsola.append("Wybrałes ten plik z obrazem: " +
             WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath()+"\n");
            ScieszkaWybranyPlikObrazu=WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath();
@@ -1770,12 +1771,12 @@ public class PanelSterowania extends JFrame implements ActionListener {
         
         //Algorytm.liczba_jader(OknoWyświetlOryginał.PobierzObraz(), 10, 10, 128, 100, 100);
         Algorytm.rozpoznanie(OknoWyświetlOryginał.PobierzObraz(), OknoEdytowalnyObraz.PobierzObraz(),OknoWyświetlOryginał.pobierzSciezkePliku(), 30, 40, 50, 50);
-        //OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktyk.get(3));
+        OknoEdytowalnyObraz.UstawObraz(Algorytm.ListaGalaktyk.get(3));
        //System.out.println(Algorytm.asymetryczny(Algorytm.ListaGalaktyk.get(0),2, 20));
         PojedynczaSelekcja = Algorytm.ListaWykrytychGalaktyk();
         OknoListyGalaktyk = new OknoListyGalaktyk(PojedynczaSelekcja);
-        //Konsola.append(Algorytm.TypGalaktykiNazwa.get(3));
-        //OknoEdytowalnyObraz.Odswierzenie();
+        Konsola.append(Algorytm.TypGalaktykiNazwa.get(3));
+        OknoEdytowalnyObraz.Odswierzenie();
         
     }//GEN-LAST:event_WykonanieSelekcjiPojedynczejMouseClicked
 
