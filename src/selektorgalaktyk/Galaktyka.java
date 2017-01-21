@@ -7,7 +7,9 @@ package selektorgalaktyk;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+
 import java.awt.image.BufferedImage;
+import org.opencv.core.Point;
 
 /**
  *
@@ -23,6 +25,13 @@ public class Galaktyka {
     double PikseleBiałe;
     int LiczbaJasnychPunktów;
     int LiczbaJąderGalaktyki;
+    
+    Point Punkt1;
+    Point Punkt2;
+    Point Punkt3;
+    Point Punkt4;
+    
+    
     
    public Galaktyka(String Żródło,BufferedImage ObrazGalaktyki,Widok WidokNaGalaktyke,TypGalaktyki TypGalaktyki,double PikseleJasne,double PikseleBiałe,int LiczbaJasnychPunktów,int LiczbaJąderGalaktyki){
       this.LiczbaJasnychPunktów =  LiczbaJasnychPunktów;
@@ -69,6 +78,13 @@ public class Galaktyka {
     
     public void setPikseleJasne(double setPikseleJasne){
         this.PikseleJasne = setPikseleJasne;
+    }
+    
+    public void setPunkty(Point P1,Point P2,Point P3,Point P4){
+        this.Punkt1 = P1;
+        this.Punkt2 = P2;
+        this.Punkt3 = P3;
+        this.Punkt4 = P4; 
     }
     
     /*

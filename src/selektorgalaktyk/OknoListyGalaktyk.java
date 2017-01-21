@@ -22,15 +22,20 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     Wyświetlacz Wyświetlacz;
     Wyświetlacz Miniatura;
     ArrayList<Galaktyka> ListaGalaktyk;
+    double stosunekDługościOryginału;
+    double ProcentXWzględemOryginału;
+    double ProcentYWzględemOryginału;
     /**
      * Creates new form OknoListyGalaktyk
      */
-    public OknoListyGalaktyk(ArrayList<Galaktyka> ListaGalaktyk) {
-        
+    public OknoListyGalaktyk(ArrayList<Galaktyka> ListaGalaktyk,BufferedImage ObrazOryginalny) {
+        super("Lista Galaktyk");
         this.ListaGalaktyk = ListaGalaktyk;
-        Wyświetlacz = new Wyświetlacz(ZmieńRozmiarObrazu(ListaGalaktyk.get(0).getObraz(),700, 422));
+        ustawOryginalInicjacja(ObrazOryginalny);
         ustawMiniaturęInicjacja(ListaGalaktyk.get(0).ObrazGalaktyki);
         initComponents();
+        Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*stosunekDługościOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*stosunekDługościOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*stosunekDługościOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*stosunekDługościOryginału));
+
         ustawDane(ListaGalaktyk.get(0));
     }
 
@@ -72,11 +77,11 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         PanelWyświetlacz.setLayout(PanelWyświetlaczLayout);
         PanelWyświetlaczLayout.setHorizontalGroup(
             PanelWyświetlaczLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         PanelWyświetlaczLayout.setVerticalGroup(
             PanelWyświetlaczLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 434, Short.MAX_VALUE)
         );
 
         ButtonPoprzedni.setText("Poprzedni");
@@ -140,49 +145,47 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelWyświetlacz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LabelŹródło)
+                            .addComponent(LabelWidok)
+                            .addComponent(LabelTypGalaktyki)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LabelPikseleJasne)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelPikseleJasneWartość))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LabelLiczbaJasnychPunktow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelLiczbaJasnychPunktowWartość, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabelŹródło)
-                                    .addComponent(LabelWidok)
-                                    .addComponent(LabelTypGalaktyki)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LabelPikseleJasne)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LabelPikseleJasneWartość))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LabelLiczbaJasnychPunktow)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LabelLiczbaJasnychPunktowWartość, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(LabelPikseleBiałe)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LabelPikseleBiałe)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LabelPikseleBiałeWartość))
-                                    .addComponent(LabelTypGalaktykiWartość)
-                                    .addComponent(LabelWidokWartość)
-                                    .addComponent(LabelŹródłoWartość)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LabelLiczbaWykrytychJąderGalaktyki)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LabelLiczbaWykrytychJąderGalaktykiWartość, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(LabelPikseleBiałeWartość))
+                            .addComponent(LabelTypGalaktykiWartość)
+                            .addComponent(LabelWidokWartość)
+                            .addComponent(LabelŹródłoWartość)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ButtonPoprzedni)
+                                .addComponent(LabelLiczbaWykrytychJąderGalaktyki)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonNastępny)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelPrzeglądanaGalaktyka)))
-                        .addGap(127, 127, 127)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(PanelMiniatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 289, Short.MAX_VALUE))
+                                .addComponent(LabelLiczbaWykrytychJąderGalaktykiWartość, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ButtonPoprzedni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ButtonNastępny)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LabelPrzeglądanaGalaktyka)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(PanelMiniatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addComponent(PanelWyświetlacz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,10 +226,11 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                             .addComponent(LabelLiczbaWykrytychJąderGalaktykiWartość))
                         .addGap(107, 107, 107))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PanelMiniatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
 
         pack();
@@ -237,25 +241,25 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         if(galaktyka<0){
             galaktyka = 0;
         }
-        Wyświetlacz.UstawNowyObraz(ZmieńRozmiarObrazu(ListaGalaktyk.get(galaktyka).getObraz(),700, 422));
-        ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
-        ustawDane(ListaGalaktyk.get(galaktyka));
-        Odswierzenie();
-        LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+       ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
+       ustawDane(ListaGalaktyk.get(galaktyka));
+       LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+       Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*ProcentYWzględemOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*ProcentYWzględemOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*ProcentYWzględemOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*ProcentYWzględemOryginału));
+       Odswierzenie();
     }//GEN-LAST:event_ButtonPoprzedniMouseClicked
 
     
     
     private void ButtonNastępnyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonNastępnyMouseClicked
-       galaktyka++; // TODO add your handling code here:
+       galaktyka++; 
        if(galaktyka>=ListaGalaktyk.size()-1){
             galaktyka = ListaGalaktyk.size()-1;
         }
-       Wyświetlacz.UstawNowyObraz(ZmieńRozmiarObrazu(ListaGalaktyk.get(galaktyka).getObraz(),700, 422));
        ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
        ustawDane(ListaGalaktyk.get(galaktyka));
-       Odswierzenie();
        LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+       Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*ProcentYWzględemOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*ProcentYWzględemOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*ProcentYWzględemOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*ProcentYWzględemOryginału));
+       Odswierzenie();
     }//GEN-LAST:event_ButtonNastępnyMouseClicked
     
     
@@ -301,6 +305,57 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                 {
             int NowyX = img.getWidth()*200/img.getHeight();
             Miniatura = new Wyświetlacz(ZmieńRozmiarObrazu(img,NowyX,200));
+        }
+         
+    }
+    
+    public void ustawOryginalInicjacja(BufferedImage img){
+        
+        
+        
+        if(img.getWidth()<=900&&img.getHeight()<=434){
+            Wyświetlacz = new Wyświetlacz(img);
+            stosunekDługościOryginału = 1.0;
+            ProcentXWzględemOryginału = 1.0;
+            ProcentYWzględemOryginału =1.0;
+        }
+        else if(img.getWidth()>img.getHeight())
+                {
+                    stosunekDługościOryginału =(double) img.getWidth()/img.getHeight();
+                    int NowyY = (int) (900*stosunekDługościOryginału);
+
+                    if(NowyY>434){
+
+                        int NowyX =  (int) (434*stosunekDługościOryginału);   
+                        Wyświetlacz= new Wyświetlacz(ZmieńRozmiarObrazu(img,NowyX,434));
+                        ProcentXWzględemOryginału =(double) NowyX/img.getWidth();
+                        ProcentYWzględemOryginału =(double) 434.0/img.getHeight();
+                        stosunekDługościOryginału= ProcentYWzględemOryginału;
+                        }
+                    else{
+                        Wyświetlacz= new Wyświetlacz(ZmieńRozmiarObrazu(img,900,NowyY));
+                        ProcentXWzględemOryginału =(double) 900.0/img.getWidth();
+                        ProcentYWzględemOryginału =(double) NowyY/img.getHeight();
+                    }
+           
+        }
+        
+        else if(img.getHeight()>img.getWidth())
+                {
+                    stosunekDługościOryginału =(double) img.getHeight()/img.getWidth();
+                    int NowyX =  (int) (434*stosunekDługościOryginału);
+                        if(NowyX>900){
+                            int NowyY = (int) (900*stosunekDługościOryginału);
+                            Wyświetlacz = new Wyświetlacz(ZmieńRozmiarObrazu(img,900,NowyY));
+                            ProcentXWzględemOryginału =(double) 900/img.getWidth();
+                            ProcentYWzględemOryginału =(double) NowyY/img.getHeight();
+                        }
+                        else{
+                             Wyświetlacz = new Wyświetlacz(ZmieńRozmiarObrazu(img,NowyX,434));
+                             ProcentXWzględemOryginału =(double) NowyX/img.getWidth();
+                             ProcentYWzględemOryginału =(double) 434/img.getHeight();
+                        }
+           
         }
          
     }

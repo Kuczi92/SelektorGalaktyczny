@@ -572,7 +572,7 @@ public class AlgorytmSelekcji {
                             for(int i=0 ; i<ListaGalaktyk.size() ; i++)
                                     {
                                                 Galaktyka WykrytaGalaktyka = new Galaktyka(Źródło,ListaGalaktyk.get(i));                                        
-                                                
+                                                WykrytaGalaktyka.setPunkty(PGorny.get(i), PPrawy.get(i), PDolny.get(i), PLewy.get(i));
                                                 String widok;
                                                 double prawygorny =  distance(PGorny.get(i).x,PGorny.get(i).y, PPrawy.get(i).x, PPrawy.get(i).y);
                                                 double lewygorny  = distance(PGorny.get(i).x,PGorny.get(i).y, PLewy.get(i).x, PLewy.get(i).y);

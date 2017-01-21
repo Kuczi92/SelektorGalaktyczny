@@ -27,62 +27,58 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSeparator1" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
+          <Component id="jSeparator1" pref="900" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="PanelWyświetlacz" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="LabelŹródło" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWidok" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelTypGalaktyki" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LabelŹródło" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelWidok" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelTypGalaktyki" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="LabelPikseleJasne" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="LabelPikseleJasneWartość" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="LabelLiczbaJasnychPunktow" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="LabelLiczbaJasnychPunktowWartość" min="-2" pref="16" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="LabelPikseleJasne" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="LabelPikseleBiałe" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="LabelPikseleBiałeWartość" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="LabelTypGalaktykiWartość" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelWidokWartość" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelŹródłoWartość" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="LabelLiczbaWykrytychJąderGalaktyki" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="LabelLiczbaWykrytychJąderGalaktykiWartość" min="-2" pref="21" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="LabelPikseleJasneWartość" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="ButtonPoprzedni" min="-2" max="-2" attributes="0"/>
+                              <Component id="LabelLiczbaJasnychPunktow" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ButtonNastępny" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelPrzeglądanaGalaktyka" min="-2" max="-2" attributes="0"/>
+                              <Component id="LabelLiczbaJasnychPunktowWartość" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="PanelMiniatura" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="LabelPikseleBiałe" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPikseleBiałeWartość" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="LabelTypGalaktykiWartość" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelWidokWartość" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelŹródłoWartość" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="LabelLiczbaWykrytychJąderGalaktyki" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelLiczbaWykrytychJąderGalaktykiWartość" min="-2" pref="21" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="ButtonPoprzedni" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ButtonNastępny" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelPrzeglądanaGalaktyka" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="0" pref="289" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="PanelMiniatura" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="PanelWyświetlacz" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -131,10 +127,11 @@
                       <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="PanelMiniatura" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -150,12 +147,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="700" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="434" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

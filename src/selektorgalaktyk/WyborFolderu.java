@@ -32,8 +32,13 @@ public class WyborFolderu extends javax.swing.JFrame {
         try(Stream<Path> paths = Files.walk(Paths.get(WybieraczFolderu.getSelectedFile().getAbsolutePath()))) {
           paths.forEach((Path filePath) -> {
         if (Files.isRegularFile(filePath)) {
-            System.out.println(filePath);
-            ListaPlików.add(filePath.toString());
+            
+            String temp = filePath.toString();
+            if((temp.endsWith("jpg")||temp.endsWith("png")||temp.endsWith("jpeg")||temp.endsWith("JPEG")||temp.endsWith("JPG")))
+            {
+                ListaPlików.add(filePath.toString());
+            }
+
            }
           });
          }

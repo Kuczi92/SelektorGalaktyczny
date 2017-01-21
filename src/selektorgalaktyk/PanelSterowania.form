@@ -151,7 +151,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="264" max="32767" attributes="0"/>
+                      <EmptySpace pref="531" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
@@ -181,12 +181,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="WykonanieSelekcjiMasowej" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="WykonanieSelekcjiPojedynczej" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="ListaGalaktyk" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="ListaGalaktyk" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="PanelGlowny" min="-2" max="-2" attributes="0"/>
@@ -333,7 +333,7 @@
                   <Component id="UstawieniaPłaskiSymetrycznyZakladka" alignment="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="6" groupAlignment="0" attributes="0">
-                  <Component id="UstawieniaPelnyZakladka" alignment="1" max="32767" attributes="0"/>
+                  <Component id="UstawieniaPelnyZakladka" alignment="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="7" groupAlignment="0" attributes="0">
                   <Component id="UstawieniaNieregularneZakladka" alignment="1" max="32767" attributes="0"/>
@@ -617,6 +617,7 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="ToggleProgowanie">
               <Properties>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Progowanie"/>
               </Properties>
               <Events>
