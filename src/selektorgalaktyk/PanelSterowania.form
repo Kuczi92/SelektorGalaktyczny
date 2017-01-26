@@ -151,7 +151,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="531" max="32767" attributes="0"/>
+                      <EmptySpace pref="508" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
@@ -419,7 +419,7 @@
                           <Component id="LabelNiebieskiWartosc" min="-2" max="-2" attributes="0"/>
                           <Component id="SliderNiebieski" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="116" max="32767" attributes="0"/>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -556,7 +556,7 @@
                           <Component id="SliderWartoscProgowa" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWartoscWartoscProgowa" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="85" max="32767" attributes="0"/>
+                      <EmptySpace pref="160" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ToggleProgowanie" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ToggleEfektRozjasniania" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -715,7 +715,7 @@
                           <Component id="WielkoscObrazuY" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWielkoscObrazuY" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace pref="146" max="32767" attributes="0"/>
                       <Component id="ButtonStworzPlikJPGzTeraźniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="ButtonStworzPlikPDFzTerazniejszymUstawieniem" min="-2" max="-2" attributes="0"/>
@@ -782,32 +782,32 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="SliderRozmycie" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelRozmycieWartosc" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelRozmycie" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelCzulosc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelMinWielkoscX" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelMinWielkoscY" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="LabelRozmycie" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelCzulosc" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="SliderCzulosc" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="SliderMinWielkoscY" pref="460" max="32767" attributes="0"/>
+                                  <Component id="SliderMinWielkoscX" max="32767" attributes="0"/>
+                                  <Component id="SliderRozmycie" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="SliderCzulosc" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelCzuloscWartosc" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="LabelMinWielkoscX" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="SliderMinWielkoscX" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelMinimalnaWielkoscXWartosc" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="LabelMinWielkoscY" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="SliderMinWielkoscY" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelMinimalnaWielkoscYWartosc" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelRozmycieWartosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelCzuloscWartosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelMinimalnaWielkoscXWartosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelMinimalnaWielkoscYWartosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="270" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -818,43 +818,40 @@
                       <Component id="LabelRozmycie" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="SliderRozmycie" min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="LabelRozmycieWartosc" min="-2" max="-2" attributes="0"/>
+                          <Component id="SliderRozmycie" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelCzulosc" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="LabelCzulosc" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SliderCzulosc" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="SliderCzulosc" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelCzuloscWartosc" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="LabelMinWielkoscX" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SliderMinWielkoscX" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="LabelMinimalnaWielkoscXWartosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabelMinWielkoscX" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="SliderMinWielkoscX" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelMinimalnaWielkoscXWartosc" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="LabelMinWielkoscY" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="LabelMinWielkoscY" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SliderMinWielkoscY" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="LabelMinimalnaWielkoscYWartosc" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="SliderMinWielkoscY" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelMinimalnaWielkoscYWartosc" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JSlider" name="SliderRozmycie">
+              <Properties>
+                <Property name="value" type="int" value="30"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderRozmycieStateChanged"/>
               </Events>
@@ -870,6 +867,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderCzulosc">
+              <Properties>
+                <Property name="value" type="int" value="40"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderCzuloscStateChanged"/>
               </Events>
@@ -1000,13 +1000,16 @@
                               <Component id="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="116" max="32767" attributes="0"/>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna">
+              <Properties>
+                <Property name="value" type="int" value="60"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralnaStateChanged"/>
               </Events>
@@ -1022,6 +1025,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata">
+              <Properties>
+                <Property name="value" type="int" value="80"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowataStateChanged"/>
               </Events>
@@ -1032,6 +1038,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata">
+              <Properties>
+                <Property name="value" type="int" value="10"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowataStateChanged"/>
               </Events>
@@ -1072,25 +1081,32 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiBialymiProgSpiralna" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna" alignment="1" pref="304" max="32767" attributes="0"/>
-                          <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" alignment="0" max="32767" attributes="0"/>
-                          <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPlaskiSymProcentZapelnieniaBialymiProgSoczewkowata" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
-                          <Component id="SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LabelPZBSocz" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPZJSocz" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPZBS" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPZJS" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPZJDK" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna" alignment="1" pref="416" max="32767" attributes="0"/>
+                                  <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiBialymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiSymProcentZapelnieniaBialymiProgSoczewkowata" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="LabelPZJS" max="32767" attributes="0"/>
+                                  <Component id="LabelPZBS" max="32767" attributes="0"/>
+                                  <Component id="LabelPZJSocz" max="32767" attributes="0"/>
+                                  <Component id="LabelPZBSocz" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" min="-2" pref="416" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPZJDK" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1100,7 +1116,7 @@
                           <Component id="LabePlaskiSymProcentZapelenieniaBialymiSoczewkowata" max="32767" attributes="0"/>
                           <Component id="LabePlaskiSymProcentZapelenieniaJasnymiKarlowata" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace pref="82" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1110,75 +1126,65 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="LabePlaskiSymProcentZapelenieniaJasnymiKarlowata" max="32767" attributes="0"/>
-                              <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="LabelPZJDK" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="LabelPZJDK" max="32767" attributes="0"/>
+                          <Component id="LabePlaskiSymProcentZapelenieniaJasnymiKarlowata" alignment="1" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="LabePlaskiSymProcentZapelenieniaJasnymiSpiralna" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiBialymiProgSpiralna" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="LabelPZJS" min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LabePlaskiSymProcentZapelenieniaJasnymiSpiralna" pref="29" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna" min="-2" pref="14" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiBialymiProgSpiralna" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="LabePlaskiSymProcentZapelenieniaBialymiSpiralna" pref="29" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna" min="-2" pref="14" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" pref="14" max="-2" attributes="0"/>
-                                                  <Component id="LabePlaskiSymProcentZapelenieniaJasnymiSoczewkowata" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="LabelPlaskiSymProcentZapelnieniaBialymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="LabelPZJSocz" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="LabePlaskiSymProcentZapelenieniaBialymiSoczewkowata" max="32767" attributes="0"/>
-                                              <Component id="SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata" min="-2" pref="14" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="LabelPZBSocz" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="27" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="LabelPZBS" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="LabePlaskiSymProcentZapelenieniaBialymiSpiralna" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="LabelPZJS" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelPZBS" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="LabelPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                                      <Component id="LabelPlaskiSymProcentZapelnieniaBialymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="LabelPZJSocz" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelPZBSocz" min="-2" pref="26" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LabePlaskiSymProcentZapelenieniaJasnymiSoczewkowata" pref="17" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="LabePlaskiSymProcentZapelenieniaBialymiSoczewkowata" min="-2" pref="14" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1210,26 +1216,41 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata">
+              <Properties>
+                <Property name="value" type="int" value="10"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowataStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna">
+              <Properties>
+                <Property name="value" type="int" value="85"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralnaStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna">
+              <Properties>
+                <Property name="value" type="int" value="5"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralnaStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata">
+              <Properties>
+                <Property name="value" type="int" value="90"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowataStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPlaskiSymProcentZapelnieniaBia&#x142;ymiProgSoczewkowata">
+              <Properties>
+                <Property name="value" type="int" value="10"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPlaskiSymProcentZapelnieniaBia&#x142;ymiProgSoczewkowataStateChanged"/>
               </Events>
@@ -1287,67 +1308,74 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="LabelPelnyProcentZapelnieniaBiałymiProgKarlowata" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="LabelPelnyProcentZapelnieniaBiałymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="LabelPelnyProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="LabelPelnyProcentZapelnieniaJasnymiProgKarlowata" alignment="0" pref="474" max="32767" attributes="0"/>
+                                      <Component id="LabelPelnyProcentZapelnieniaBiałymiProgKarlowata" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="SliderPelnyProcentZapelnieniaJasnymiProgSpiralna" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
+                                      <Component id="SliderPelnyProcentZapelnieniaBiałymiProgSpiralna" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
+                                      <Component id="SliderPelnyProcentZapelnieniaBiałymiProgKarlowata" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="SliderPelnyProcentZapelnieniaJasnymiProgKarlowata" min="-2" pref="400" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelPZBPGSPisarlne" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelPZBPGK" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelPZBPGE" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelPZJPGSpiralne" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Component id="LabelPelnyProcentZapelnieniaBiałymiProgEliptyczna" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="LabelPelnyLiczbaJasnychProgObiektow" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
-                                      <Component id="LabelPelnyProcentZapelnieniaBialymiEliptyczna" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="SliderPelnyProcentZapelnieniaJasnymiProgKarlowata" min="-2" pref="186" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="LabelPZBPGE" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="LabelPelnyLiczbaJasnychObiektow" min="-2" pref="11" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="SliderPelnyLiczbaJasnychProgObiektow" min="-2" pref="128" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelLJO" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="LabelPelnyProcentZapelnieniaBiałymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
-                              <Component id="LabelPelnyProcentZapelnieniaJasnymiProgSpiralna" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="LabelPelnyProcentZapelnieniaJasnymiProgKarlowata" alignment="0" min="-2" pref="309" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="SliderPelnyProcentZapelnieniaBiałymiProgKarlowata" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="SliderPelnyProcentZapelnieniaJasnymiProgSpiralna" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="SliderPelnyProcentZapelnieniaBiałymiProgSpiralna" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LabelPZBPGSPisarlne" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelPZJPGSpiralne" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelPZBPGK" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LabelPZJPGK" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="176" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="LabelPelnyProcentZapelnieniaJasnymiKarlowata" alignment="0" max="32767" attributes="0"/>
                           <Component id="LabelPelnyProcentZapelnieniaBiałymiSpiralna" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="LabelPelnyProcentZapelnieniaBialymiEliptyczna" min="-2" pref="48" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="LabelPelnyLiczbaJasnychProgObiektow" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna" min="-2" pref="228" max="-2" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="SliderPelnyLiczbaJasnychProgObiektow" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPZJPGK" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
+                                      <Component id="LabelPelnyLiczbaJasnychObiektow" min="-2" pref="11" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="LabelLJO" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -1357,60 +1385,70 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="LabelPelnyProcentZapelnieniaJasnymiProgKarlowata" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="LabelPelnyProcentZapelnieniaJasnymiKarlowata" min="-2" pref="19" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="SliderPelnyProcentZapelnieniaJasnymiProgKarlowata" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <Component id="LabelPelnyProcentZapelnieniaBiałymiProgKarlowata" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="LabelPelnyProcentZapelnieniaJasnymiProgKarlowata" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LabelPZJPGK" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <Component id="LabelPZBPGE" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="LabelPelnyProcentZapelnieniaJasnymiKarlowata" min="-2" pref="19" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="LabelPelnyProcentZapelnieniaBiałymiProgKarlowata" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="SliderPelnyProcentZapelnieniaBiałymiProgKarlowata" min="-2" pref="14" max="-2" attributes="0"/>
-                          <Component id="LabelPZBPGK" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="LabelPZBPGK" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="SliderPelnyProcentZapelnieniaBiałymiProgKarlowata" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelPelnyProcentZapelnieniaJasnymiProgSpiralna" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="SliderPelnyProcentZapelnieniaJasnymiProgSpiralna" min="-2" pref="14" max="-2" attributes="0"/>
-                          <Component id="LabelPZJPGSpiralne" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="LabelPZJPGSpiralne" max="32767" attributes="0"/>
+                          <Component id="SliderPelnyProcentZapelnieniaJasnymiProgSpiralna" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="LabelPelnyProcentZapelnieniaBiałymiProgSpiralna" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="SliderPelnyProcentZapelnieniaBiałymiProgSpiralna" min="-2" pref="14" max="-2" attributes="0"/>
-                          <Component id="LabelPelnyProcentZapelnieniaBiałymiSpiralna" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="LabelPZBPGSPisarlne" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="LabelPZBPGSPisarlne" max="32767" attributes="0"/>
+                          <Component id="SliderPelnyProcentZapelnieniaBiałymiProgSpiralna" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="LabelPelnyProcentZapelnieniaBiałymiProgEliptyczna" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="LabelPelnyLiczbaJasnychObiektow" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="SliderPelnyProcentZapelnieniaJasnymiProgKarlowata" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="LabelPZBPGE" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="LabelPelnyProcentZapelnieniaBialymiEliptyczna" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="LabelPelnyProcentZapelnieniaBiałymiSpiralna" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="LabelPelnyProcentZapelnieniaBiałymiProgEliptyczna" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="LabelPZJPGK" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPelnyLiczbaJasnychObiektow" min="-2" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="LabelLJO" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="LabelPelnyLiczbaJasnychProgObiektow" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="SliderPelnyLiczbaJasnychProgObiektow" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="LabelPelnyProcentZapelnieniaBialymiEliptyczna" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                                      <Component id="LabelPelnyLiczbaJasnychProgObiektow" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="SliderPelnyLiczbaJasnychProgObiektow" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabelLJO" min="-2" pref="26" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -1450,31 +1488,50 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPelnyProcentZapelnieniaJasnymiProgKarlowata">
+              <Properties>
+                <Property name="value" type="int" value="16"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPelnyProcentZapelnieniaJasnymiProgKarlowataStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPelnyProcentZapelnieniaBia&#x142;ymiProgKarlowata">
+              <Properties>
+                <Property name="maximum" type="int" value="10000"/>
+                <Property name="paintTrack" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPelnyProcentZapelnieniaBia&#x142;ymiProgKarlowataStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPelnyProcentZapelnieniaJasnymiProgSpiralna">
+              <Properties>
+                <Property name="value" type="int" value="75"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPelnyProcentZapelnieniaJasnymiProgSpiralnaStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPelnyProcentZapelnieniaBia&#x142;ymiProgSpiralna">
+              <Properties>
+                <Property name="value" type="int" value="10"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPelnyProcentZapelnieniaBia&#x142;ymiProgSpiralnaStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPelnyLiczbaJasnychProgObiektow">
+              <Properties>
+                <Property name="value" type="int" value="3"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPelnyLiczbaJasnychProgObiektowStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderPelnyProcentZapelnieniaBia&#x142;ymiProgEliptyczna">
+              <Properties>
+                <Property name="value" type="int" value="10"/>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SliderPelnyProcentZapelnieniaBia&#x142;ymiProgEliptycznaStateChanged"/>
               </Events>
@@ -1497,7 +1554,7 @@
             <Component class="javax.swing.JLabel" name="LabelPZBPGK">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="String.valueOf(SliderPelnyProcentZapelnieniaBia&#x142;ymiProgKarlowata.getValue())&#xd;&#xa;" type="code"/>
+                  <Connection code="String.valueOf(SliderPelnyProcentZapelnieniaBia&#x142;ymiProgKarlowata.getValue()/1000.0)&#xa;    " type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -1588,15 +1645,21 @@
                           <Component id="LabelNieregularnaJansosc" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelWartoscProgJasnosci" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="131" max="32767" attributes="0"/>
+                      <EmptySpace pref="206" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JSlider" name="SliderNieregularnaProgRozmycie">
+              <Properties>
+                <Property name="value" type="int" value="2"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="SliderNieregularnaProgJasnosc">
+              <Properties>
+                <Property name="value" type="int" value="80"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelNieregularnaProgRozmycie">
               <Properties>

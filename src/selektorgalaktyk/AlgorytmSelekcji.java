@@ -12,7 +12,6 @@ import org.opencv.core.*;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,11 +29,7 @@ import org.opencv.imgproc.Imgproc;
 
 
 public class AlgorytmSelekcji {
-    
-    
-    
-    
-    
+
     ArrayList<String> TypGalaktykiNazwa = new ArrayList<>();
     ArrayList<BufferedImage> ListaGalaktyk=new ArrayList<>();
     ArrayList<BufferedImage> ListaGalaktykBufor=new ArrayList<>();
@@ -62,8 +57,9 @@ public class AlgorytmSelekcji {
     //////////////////////////// Zmienne /////////////////////////////////////
     
     /** Przechowanie obrazu */
-    private BufferedImage image;
-    
+    private final BufferedImage image;
+    private final BufferedImage origin;
+    String Źródło;
     /** Store the image width and height */
     private int width, height;
     
@@ -71,11 +67,11 @@ public class AlgorytmSelekcji {
     private int pixels[];
     
     /** Total number of pixel in an image*/
-    private int totalPixels;
+    private final int totalPixels;
     
      /// Ustawiena dla decyzyjnego wyboru z jaka galaktyka mamy do czynienia
                                     
-                                    // dla plaskich po przekatnej
+                                         // dla plaskich po przekatnej
                                                 int plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata=80;
                                                 int plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata=10;
                                                 int plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna=60;
@@ -113,68 +109,92 @@ public class AlgorytmSelekcji {
                                                 double kontrast=5.05;
                                                 int Wartosc_Progowa=74;
     
-    /** 
-     * Image type example: jpg|png 
-     * JPG does not support alpha (transparency is lost) while PNG supports alpha.
-     */
-    private enum ImageType{
-        JPG, PNG
-    };
-    
-    private ImageType imgType;
-    
-    ////////////////////////////////// CONSTRUCTORS ////////////////////////////
+
+    ////////////////////////////////// CONSTRUCTOR ////////////////////////////
     
     /** Default constructor */
-    public AlgorytmSelekcji(){
-    
-    }
-    
     /** 
-     * Constructor to create a new image object
+     * Constructor to create a new AlgorytmSelekcji object
      * 
-     * @param width width of the image passed by the user
-     * @param height height of the image passed by the user
+     * @param Źródło źródło ścieżka obrazu z którego pobrany będzie obraz do selekcji 
+     * @param czerwien ustawienie kanału czerwieni dla maski wykrywającej galaktyki
+     * @param zielen ustawienie kanału zieleni dla maski wykrywającej galaktyki
+     * @param niebieski ustawienie kanału niebieskiego dla maski wykrywającej galaktyki
+     * @param kontrast ustawienie kontrastu dla maski wykrywającej galaktyki
+     * @param progowanie rodzaj Progowania dla maski wykrywającej galaktyki
+     * @param wartoscprogujaca wartość od której będzie progowanie
      */
-    public AlgorytmSelekcji(int width, int height){
-        
-         
-        this.width = width;
-        this.height = height;
-        this.totalPixels = this.width * this.height;
-        this.pixels = new int[this.totalPixels];
-        image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
-        this.imgType = ImageType.PNG;
-        initPixelArray();
+    public AlgorytmSelekcji(String Źródło,double czerwien,double zielen,double niebieski,double kontrast,WyświetlaczObraz.RodzajeProgowania progowanie,int wartoscprogujaca){
+    this.origin = readImage(Źródło);
+    this.height = origin.getHeight();
+    this.width = origin.getWidth();
+    this.totalPixels = height* width;  
+    this.pixels = new int[width * height];
+    this.Źródło = Źródło;
+    int TablicaObrazu[][]=convertTo2DWithoutUsingGetRGB(origin);
+    for(int y = 0; y < this.height; y++){
+        System.arraycopy(TablicaObrazu[y], 0, this.pixels, y*this.width, this.width);
+        }
+    this.pixels = ModyfikujKoloryWKanaleRGB(czerwien,zielen,niebieski,kontrast,progowanie,wartoscprogujaca);
+    this.image = ZwróćObrazZTablicyJednowymiarowej(ModyfikujKoloryWKanaleRGB(czerwien,zielen,niebieski,kontrast,progowanie,wartoscprogujaca));
+    }
+    /** 
+     * Zmiana parametrów służacych do selekcji galaktyk
+     * 
+     * @param plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata płaski pod przekątną próg zapełnienia jasnymi dla Soczewkowatych Galaktyk 
+     * @param plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata płaski pod przekątną próg zapełnienia białymi dla Soczewkowatych Galaktyk
+     * @param plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna płaski pod przekątną próg zapełnienia jasnymi dla Spiralnych Galaktyk
+     * @param plaskisym_procent_zapelnienia_jasnymi_prog_karlowata płaski symetrycznie próg zapełnienia jasnymi dla karłowatych
+     * @param plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna płaski symetrycznie próg zapełnienia jasnymi dla Spiralnych galaktyk
+     * @param plaskisym_procent_zapelnienia_bialymi_prog_Spiralna płaski symetrycznie próg zapełnienia białymi dla Spiralnych galaktyk
+     * @param plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata płaski symetrycznie próg zapełnienia jasnymi dla Soczewkowatych galaktyk
+     * @param plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata płaski symetrycznie próg zapełnienia białymi dla Soczewkowatych galaktyk
+     * @param pelny_procent_zapelnienia_jasnymi_prog_karlowata pełny próg zapełnienia jasnymi dla karłowatych galaktyk
+     * @param pelny_procent_zapelnienia_bialymi_prog_karlowata pełny próg zapełnienia białymi dla karłowatych galaktyk
+     * @param pelny_procent_zapelnienia_jasnymi_prog_Spiralna pełny próg zapełnienia jasnymi dla Spiralnych galaktyk
+     * @param pelny_procent_zapelnienia_bialymi_prog_Spiralna pełny próg zapełnienia białymi dla Spiralnych galaktyk
+     * @param pelny_liczba_jasnych_obiektow_Spiralna pełny próg ilość  jasnych dobiektów dla Spiralnych galaktyk
+     * @param pelny_procent_zapelnienia_bialymi_prog_Eliptyczna pełny próg zapełnienia białymi dla Eliptycznych galaktyk
+     * @param rozmycie_prog_Nieregularna rozmycie dla przypadku gdy galatkyka jest niregularna
+     * @param prog_jasnosci_Nieregularna próg jasności dla galaktyk nieregularnych
+     */
+    public void ustawParametrySystemuDecyzyjnego( int plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,int plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,int plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,int plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,int plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna,int plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,int plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,int plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata,int pelny_procent_zapelnienia_jasnymi_prog_karlowata,double pelny_procent_zapelnienia_bialymi_prog_karlowata,int pelny_procent_zapelnienia_jasnymi_prog_Spiralna,int pelny_procent_zapelnienia_bialymi_prog_Spiralna,int pelny_liczba_jasnych_obiektow_Spiralna,int pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,int rozmycie_prog_Nieregularna,int prog_jasnosci_Nieregularna){
+                                            //dla płaskich pod przekątną
+                                            this.plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata=plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata;
+                                            this.plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata=plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata;
+                                            this.plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna=plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna;
+                                                
+                                            // dla plaskich symetrycznie     
+                                            this.plaskisym_procent_zapelnienia_jasnymi_prog_karlowata=plaskisym_procent_zapelnienia_jasnymi_prog_karlowata;
+                                            this.plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna=plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna;
+                                            this.plaskisym_procent_zapelnienia_bialymi_prog_Spiralna=plaskisym_procent_zapelnienia_bialymi_prog_Spiralna;
+                                            this.plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata=plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata;
+                                            this.plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata=plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata; 
+                                               
+                                             // dla pelnego widoku      
+                                            this.pelny_procent_zapelnienia_jasnymi_prog_karlowata=pelny_procent_zapelnienia_jasnymi_prog_karlowata;
+                                            this.pelny_procent_zapelnienia_bialymi_prog_karlowata= pelny_procent_zapelnienia_bialymi_prog_karlowata; 
+                                              
+                                            this.pelny_procent_zapelnienia_jasnymi_prog_Spiralna=pelny_procent_zapelnienia_jasnymi_prog_Spiralna;
+                                            this.pelny_procent_zapelnienia_bialymi_prog_Spiralna=pelny_procent_zapelnienia_bialymi_prog_Spiralna;
+                                                
+                                            this.pelny_liczba_jasnych_obiektow_Spiralna=pelny_liczba_jasnych_obiektow_Spiralna;
+                                            this.pelny_procent_zapelnienia_bialymi_prog_Eliptyczna=pelny_procent_zapelnienia_bialymi_prog_Eliptyczna;
+                                                
+                                                
+                                           //dla nieregularnych    
+                                            this.rozmycie_prog_Nieregularna=rozmycie_prog_Nieregularna;
+                                            this.prog_jasnosci_Nieregularna=prog_jasnosci_Nieregularna;   
     }
     
-    /** 
-     * Constructor to create a copy of a previously created image object.
-     * 
-     * @param img The image object whose copy is created.
-     */
-    public AlgorytmSelekcji(AlgorytmSelekcji img){
-       
-        this.width = img.getImageWidth();
-        this.height = img.getImageHeight();
-        this.totalPixels = this.width * this.height;
-        this.pixels = new int[this.totalPixels];
-        
-        this.imgType = img.imgType;
-        if(this.imgType == ImageType.PNG){
-            this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        }else{
-            this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        }
-        
-        //copy original image pixels value to new image and pixels array
-        for(int y = 0; y < this.height; y++){
-            for(int x = 0; x < this.width; x++){
-                this.image.setRGB(x, y, img.getPixel(x, y));
-                this.pixels[x+y*this.width] = img.getPixel(x, y);
-            }
-        }
+    
+    public BufferedImage PobierzOryginał(){
+        return origin;
     }
+    public BufferedImage PobierzZmodyfikowanyObraz(){
+        return image;
+    }
+
  
     int Najjasniejszy(BufferedImage src ,int rozmyciex,int rozmyciey)
                                                     {
@@ -298,10 +318,7 @@ public class AlgorytmSelekcji {
                                                                                                               }
                                                                                                     }
                                                                                                   }
-                                                                                                  System.out.println("prawa połowa"+prawa_strona);
-                                                                                                  System.out.println("lewa połowa"+lewa_strona);
-                                                                                                  System.out.println("gorna połowa"+gorna_strona);
-                                                                                                  System.out.println("dolna połowa"+dolna_strona);
+                                                                                                  
                                                                   
                                                                   
                                                                   boolean asymetria=false; 
@@ -325,9 +342,7 @@ public class AlgorytmSelekcji {
                                                                   
                                                                     return asymetria;
                           }
-    
-    
-    
+
     
     
    public  int liczba_jader(BufferedImage src,int rozmyciex,int rozmyciey ,int czulosc,int min_wielkoscx ,int min_wielkoscy)
@@ -373,7 +388,7 @@ public class AlgorytmSelekcji {
                                                                             
                                                                             
                                                                            
-                                                                            image = MatDoBufferedImage(opencv);
+                                                                   
                                                                             
                                                                             
                                                                                 for( MatOfPoint mop: contours )
@@ -423,19 +438,8 @@ public class AlgorytmSelekcji {
                                                                           return iloscjader;
                                                                           }
      
-     
-     
-  
-     
-    
    
-   
-   
-   
-   
-   
-   
-   int rozpoznanie(BufferedImage origin,BufferedImage src,String Źródło,int rozmycie, int czulosc,int min_wielkoscx ,int min_wielkoscy)
+   int rozpoznanie(int rozmycie, int czulosc,int min_wielkoscx ,int min_wielkoscy)
 {
                                                 
                                if(PGorny.size()>0)
@@ -457,9 +461,9 @@ public class AlgorytmSelekcji {
                                         ArrayList<MatOfPoint> contours = new ArrayList<>(); 
                                                                             Mat hierarchy = new Mat();
                        
-                                                                            byte[] data = ((DataBufferByte) src.getRaster().getDataBuffer()).getData();
+                                                                            byte[] data = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
                                                                             
-                                                                            Mat opencv = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
+                                                                            Mat opencv = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC3);
                                                                             opencv.put(0, 0, data);
                                                                             
                                                                                     
@@ -470,11 +474,11 @@ public class AlgorytmSelekcji {
                                                                                       
                                                                                      
                                                                             // macierz w skali szarosci          
-                                                                            Mat grayscaleMat  = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1); 
+                                                                            Mat grayscaleMat  = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1); 
                                                                             //konwert z koloru do szarosci
                                                                             Imgproc.cvtColor(opencv, grayscaleMat, Imgproc.COLOR_BGR2GRAY);  
                                                                             //inicjacja maski binarnej
-                                                                            Mat maskaobrazu = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC1);
+                                                                            Mat maskaobrazu = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1);
                                                                             // fuckja tresholde wykorzystywana do wyodrebnienia obiektow         
                                                                             Imgproc.threshold(grayscaleMat,maskaobrazu , czulosc,  czulosc, Imgproc.THRESH_BINARY);
                                                                             // funkcja find contours do znajodownia punktow oraz obiektow      
@@ -484,8 +488,8 @@ public class AlgorytmSelekcji {
 
 
                                     
-                                                                            int MinX = src.getWidth();
-                                                                            int MinY = src.getHeight();
+                                                                            int MinX = image.getWidth();
+                                                                            int MinY = image.getHeight();
                                                                             int MaxX=0;
                                                                             int MaxY=0;                   
                                                                             Point Góra = null;
@@ -493,16 +497,7 @@ public class AlgorytmSelekcji {
                                                                             Point Prawo = null;
                                                                             Point Lewo = null;
                                                                             int PoczatekX,PoczatekY,Wysokosc,Szerokosc;
-                                                                                                    // for each contour, display it in blue
-                                                                                                   
-                                                                                                   
-                                                                                                           //Imgproc.drawContours(opencv, contours, idx, new Scalar(250, 0, 0));
-                                                                                                           //System.out.println(contours.get(idx).size());
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
+                                                                                                      
                                                                                                     
                                for( MatOfPoint mop: contours )
                                     {
@@ -553,8 +548,8 @@ public class AlgorytmSelekcji {
                                                                       iloscgalaktyk++;
                                                                    }
                                                                           
-                                          MinX = src.getWidth();
-                                          MinY = src.getHeight();
+                                          MinX = image.getWidth();
+                                          MinY = image.getHeight();
                                           MaxX=0;
                                           MaxY=0;                                
                                                                           
@@ -855,10 +850,7 @@ public class AlgorytmSelekcji {
                                     }
  
 
-         //loadPixels();
-        // src.loadPixels();
-        /// wynik = createImage(src.width, src.height, RGB);
-         //wynik.loadPixels();
+      
          
  
             for(int t = 0; t<ListaGalaktyk.size() ; t++)
@@ -870,8 +862,6 @@ public class AlgorytmSelekcji {
                           return iloscgalaktyk;
   
 }
-   
-   
    public ArrayList<Galaktyka> ListaWykrytychGalaktyk(){
        return DanaGalaktyka;
    }
@@ -943,24 +933,20 @@ public class AlgorytmSelekcji {
      * @param filePath the path of the image file
      * Example filePath = "D:\\LogoJava.jpg"
      */
-    public void readImage(String filePath){
+    public BufferedImage readImage(String filePath){
+        BufferedImage image = null;
         try{
             File f = new File(filePath);
             image = ImageIO.read(f);
             String fileType = filePath.substring(filePath.lastIndexOf('.')+1);
-            if("jpg".equals(fileType)){
-                imgType = ImageType.JPG;
-            }else{
-                imgType = ImageType.PNG;
-            }
+            
             this.width = image.getWidth();
             this.height = image.getHeight();
-            this.totalPixels = this.width * this.height;
-            this.pixels = new int[this.totalPixels];
-            initPixelArray();
+           
         }catch(IOException e){
             System.out.println("Error Occurred!\n"+e);
         }
+        return image;
     }
     
     /**
@@ -979,26 +965,8 @@ public class AlgorytmSelekcji {
         }
     }
     
-    /**
-     * Initialize the pixel array
-     * Image origin is at coordinate (0,0)
-     * (0,0)--------> X-axis
-     *     |
-     *     |
-     *     |
-     *     v
-     *   Y-axis
-     * 
-     * This method will store the value of each pixels of a 2D image in a 1D array.
-     */
-    private void initPixelArray(){
-        PixelGrabber pg = new PixelGrabber(image, 0, 0, width, height, pixels, 0, width);
-        try{
-            pg.grabPixels();
-        }catch(InterruptedException e){
-            System.out.println("Error Occurred: "+e);
-        }
-    }
+ 
+   
     
     /**
      * This method will check for equality of two images.
@@ -1233,6 +1201,8 @@ public class AlgorytmSelekcji {
         }
     }
     
+    
+    
     /**
      * This method will update the image pixel at coordinate (x,y)
      * 
@@ -1248,6 +1218,16 @@ public class AlgorytmSelekcji {
     }
     
     
+    private BufferedImage ZwróćObrazZTablicyJednowymiarowej(int pixelArray[]){
+        BufferedImage Out = new BufferedImage( width, height, BufferedImage.TYPE_3BYTE_BGR);
+        for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                pixels[x+y*width] = pixelArray[x+y*width];
+               Out.setRGB(x, y, pixels[x+(y*width)]);
+            }
+        }
+        return Out;
+    }
     
 @SuppressWarnings("empty-statement")
    public int[] ModyfikujKoloryWKanaleRGB(double czerwien,double zielen,double niebieski,double kontrast,WyświetlaczObraz.RodzajeProgowania progowanie,int wartoscprogujaca){
@@ -1671,9 +1651,9 @@ public class AlgorytmSelekcji {
    }    
       
       
+    }
     
     
     
     
             
-}
