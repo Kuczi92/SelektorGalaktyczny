@@ -146,7 +146,7 @@ public class AlgorytmSelekcjiMasowej implements Callable<ArrayList <ArrayList<Ga
                                 } catch (ExecutionException ex) {
                                     Logger.getLogger(AlgorytmSelekcjiMasowej.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-;
+
 			}
 			catch (InterruptedException e)
 			{
