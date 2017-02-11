@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jProgressBar1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LabelPrzetwozonyObraz" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelJasność" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelKontrast" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelWartośćProgowa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelRozmycie" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelCzułość" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelMinimalnaWielkośćWOsiX" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelMinimalnaWielkośćWOsiY" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelLiczbaWątków" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelZapisWyniku" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Labelplaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskisym_procent_zapelnienia_bialymi_prog_Spiralna" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskisym_procent_zapelnienia_jasnymi_prog_Spiralna" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskisym_procent_zapelnienia_jasnymi_prog_karlowata" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskipp_procent_zapelnienia_jasnymi_prog_Spiralna" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskipp_procent_zapelnienia_bialymi_prog_Soczewowata" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelplaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelpelny_procent_zapelnienia_jasnymi_prog_karlowata" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelpelny_procent_zapelnienia_jasnymi_prog_Spiralna" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelpelny_procent_zapelnienia_bialymi_prog_karlowata" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelpelny_procent_zapelnienia_bialymi_prog_Spiralna" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelpelny_liczba_jasnych_obiektow_Spiralna" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelpelny_procent_zapelnienia_bialymi_prog_Eliptyczna" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelrozmycie_prog_Nieregularna" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labelprog_jasnosci_Nieregularna" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="LabelPostępProcentowy" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
+                              <Component id="LabelCzasObliczeń" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="145" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="LabelPostępProcentowy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelCzasObliczeń" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jProgressBar1" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelPrzetwozonyObraz" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelLiczbaWątków" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelZapisWyniku" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelplaskipp_procent_zapelnienia_bialymi_prog_Soczewowata" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskipp_procent_zapelnienia_jasnymi_prog_Spiralna" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskisym_procent_zapelnienia_jasnymi_prog_karlowata" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelJasność" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskisym_procent_zapelnienia_jasnymi_prog_Spiralna" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelKontrast" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskisym_procent_zapelnienia_bialymi_prog_Spiralna" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelWartośćProgowa" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelRozmycie" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelplaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelCzułość" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelpelny_procent_zapelnienia_jasnymi_prog_karlowata" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelMinimalnaWielkośćWOsiX" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Labelpelny_procent_zapelnienia_bialymi_prog_karlowata" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelMinimalnaWielkośćWOsiY" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelpelny_procent_zapelnienia_jasnymi_prog_Spiralna" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelpelny_procent_zapelnienia_bialymi_prog_Spiralna" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelpelny_liczba_jasnych_obiektow_Spiralna" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelpelny_procent_zapelnienia_bialymi_prog_Eliptyczna" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelrozmycie_prog_Nieregularna" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Labelprog_jasnosci_Nieregularna" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelPost&#x119;pProcentowy">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Procentowy post&#x119;p: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ustawione parametry Pre - Processingu:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ustawienia parametr&#xf3;w Setekcji systemu ekspertowego:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Przetwo&#x17c;ony obraz:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelPrzetwozonyObraz">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="brak przetwozonego obrazu"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelJasno&#x15b;&#x107;">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Jasno&#x15b;&#x107;: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelKontrast">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kontrast: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelWarto&#x15b;&#x107;Progowa">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Warto&#x15b;&#x107;  progowa: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelRozmycie">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rozmycie: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelCzu&#x142;o&#x15b;&#x107;">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Czu&#x142;o&#x15b;&#x107;: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelMinimalnaWielko&#x15b;&#x107;WOsiX">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minimalna wielko&#x15b;&#x107; w osi X : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelMinimalnaWielko&#x15b;&#x107;WOsiY">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minimalna wielko&#x15b;&#x107; w osi Y: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski pod przek&#x105;tn&#x105; procent zape&#x142;nienia jasnymi pr&#xf3;g dla Soczewowatych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskipp_procent_zapelnienia_bialymi_prog_Soczewowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski pod przek&#x105;tn&#x105; procent zape&#x142;nienia bia&#x142;ymi pr&#xf3;g dla Soczewowatych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskipp_procent_zapelnienia_jasnymi_prog_Spiralna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski pod przek&#x105;tn&#x105; procent zape&#x142;nienia jasnymi pr&#xf3;g dla Spiralnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskisym_procent_zapelnienia_jasnymi_prog_karlowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski symetrycznie procent zape&#x142;nienia jasnymi pr&#xf3;g dla Kar&#x142;owatych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskisym_procent_zapelnienia_jasnymi_prog_Spiralna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski symetrycznie procent zape&#x142;nienia jasnymi pr&#xf3;g dla Spiralnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskisym_procent_zapelnienia_bialymi_prog_Spiralna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski symetrycznie procent zape&#x142;nienia bia&#x142;ymi pr&#xf3;g dla Spiralnych:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski symetrycznie procent zape&#x142;nienia jasnymi pr&#xf3;g dla Soczewkowatych:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelplaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - P&#x142;aski symetrycznie procent zape&#x142;nienia bia&#x142;ymi pr&#xf3;g dla Soczewkowata: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelpelny_procent_zapelnienia_jasnymi_prog_karlowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pe&#x142;ny procent zape&#x142;nienia jasnymi pr&#xf3;g dla Kar&#x142;owatych:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelpelny_procent_zapelnienia_bialymi_prog_karlowata">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pe&#x142;ny procent zape&#x142;nienia bia&#x142;ymi pr&#xf3;g dla Karlowatych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelpelny_procent_zapelnienia_jasnymi_prog_Spiralna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pe&#x142;ny procent zape&#x142;nienia jasnymi pr&#xf3;g dla Spiralnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelpelny_procent_zapelnienia_bialymi_prog_Spiralna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pe&#x142;ny procent zape&#x142;nienia bia&#x142;ymi pr&#xf3;g dla Spiralnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelpelny_liczba_jasnych_obiektow_Spiralna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pe&#x142;ny procent liczba jasnych obiekt&#xf3;w dla Spiralnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelpelny_procent_zapelnienia_bialymi_prog_Eliptyczna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pe&#x142;ny procent zape&#x142;nienia bia&#x142;ymi pr&#xf3;g dla Eliptycznych:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelrozmycie_prog_Nieregularna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pikselowe rozmycie ustawienie dla Nieregularnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Labelprog_jasnosci_Nieregularna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" - Pr&#xf3;g jasno&#x15b;ci dla Nieregularnych: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelCzasOblicze&#x144;">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Czas obliczenia: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelLiczbaW&#x105;tk&#xf3;w">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Liczba wykorzystywanych w&#x105;tk&#xf3;w: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelZapisWyniku">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zapis wyniku do: programu"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

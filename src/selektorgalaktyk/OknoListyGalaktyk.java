@@ -35,8 +35,12 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         ustawMiniaturęInicjacja(ListaGalaktyk.get(0).ObrazGalaktyki);
         initComponents();
         Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*stosunekDługościOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*stosunekDługościOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*stosunekDługościOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*stosunekDługościOryginału));
-
+         
         ustawDane(ListaGalaktyk.get(0));
+        
+        ListOryginalneZdjęcia.setVisible(false);
+        
+        LabelListaOryginalnychZdjęć.setVisible(false);
     }
 
     /**
@@ -70,6 +74,10 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         LabelŹródłoWartość = new javax.swing.JLabel();
         LabelWidokWartość = new javax.swing.JLabel();
         LabelTypGalaktykiWartość = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListOryginalneZdjęcia = new javax.swing.JList<>();
+        LabelListaOryginalnychZdjęć = new javax.swing.JLabel();
+        ButtonZapisz = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -141,6 +149,17 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
 
         LabelTypGalaktykiWartość.setText("jLabel3");
 
+        ListOryginalneZdjęcia.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(ListOryginalneZdjęcia);
+
+        LabelListaOryginalnychZdjęć.setText("Lista oryginalnych zdjęć:");
+
+        ButtonZapisz.setText("Zapisz Obraz");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,38 +168,48 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(LabelŹródło)
-                            .addComponent(LabelWidok)
-                            .addComponent(LabelTypGalaktyki)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelPikseleJasne)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelPikseleJasneWartość))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelLiczbaJasnychPunktow)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelLiczbaJasnychPunktowWartość, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelPikseleBiałe)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(LabelŹródło)
+                                    .addComponent(LabelWidok)
+                                    .addComponent(LabelTypGalaktyki)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LabelPikseleJasne)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LabelPikseleJasneWartość))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LabelLiczbaJasnychPunktow)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LabelLiczbaJasnychPunktowWartość, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelPikseleBiałeWartość))
-                            .addComponent(LabelTypGalaktykiWartość)
-                            .addComponent(LabelWidokWartość)
-                            .addComponent(LabelŹródłoWartość)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelLiczbaWykrytychJąderGalaktyki)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LabelLiczbaWykrytychJąderGalaktykiWartość, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LabelPikseleBiałe)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LabelPikseleBiałeWartość))
+                                    .addComponent(LabelTypGalaktykiWartość)
+                                    .addComponent(LabelWidokWartość)
+                                    .addComponent(LabelŹródłoWartość)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LabelLiczbaWykrytychJąderGalaktyki)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LabelLiczbaWykrytychJąderGalaktykiWartość, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(ButtonZapisz))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ButtonPoprzedni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ButtonNastępny)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LabelPrzeglądanaGalaktyka)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelPrzeglądanaGalaktyka))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(212, 212, 212)
+                                .addComponent(LabelListaOryginalnychZdjęć)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(PanelMiniatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -193,14 +222,13 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                 .addComponent(PanelWyświetlacz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ButtonPoprzedni)
                             .addComponent(ButtonNastępny)
                             .addComponent(LabelPrzeglądanaGalaktyka))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelŹródło)
                             .addComponent(LabelŹródłoWartość))
@@ -224,12 +252,18 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                             .addComponent(LabelLiczbaJasnychPunktowWartość)
                             .addComponent(LabelLiczbaWykrytychJąderGalaktyki)
                             .addComponent(LabelLiczbaWykrytychJąderGalaktykiWartość))
-                        .addGap(107, 107, 107))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ButtonZapisz)
+                        .addGap(78, 78, 78))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(LabelListaOryginalnychZdjęć))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PanelMiniatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(PanelMiniatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
                         .addContainerGap())))
         );
 
@@ -404,10 +438,12 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonNastępny;
     private javax.swing.JButton ButtonPoprzedni;
+    private javax.swing.JButton ButtonZapisz;
     private javax.swing.JLabel LabelLiczbaJasnychPunktow;
     private javax.swing.JLabel LabelLiczbaJasnychPunktowWartość;
     private javax.swing.JLabel LabelLiczbaWykrytychJąderGalaktyki;
     private javax.swing.JLabel LabelLiczbaWykrytychJąderGalaktykiWartość;
+    private javax.swing.JLabel LabelListaOryginalnychZdjęć;
     private javax.swing.JLabel LabelPikseleBiałe;
     private javax.swing.JLabel LabelPikseleBiałeWartość;
     private javax.swing.JLabel LabelPikseleJasne;
@@ -419,10 +455,12 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     private javax.swing.JLabel LabelWidokWartość;
     private javax.swing.JLabel LabelŹródło;
     private javax.swing.JLabel LabelŹródłoWartość;
+    private javax.swing.JList<String> ListOryginalneZdjęcia;
     private javax.swing.JPanel PanelMiniatura;
     private javax.swing.JPanel PanelWyświetlacz;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
  

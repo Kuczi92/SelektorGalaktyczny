@@ -138,6 +138,8 @@ public class AlgorytmSelekcji {
     this.pixels = ModyfikujKoloryWKanaleRGB(czerwien,zielen,niebieski,kontrast,progowanie,wartoscprogujaca);
     this.image = ZwróćObrazZTablicyJednowymiarowej(ModyfikujKoloryWKanaleRGB(czerwien,zielen,niebieski,kontrast,progowanie,wartoscprogujaca));
     }
+    
+ 
     /** 
      * Zmiana parametrów służacych do selekcji galaktyk
      * 
