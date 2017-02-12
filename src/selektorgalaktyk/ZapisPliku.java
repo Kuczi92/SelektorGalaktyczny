@@ -20,15 +20,44 @@ public class ZapisPliku extends javax.swing.JFrame {
         initComponents();
     }
 
-    ZapisPliku(String NazwaObrazu) {
+   public ZapisPliku(String NazwaObrazu) {
        initComponents(NazwaObrazu);
     }
+  public ZapisPliku(String NazwaObrazu,int liczba) {
+       initComponents(NazwaObrazu, liczba);
+    }
+  
+  private void initComponents(String nazwapliku, int liczba) {
 
+        WybieraczZapis = new javax.swing.JFileChooser();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        int liczbaWykrytejGalaktyki = liczba+1; 
+        WybieraczZapis.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        WybieraczZapis.setSelectedFile(new File(nazwapliku+" Wykryta Galaktyka nr "+liczbaWykrytejGalaktyki+".png"));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(WybieraczZapis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(WybieraczZapis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }
     private void initComponents(String nazwapliku) {
 
         WybieraczZapis = new javax.swing.JFileChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         WybieraczZapis.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         WybieraczZapis.setSelectedFile(new File(nazwapliku+" Wyedytowany.png"));

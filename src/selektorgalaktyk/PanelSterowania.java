@@ -49,12 +49,21 @@ public class PanelSterowania extends JFrame implements ActionListener {
     
     public ArrayList <Galaktyka> PojedynczaSelekcja;
     private OknoListyGalaktyk OknoListyGalaktyk;
+    private OknoListyGalaktyk MasoweOknoListyGalaktyk;
     
    private OknoSelekcjiMasowej OknoSelekcjiMasowej;
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
-        
+        NatezenieKolorowZakladka.setVisible(false);
+        UstawieniaObrazuZakladka.setVisible(true); 
+        OperacjeNaObrazachZakladka.setVisible(false);
+        ParametryDetekcjiZakladka.setVisible(false);
+        UstawieniaDlaSelekcjiMasowej.setVisible(false);
+        UstawieniaPlaskiPrzekatnyZakladka.setVisible(false);
+        UstawieniaPłaskiSymetrycznyZakladka.setVisible(false);
+        UstawieniaNieregularneZakladka.setVisible(false);
+        UstawieniaPelnyZakladka.setVisible(false);
        
         CheckBoxZapisDoProgramu.setSelected(true);
     }
@@ -615,7 +624,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
                 .addComponent(ButtonStworzPlikJPGzTeraźniejszymUstawieniem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonStworzPlikPDFzTerazniejszymUstawieniem)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         SliderRozmycie.setValue(30);
@@ -1232,6 +1241,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
             Watek[watek]=String.valueOf(watek+1);
         }
         ComboBoxLiczbaWątkówWSelekcjiMasowej.setModel(new javax.swing.DefaultComboBoxModel<>(Watek));
+        ComboBoxLiczbaWątkówWSelekcjiMasowej.setSelectedIndex(7);
 
         CheckBoxZapisDoProgramu.setText("Zapis do pamięci programu");
         CheckBoxZapisDoProgramu.addActionListener(new java.awt.event.ActionListener() {
@@ -1349,6 +1359,11 @@ public class PanelSterowania extends JFrame implements ActionListener {
         );
 
         ButtonListaSelekcjiMasowej.setText("Lista Galaktyk po selekcji masowej");
+        ButtonListaSelekcjiMasowej.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonListaSelekcjiMasowejMouseClicked(evt);
+            }
+        });
 
         MenuUstawieniaObrazu.setText("Ustawienia Obrazu");
 
@@ -1973,6 +1988,10 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private void SliderNieregularnaProgJasnoscStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderNieregularnaProgJasnoscStateChanged
      LabelWartoscProgJasnosci.setText(String.valueOf(SliderNieregularnaProgJasnosc.getValue()));
     }//GEN-LAST:event_SliderNieregularnaProgJasnoscStateChanged
+
+    private void ButtonListaSelekcjiMasowejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonListaSelekcjiMasowejMouseClicked
+      MasoweOknoListyGalaktyk = new OknoListyGalaktyk(this,OknoSelekcjiMasowej.ListaGalaktyk);
+    }//GEN-LAST:event_ButtonListaSelekcjiMasowejMouseClicked
     
 
 /**
@@ -2009,7 +2028,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private javax.swing.JCheckBox CheckBoxZapisDoPlików;
     private javax.swing.JCheckBox CheckBoxZapisDoProgramu;
     private javax.swing.JComboBox<String> ComboBoxLiczbaWątkówWSelekcjiMasowej;
-    private javax.swing.JTextArea Konsola;
+    public javax.swing.JTextArea Konsola;
     private javax.swing.JLabel LabePlaskiSymProcentZapelenieniaBialymiSoczewkowata;
     private javax.swing.JLabel LabePlaskiSymProcentZapelenieniaBialymiSpiralna;
     private javax.swing.JLabel LabePlaskiSymProcentZapelenieniaJasnymiKarlowata;
@@ -2155,4 +2174,6 @@ public class PanelSterowania extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }

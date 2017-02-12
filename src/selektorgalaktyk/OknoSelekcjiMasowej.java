@@ -13,14 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-// Semaphore for updating progress bar value
-	
-/**
- *
- * @author Quchi
- */
+
 
 
 public class OknoSelekcjiMasowej extends javax.swing.JFrame implements Callable <List<Future<ArrayList<ArrayList<Galaktyka>>>>> {

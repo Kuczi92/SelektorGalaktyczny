@@ -12,5 +12,6 @@ package selektorgalaktyk;
 public enum Widok {
     Płaski_pod_przekątną,
     Płaski_symetrycznie,
-    Pełny
+    Pełny,
+    Brak_widoku
 }

@@ -559,11 +559,19 @@ public class AlgorytmSelekcji {
                                                                                                     
                                                                                                     
                                                                                                     
-                                            
-                                          
+                            //fragment kodu odpowiedzialny za przypadek gdy algorytm nie znajdzie zadnej Galaktyki                
+                            if(ListaGalaktyk.isEmpty()){
+                                Galaktyka WykrytaGalaktyka = new Galaktyka(Źródło,origin);
+                                WykrytaGalaktyka.TypGalaktyki = TypGalaktyki.Niezakwalifikowany;
+                                WykrytaGalaktyka.WidokNaGalaktyke=Widok.Brak_widoku;
+                                WykrytaGalaktyka.setPunkty(new Point(0,0), new Point(0,0), new Point(0,0), new Point(0,0));
+                                DanaGalaktyka.add(WykrytaGalaktyka);
+                            }              
                                             
                                            
                                     
+                          
+                 
                           
                  
                             for(int i=0 ; i<ListaGalaktyk.size() ; i++)

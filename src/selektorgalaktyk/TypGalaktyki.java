@@ -11,5 +11,5 @@ package selektorgalaktyk;
  */
 
 public enum TypGalaktyki {
-    Karłowata,Spiralna,Soczewkowata,Nieregularna,Niezakwalifikowany,Eliptyczna
+    Karłowata,Spiralna,Soczewkowata,Nieregularna,Niezakwalifikowany,Eliptyczna,Nie_wykryto
 }
