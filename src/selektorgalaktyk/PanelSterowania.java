@@ -51,7 +51,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private OknoListyGalaktyk OknoListyGalaktyk;
     private OknoListyGalaktyk MasoweOknoListyGalaktyk;
     
-   private OknoSelekcjiMasowej OknoSelekcjiMasowej;
+   private OknoSelekcjiMasowejWynikDoProgramu OknoSelekcjiMasowejDoProgramu;
+   private OknoSelekcjiMasowejWynikDoPlików OknoSelekcjiMasowejDoPlików; 
     public PanelSterowania() {
         super("Selektor Galaktyczny");
         initComponents();
@@ -1241,7 +1242,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
             Watek[watek]=String.valueOf(watek+1);
         }
         ComboBoxLiczbaWątkówWSelekcjiMasowej.setModel(new javax.swing.DefaultComboBoxModel<>(Watek));
-        ComboBoxLiczbaWątkówWSelekcjiMasowej.setSelectedIndex(7);
+        ComboBoxLiczbaWątkówWSelekcjiMasowej.setSelectedIndex(3);
 
         CheckBoxZapisDoProgramu.setText("Zapis do pamięci programu");
         CheckBoxZapisDoProgramu.addActionListener(new java.awt.event.ActionListener() {
@@ -1662,7 +1663,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
         WybranyFolderWejscia = new WyborFolderu();
           int returnVal = WybranyFolderWejscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
-           Konsola.append("Wybrałes ten folder jako źródłowy: " +
+           Konsola.append("\nWybrałes ten folder jako źródłowy: " +
            WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
            }
         try 
@@ -1684,9 +1685,16 @@ public class PanelSterowania extends JFrame implements ActionListener {
      WybranyFolderWyjscia = new WyborFolderu();
           int returnVal = WybranyFolderWyjscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
-           Konsola.append("Wybrałes ten folder jako Wyjściowy: " +
-            WybranyFolderWyjscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
+           Konsola.append("\nWybrałes ten folder jako Wyjściowy: " +
+            WybranyFolderWyjscia.WybieraczFolderu.getSelectedFile().getAbsolutePath());
+           
+                try {
+                    ScieszkaWybranyFolderWyjscia= WybranyFolderWyjscia.WybieraczFolderu.getSelectedFile().getCanonicalPath();
+                } catch (IOException ex) {
+                    Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
+                }
            }
+           
     }//GEN-LAST:event_WybierzFolderWyjsciowyMouseClicked
 
     
@@ -1937,12 +1945,26 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderPelnyProcentZapelnieniaJasnymiProgKarlowataStateChanged
 
     private void WykonanieSelekcjiMasowejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiMasowejMouseClicked
-      OknoSelekcjiMasowej = new OknoSelekcjiMasowej(Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaObrazówWFolderze,SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
-      OknoSelekcjiMasowej.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
- 
-      OknoSelekcjiMasowej.ustawParametryDlaPreProcessingu(SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,SliderWartoscProgowa.getValue(),SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
-      ExecutorService service = Executors.newSingleThreadExecutor();
-      service.submit(OknoSelekcjiMasowej);
+     
+      if(CheckBoxZapisDoProgramu.isSelected()&&(!ListaObrazówWFolderze.isEmpty())){
+            OknoSelekcjiMasowejDoProgramu = new OknoSelekcjiMasowejWynikDoProgramu(Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaObrazówWFolderze,SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+            OknoSelekcjiMasowejDoProgramu.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
+            OknoSelekcjiMasowejDoProgramu.ustawParametryDlaPreProcessingu(SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,SliderWartoscProgowa.getValue(),SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
+            ExecutorService service = Executors.newSingleThreadExecutor();
+            service.submit(OknoSelekcjiMasowejDoProgramu); 
+      }
+      else if (CheckBoxZapisDoPlików.isSelected()){
+            OknoSelekcjiMasowejDoPlików = new OknoSelekcjiMasowejWynikDoPlików(ScieszkaWybranyFolderWyjscia,Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaObrazówWFolderze,SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+            OknoSelekcjiMasowejDoPlików.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
+            OknoSelekcjiMasowejDoPlików.ustawParametryDlaPreProcessingu(SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,SliderWartoscProgowa.getValue(),SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
+            ExecutorService service = Executors.newSingleThreadExecutor();
+            service.submit(OknoSelekcjiMasowejDoPlików);
+      }
+      
+      else if(ScieszkaWybranyFolderWejscia.isEmpty()){
+          Konsola.append("\nNie wybrałeś folderu źródłowego");
+      }
+      
     }//GEN-LAST:event_WykonanieSelekcjiMasowejMouseClicked
 
     private void WykonanieSelekcjiMasowejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiMasowejActionPerformed
@@ -1990,7 +2012,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderNieregularnaProgJasnoscStateChanged
 
     private void ButtonListaSelekcjiMasowejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonListaSelekcjiMasowejMouseClicked
-      MasoweOknoListyGalaktyk = new OknoListyGalaktyk(this,OknoSelekcjiMasowej.ListaGalaktyk);
+      MasoweOknoListyGalaktyk = new OknoListyGalaktyk(this,OknoSelekcjiMasowejDoProgramu.ListaGalaktyk);
     }//GEN-LAST:event_ButtonListaSelekcjiMasowejMouseClicked
     
 

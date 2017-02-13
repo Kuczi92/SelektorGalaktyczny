@@ -1776,7 +1776,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ComboBoxLiczbaW&#x105;tk&#xf3;wWSelekcjiMasowej.setSelectedIndex(7);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ComboBoxLiczbaW&#x105;tk&#xf3;wWSelekcjiMasowej.setSelectedIndex(3);"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] Watek = new String[60];&#xa;        for(int watek = 0 ; watek &lt; 60 ;watek ++)&#xa;        {&#xa;            Watek[watek]=String.valueOf(watek+1);&#xa;        }"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

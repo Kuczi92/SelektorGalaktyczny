@@ -26,7 +26,9 @@ public class Galaktyka {
     int LiczbaJasnychPunktów;
     int LiczbaJąderGalaktyki;
     
-    Point Punkt1;
+    String nazwaPlikuŹródłowego;
+    
+    Point Punkt1; 
     Point Punkt2;
     Point Punkt3;
     Point Punkt4;

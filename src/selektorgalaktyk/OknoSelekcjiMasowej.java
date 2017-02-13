@@ -7,34 +7,32 @@ package selektorgalaktyk;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 
 
-public class OknoSelekcjiMasowej extends javax.swing.JFrame implements Callable <List<Future<ArrayList<ArrayList<Galaktyka>>>>> {
+public class OknoSelekcjiMasowej extends javax.swing.JFrame {
                                           // wykonawca dla wielowątkowowści
                                             ExecutorService service;
                                           //referencja dla pojedyńczego algorytmu
-                                            AlgorytmSelekcjiMasowej Algorytm;
+                                            
                                             Semaphore progressLock = new Semaphore(1);
                                           //referencja dla   
                                             ArrayList <String> ListaPlików;
                                             
                                             //Referencja dla listyGalaktyk;
                                             //Pierwszy wymiar symbolizuje zdjęcie natomiast drugi listę wykrytych w nich galatkyk
-                                           ArrayList <ArrayList<Galaktyka>> ListaGalaktyk;
+                                         volatile  ArrayList <ArrayList<Galaktyka>> ListaGalaktyk;
                                           //zmienna przechowywująca wyniki z wątków
                                            List<Future<ArrayList<ArrayList<Galaktyka>>>> Listy;
                                           // Rodzaj progowania 
                                             WyświetlaczObraz.RodzajeProgowania progowanie;
                                             
                                              // liczba wykonanych selekcji
-                                                double liczbaWykonanychSelekcji = 0;
+                                              private volatile double liczbaWykonanychSelekcji = 0;
                                                 // liczbawszystkichObrazów do selekcji
                                                 double liczbaWszystkichObrazów;
                                           // liczba watków dla kótrych uruchomi się algorytm
@@ -218,7 +216,7 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame implements Callable 
           jProgressBar1.setValue((int) (100*liczbaWykonanychSelekcji/liczbaWszystkichObrazów));
           LabelPostępProcentowy.setText("Procentowy postęp: "+" "+(int) (100*liczbaWykonanychSelekcji/liczbaWszystkichObrazów)+"%");
           LabelPrzetwozonyObraz.setText(przetwozonyobraz);
-          
+         
           
          
           
@@ -234,7 +232,15 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame implements Callable 
         } 
      }
      
-     
+     public void ustawTrybPracyZapisuDoPliku(boolean b){
+         if(b){
+             LabelZapisWyniku.setText(LabelZapisWyniku.getText()+" plików");
+         }
+         else{
+             LabelZapisWyniku.setText(LabelZapisWyniku.getText()+" programu");
+         }
+         
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -345,7 +351,7 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame implements Callable 
 
         LabelLiczbaWątków.setText("Liczba wykorzystywanych wątków: ");
 
-        LabelZapisWyniku.setText("Zapis wyniku do: programu");
+        LabelZapisWyniku.setText("Zapis wyniku do:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -513,36 +519,6 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame implements Callable 
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 
-  @Override
-    public List<Future<ArrayList<ArrayList<Galaktyka>>>> call() throws Exception {
-        service = Executors.newFixedThreadPool(liczbaWątków);
-        ArrayList<AlgorytmSelekcjiMasowej> listaWątków = new ArrayList<>();
-        for(int wątek = 0 ; wątek <liczbaWątków;wątek++ )
-        {
-            
-            if(wątek<liczbaWątków-1)
-            {
-            Algorytm = new AlgorytmSelekcjiMasowej(progressLock,this,new ArrayList<>(ListaPlików.subList(0, (int) liczbaWszystkichObrazów/liczbaWątków)),czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
-            Algorytm.ustawParametrySystemuDecyzyjnego(plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna, plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata, pelny_procent_zapelnienia_jasnymi_prog_karlowata, pelny_procent_zapelnienia_bialymi_prog_karlowata,pelny_procent_zapelnienia_jasnymi_prog_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Spiralna,pelny_liczba_jasnych_obiektow_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,rozmycie_prog_Nieregularna,prog_jasnosci_Nieregularna);
-            Algorytm.ustawParametryDlaPreProcessingu(jasnosc,kontrast,Wartosc_Progowa,rozmycie,czulosc,min_wielkoscx,min_wielkoscy);
-            ListaPlików.removeAll(new ArrayList<>(ListaPlików.subList(0, (int) liczbaWszystkichObrazów/liczbaWątków)));
-            listaWątków.add(Algorytm);    
-            }
-            
-            else 
-            {
-              Algorytm = new AlgorytmSelekcjiMasowej(progressLock,this,ListaPlików,czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
-              Algorytm.ustawParametrySystemuDecyzyjnego(plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna, plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata, pelny_procent_zapelnienia_jasnymi_prog_karlowata, pelny_procent_zapelnienia_bialymi_prog_karlowata,pelny_procent_zapelnienia_jasnymi_prog_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Spiralna,pelny_liczba_jasnych_obiektow_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,rozmycie_prog_Nieregularna,prog_jasnosci_Nieregularna);
-              Algorytm.ustawParametryDlaPreProcessingu(jasnosc,kontrast,Wartosc_Progowa,rozmycie,czulosc,min_wielkoscx,min_wielkoscy);
-              listaWątków.add(Algorytm);    
-            }
-           
-        }
-       
-         Listy = service.invokeAll(listaWątków);
-         PrzenieśDaneDoArrayList(); 
-     return Listy;
-    }
-
+ 
    
 }

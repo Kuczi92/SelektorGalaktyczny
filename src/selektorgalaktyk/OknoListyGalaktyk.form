@@ -42,8 +42,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LabelŹródłoWartość" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="LabelŹródłoWartość" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LiczbaPlikówŹródłowych" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="273" max="32767" attributes="0"/>
                               <Component id="LabelListaOryginalnychZdjęć" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -128,6 +132,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LabelŹródło" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelŹródłoWartość" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LiczbaPlikówŹródłowych" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -332,6 +337,7 @@
                 <StringItem index="4" value="Item 5"/>
               </StringArray>
             </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ListOryginalneZdj&#x119;ciaMouseClicked"/>
@@ -368,6 +374,11 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LiczbaPlik&#xf3;w&#x179;r&#xf3;d&#x142;owych">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Liczba plik&#xf3;w: "/>
       </Properties>
     </Component>
   </SubComponents>

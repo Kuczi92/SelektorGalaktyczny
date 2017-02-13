@@ -61,7 +61,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
      initComponents();
      LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktykMasowa.get(0).size())+" ");
      Wyświetlacz.UstawProstokąt((int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt1.x*stosunekDługościOryginału),(int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt1.y*stosunekDługościOryginału),    (int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt2.x*stosunekDługościOryginału),(int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt2.y*stosunekDługościOryginału),   (int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt3.x*stosunekDługościOryginału),(int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt3.y*stosunekDługościOryginału),      (int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt4.x*stosunekDługościOryginału),(int)(ListaGalaktykMasowa.get(0).get(galaktyka).Punkt4.y*stosunekDługościOryginału));
-         
+     LiczbaPlikówŹródłowych.setText(LiczbaPlikówŹródłowych.getText()+" "+ListaGalaktykMasowa.size());
      ustawDane(ListaGalaktykMasowa.get(0).get(0));
      InicjacjaListy();
      setVisible(true);
@@ -133,6 +133,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        LiczbaPlikówŹródłowych = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -209,6 +210,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        ListOryginalneZdjęcia.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ListOryginalneZdjęcia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ListOryginalneZdjęciaMouseClicked(evt);
@@ -231,6 +233,8 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
 
         jLabel5.setText("-");
 
+        LiczbaPlikówŹródłowych.setText("Liczba plików: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,8 +252,11 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                             .addComponent(LabelTypGalaktyki))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelŹródłoWartość, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LabelŹródłoWartość, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LiczbaPlikówŹródłowych))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 273, Short.MAX_VALUE)
                                 .addComponent(LabelListaOryginalnychZdjęć))))
                     .addGroup(layout.createSequentialGroup()
@@ -316,7 +323,8 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelŹródło)
-                            .addComponent(LabelŹródłoWartość))
+                            .addComponent(LabelŹródłoWartość)
+                            .addComponent(LiczbaPlikówŹródłowych))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelWidok)
@@ -623,6 +631,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     private javax.swing.JLabel LabelWidokWartość;
     private javax.swing.JLabel LabelŹródło;
     private javax.swing.JLabel LabelŹródłoWartość;
+    private javax.swing.JLabel LiczbaPlikówŹródłowych;
     private javax.swing.JList<String> ListOryginalneZdjęcia;
     private javax.swing.JPanel PanelMiniatura;
     private javax.swing.JPanel PanelWyświetlacz;

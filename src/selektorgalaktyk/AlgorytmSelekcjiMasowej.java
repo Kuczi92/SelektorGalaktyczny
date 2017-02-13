@@ -6,19 +6,15 @@
 package selektorgalaktyk;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Quchi
  */
-public class AlgorytmSelekcjiMasowej implements Callable<ArrayList <ArrayList<Galaktyka>>>{
-                                           //referencja dla pojedyńczego algorytmu
-                                            AlgorytmSelekcji Algorytm;
+public class AlgorytmSelekcjiMasowej {
+                                              //referencja dla pojedyńczego algorytmu
+                                            
                                             
                                           //referencja dla   
                                             ArrayList <String> ListaPlików;
@@ -126,44 +122,5 @@ public class AlgorytmSelekcjiMasowej implements Callable<ArrayList <ArrayList<Ga
         this.czulosc = czulosc;
         this.min_wielkoscx = min_wielkoscx;
         this.min_wielkoscy = min_wielkoscy;
-        }                                          
-                                                
-   
-    @SuppressWarnings("empty-statement")
-    public void run() {
-        int liczbaplikow= ListaPlików.size();
-        ListaGalaktyk = new ArrayList<>();
-        for (int obraz = 0 ; obraz < liczbaplikow;obraz ++)
-        {
-                AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(ListaPlików.get(obraz),czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
-                Algorytm.ustawParametrySystemuDecyzyjnego(plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna, plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata, pelny_procent_zapelnienia_jasnymi_prog_karlowata, pelny_procent_zapelnienia_bialymi_prog_karlowata,pelny_procent_zapelnienia_jasnymi_prog_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Spiralna,pelny_liczba_jasnych_obiektow_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,rozmycie_prog_Nieregularna,prog_jasnosci_Nieregularna);
-                Algorytm.rozpoznanie(rozmycie,czulosc,min_wielkoscx,min_wielkoscy);
-                        try
-			{
-				progressLock.acquire();
-                                try {
-                                    OknoSelekcjiMasowej.DodajDoProgressu(1,ListaPlików.get(obraz));
-                                } catch (ExecutionException ex) {
-                                    Logger.getLogger(AlgorytmSelekcjiMasowej.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-
-			}
-			catch (InterruptedException e)
-			{
-			}
-			finally
-			{
-				progressLock.release();
-			}
-                
-                ListaGalaktyk.add(Algorytm.ListaWykrytychGalaktyk());
-       }
-    }
-
-      @Override
-      public ArrayList<ArrayList<Galaktyka>> call() throws Exception {
-      run();
-      return ListaGalaktyk;
-    }
-    
+        }
 }

@@ -338,7 +338,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="LabelZapisWyniku">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Zapis wyniku do: programu"/>
+        <Property name="text" type="java.lang.String" value="Zapis wyniku do:"/>
       </Properties>
     </Component>
   </SubComponents>
