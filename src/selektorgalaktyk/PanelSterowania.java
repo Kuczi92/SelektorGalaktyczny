@@ -10,11 +10,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania;
@@ -41,7 +45,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     WyborPliku WybranyPlikObrazu; 
     WyborFolderu WybranyFolderWejscia; 
     WyborFolderu WybranyFolderWyjscia; 
-    
+    boolean WykonanoSelekcjęMasowąDoPlików = false;
     
     public RodzajeProgowania ZastosujProgowanie = PROGOWANIE;
    
@@ -50,7 +54,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     public ArrayList <Galaktyka> PojedynczaSelekcja;
     private OknoListyGalaktyk OknoListyGalaktyk;
     private OknoListyGalaktyk MasoweOknoListyGalaktyk;
-    
+    ExecutorService service = Executors.newSingleThreadExecutor();;
    private OknoSelekcjiMasowejWynikDoProgramu OknoSelekcjiMasowejDoProgramu;
    private OknoSelekcjiMasowejWynikDoPlików OknoSelekcjiMasowejDoPlików; 
     public PanelSterowania() {
@@ -65,7 +69,6 @@ public class PanelSterowania extends JFrame implements ActionListener {
         UstawieniaPłaskiSymetrycznyZakladka.setVisible(false);
         UstawieniaNieregularneZakladka.setVisible(false);
         UstawieniaPelnyZakladka.setVisible(false);
-       
         CheckBoxZapisDoProgramu.setSelected(true);
     }
 
@@ -1365,6 +1368,11 @@ public class PanelSterowania extends JFrame implements ActionListener {
                 ButtonListaSelekcjiMasowejMouseClicked(evt);
             }
         });
+        ButtonListaSelekcjiMasowej.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonListaSelekcjiMasowejActionPerformed(evt);
+            }
+        });
 
         MenuUstawieniaObrazu.setText("Ustawienia Obrazu");
 
@@ -1540,7 +1548,24 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public ArrayList<String> ListaPlikówWFolderze(String Ściezka) throws IOException{
+        ArrayList<String> ListaPlików = new ArrayList<>();
+        try(Stream<Path> paths = Files.walk(Paths.get(Ściezka))) {
+          paths.forEach((Path filePath) -> {
+        if (Files.isRegularFile(filePath)) {
+            
+            String temp = filePath.toString();
+            if((temp.endsWith("jpg")||temp.endsWith("png")||temp.endsWith("jpeg")||temp.endsWith("JPEG")||temp.endsWith("JPG")))
+            {
+                ListaPlików.add(filePath.toString());
+            }
 
+           }
+          });
+         }
+        return ListaPlików;
+    
+    }
     private void UstawieniaPłaskiPrzekątnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UstawieniaPłaskiPrzekątnyActionPerformed
     NatezenieKolorowZakladka.setVisible(false);
     UstawieniaObrazuZakladka.setVisible(false);
@@ -1649,11 +1674,12 @@ public class PanelSterowania extends JFrame implements ActionListener {
           int returnVal = WybranyPlikObrazu.WybieraczPliku.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) 
           {
-           Konsola.append("Wybrałes ten plik z obrazem: " +
-           WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath()+"\n");
+           Konsola.append("\nWybrałes ten plik z obrazem: " +
+           WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath());
            ScieszkaWybranyPlikObrazu=WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getAbsolutePath();
            
            OknoWyświetlOryginał = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Oryginalny",WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getName());
+           OknoWyświetlOryginał.setVisible(true);
            OknoEdytowalnyObraz  = new WyświetlaczObraz(ScieszkaWybranyPlikObrazu," Obraz Edytowalny",WybranyPlikObrazu.WybieraczPliku.getSelectedFile().getName());
            
            
@@ -1700,7 +1726,12 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
     
     private void ZaladowanieOryginaluMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ZaladowanieOryginaluMouseClicked
-      OknoWyświetlOryginał.setVisible(true);
+       if(OknoWyświetlOryginał!=null){
+           OknoWyświetlOryginał.setVisible(true);
+       }
+       else{
+           Konsola.append("\nWybierz plik aby go następnie wyświetlić!");
+       }
     }//GEN-LAST:event_ZaladowanieOryginaluMouseClicked
 
     private void SliderCzerwonyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderCzerwonyStateChanged
@@ -1788,10 +1819,15 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowataStateChanged
 
     private void OknoEdycjiDlaPojedynczegoObrazuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
-
-       OknoEdytowalnyObraz.setVisible(true);
-       OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
-       OknoEdytowalnyObraz.Odswierzenie();
+       if(OknoEdytowalnyObraz!=null){
+            OknoEdytowalnyObraz.setVisible(true);
+            OknoEdytowalnyObraz.UstawTablicePikseli(OknoWyświetlOryginał.ModyfikujKoloryWKanaleRGB(SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue()));
+            OknoEdytowalnyObraz.Odswierzenie();
+            Konsola.append("\nWłączyłeś okno Edycji dla pojedyńczej selekcji");
+       }
+       else{
+            Konsola.append("\nWybierz plik, by następnie go wyświetlić!");
+       }
         
     }//GEN-LAST:event_OknoEdycjiDlaPojedynczegoObrazuMouseClicked
 
@@ -1807,8 +1843,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
         ZapisPliku ZapisObrazu = new ZapisPliku(OknoEdytowalnyObraz.pobierzNazwePliku());
         int returnVal = ZapisObrazu.WybieraczZapis.showSaveDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
-           Konsola.append("Wybrałes ten folder jako Wyjściowy na zapis Zmodyfikowanego obrazu: " +
-            ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath()+"\n");
+           Konsola.append("\nWybrałes ten folder jako Wyjściowy na zapis Zmodyfikowanego obrazu: " +
+            ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath());
            }
         OknoEdytowalnyObraz.zapiszObraz(ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_ButtonStworzPlikJPGzTeraźniejszymUstawieniemActionPerformed
@@ -1834,11 +1870,11 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderKontrastMouseReleased
 
     private void ZapiszWynikoweObrazyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZapiszWynikoweObrazyActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_ZapiszWynikoweObrazyActionPerformed
 
     private void ZaladujPojedynczyObrazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZaladujPojedynczyObrazActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_ZaladujPojedynczyObrazActionPerformed
 
     private void SliderWartoscProgowaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderWartoscProgowaMouseReleased
@@ -1906,19 +1942,28 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_ToggleEfektPrzyciemnianiaMousePressed
 
     private void WykonanieSelekcjiPojedynczejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiPojedynczejMouseClicked
-
+     if(OknoWyświetlOryginał!=null){
         AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(OknoWyświetlOryginał.pobierzSciezkePliku(),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
         Algorytm.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
         Algorytm.rozpoznanie(SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
         PojedynczaSelekcja = Algorytm.ListaWykrytychGalaktyk();
         OknoListyGalaktyk = new OknoListyGalaktyk(PojedynczaSelekcja,Algorytm.PobierzOryginał());
+        OknoEdytowalnyObraz.setVisible(true);
         OknoEdytowalnyObraz.Odswierzenie();
-        
+        Konsola.append("\nWykonano selekcję pojedyńczą.");
+     }
+     else{
+          Konsola.append("\nWybierz plik źródłowy na którym jest pojedyńczy obraz,by dany obraz mógł zostać poddany selekcji! ");
+     }  
     }//GEN-LAST:event_WykonanieSelekcjiPojedynczejMouseClicked
 
     private void ListaGalaktykMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaGalaktykMouseClicked
-       
-       OknoListyGalaktyk.setVisible(true);
+        if(OknoListyGalaktyk!=null){
+            OknoListyGalaktyk.setVisible(true);
+        }
+        else{
+            Konsola.append("\nDokonaj Selekcji na wybranym pliku, by móc pokazać jej efekty !");
+        }
     }//GEN-LAST:event_ListaGalaktykMouseClicked
 
     private void SliderPelnyProcentZapelnieniaBiałymiProgEliptycznaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderPelnyProcentZapelnieniaBiałymiProgEliptycznaStateChanged
@@ -1947,24 +1992,35 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
     private void WykonanieSelekcjiMasowejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiMasowejMouseClicked
      
-      if(CheckBoxZapisDoProgramu.isSelected()&&!(ScieszkaWybranyFolderWejscia==null))
+      if(CheckBoxZapisDoProgramu.isSelected()&&!(ScieszkaWybranyFolderWejscia==null)&&(OknoSelekcjiMasowejDoProgramu==null))
       {
-            OknoSelekcjiMasowejDoProgramu = new OknoSelekcjiMasowejWynikDoProgramu(Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaObrazówWFolderze,SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+            try {
+                OknoSelekcjiMasowejDoProgramu = new OknoSelekcjiMasowejWynikDoProgramu(Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+            } catch (IOException ex) {
+                Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
+               Konsola.append("\nBłąd podczas pobierania folderu źródłowego!");
+            }
+          
             OknoSelekcjiMasowejDoProgramu.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
             OknoSelekcjiMasowejDoProgramu.ustawParametryDlaPreProcessingu(SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,SliderWartoscProgowa.getValue(),SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
-            ExecutorService service = Executors.newSingleThreadExecutor();
+            service = Executors.newSingleThreadExecutor();
             service.submit(OknoSelekcjiMasowejDoProgramu); 
       }
       
-      else if (CheckBoxZapisDoPlików.isSelected()&&!(ScieszkaWybranyFolderWyjscia==null)&&!(ScieszkaWybranyFolderWejscia==null))
+      else if (CheckBoxZapisDoPlików.isSelected()&&!(ScieszkaWybranyFolderWyjscia==null)&&!(ScieszkaWybranyFolderWejscia==null)&&(OknoSelekcjiMasowejDoPlików==null))
       {
-            OknoSelekcjiMasowejDoPlików = new OknoSelekcjiMasowejWynikDoPlików(ScieszkaWybranyFolderWyjscia,Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaObrazówWFolderze,SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+            try {
+                OknoSelekcjiMasowejDoPlików = new OknoSelekcjiMasowejWynikDoPlików(ScieszkaWybranyFolderWyjscia,Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+            } catch (IOException ex) {
+                Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
+                Konsola.append("\nBłąd podczas pobierania folderu źródłowego!");
+            }
             OknoSelekcjiMasowejDoPlików.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
             OknoSelekcjiMasowejDoPlików.ustawParametryDlaPreProcessingu(SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,SliderWartoscProgowa.getValue(),SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
-            ExecutorService service = Executors.newSingleThreadExecutor();
+            service = Executors.newSingleThreadExecutor();
             service.submit(OknoSelekcjiMasowejDoPlików);
+            WykonanoSelekcjęMasowąDoPlików = true;
       }
-      
       else if(ScieszkaWybranyFolderWejscia==null)
       {
           Konsola.append("\nNie wybrałeś folderu źródłowego!");
@@ -1973,6 +2029,11 @@ public class PanelSterowania extends JFrame implements ActionListener {
       {
           Konsola.append("\nNie wybrałeś folderu wyjściowego!");
       }
+      
+      else if(!OknoSelekcjiMasowejDoProgramu.isActive()||!OknoSelekcjiMasowejDoPlików.isActive()){
+          Konsola.append("\nDokonuję się już Selekcja!");
+      }
+      
       else
       {
           Konsola.append("\nNie wybrałeś folderów wyjścia / wejścia! ");
@@ -2027,8 +2088,36 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }//GEN-LAST:event_SliderNieregularnaProgJasnoscStateChanged
 
     private void ButtonListaSelekcjiMasowejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonListaSelekcjiMasowejMouseClicked
-      MasoweOknoListyGalaktyk = new OknoListyGalaktyk(this,OknoSelekcjiMasowejDoProgramu.ListaGalaktyk);
+          
+        if(WykonanoSelekcjęMasowąDoPlików){
+            try {
+                MasoweOknoListyGalaktyk = new OknoListyGalaktyk(ScieszkaWybranyFolderWyjscia,ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),this);
+                OknoSelekcjiMasowejDoPlików.dispose();
+                OknoSelekcjiMasowejDoPlików=null;
+            } catch (IOException ex) {
+                Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            if(OknoSelekcjiMasowejDoProgramu!=null)
+            {
+                    MasoweOknoListyGalaktyk = new OknoListyGalaktyk(this,OknoSelekcjiMasowejDoProgramu.ListaGalaktyk);
+                    OknoSelekcjiMasowejDoProgramu.dispose();
+                    OknoSelekcjiMasowejDoProgramu=null;
+            }  
+            else{
+                Konsola.append("\nDokonaj Selekcji masowej by móc wyświetlić jej efekty!");
+            }
+             
+        }
+       
     }//GEN-LAST:event_ButtonListaSelekcjiMasowejMouseClicked
+
+    private void ButtonListaSelekcjiMasowejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonListaSelekcjiMasowejActionPerformed
+  
+           service.shutdown();
+           service=null;
+    }//GEN-LAST:event_ButtonListaSelekcjiMasowejActionPerformed
     
 
 /**
@@ -2206,7 +2295,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
-
+   
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

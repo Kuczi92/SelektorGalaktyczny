@@ -7,32 +7,40 @@ package selektorgalaktyk;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import org.opencv.core.Point;
 
 /**
  *
  * @author Quchi
  */
-public class OknoListyGalaktyk extends JFrame implements ActionListener{
+public class OknoListyGalaktyk extends JFrame {
     int galaktyka = 0;
     Wyświetlacz Wyświetlacz;
     Wyświetlacz Miniatura;
     ArrayList<Galaktyka> ListaGalaktyk;
+    ArrayList<String> ListaGalaktykWFolderze;
     ArrayList<ArrayList<Galaktyka>> ListaGalaktykMasowa;
+    String ŚcieżkaFolderuWyjściowego;
     double stosunekDługościOryginału;
     double ProcentXWzględemOryginału;
     double ProcentYWzględemOryginału;
     PanelSterowania Panel;
+    
     /**
-     * Creates new form OknoListyGalaktyk
+     * konstruktor dla przypadku gdy pokazywana jest lista z pojedycznej selekcji
      */
     public OknoListyGalaktyk(ArrayList<Galaktyka> ListaGalaktyk,BufferedImage ObrazOryginalny) {
         super("Lista Galaktyk");
@@ -50,7 +58,9 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         LabelListaOryginalnychZdjęć.setVisible(false);
     }
     
-    
+    /**
+     * konstruktor dla przypadku gdy pokazywana jest lista z masowej selekcji gdzie wynik zapisywany jest do programu
+     */
     public OknoListyGalaktyk(PanelSterowania Panel,ArrayList<ArrayList<Galaktyka>> ListaGalaktyk){
      super("Lista Galaktyk po selekcji masowej");  
      this.ListaGalaktykMasowa =  ListaGalaktyk;
@@ -66,7 +76,92 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
      InicjacjaListy();
      setVisible(true);
     }
+    /**
+     * konstruktor dla przypadku gdy pokazywana jest lista z masowej selekcji gdzie wynik zapisywany jest do plików 
+     */
+    public OknoListyGalaktyk(String ścieżkaFolderuwyjściowego,ArrayList <String> ListaObrazówWFolderze,PanelSterowania Panel) throws IOException{
+     super("Lista Galaktyk po selekcji masowej");  
     
+     this.Panel = Panel;
+     this.ŚcieżkaFolderuWyjściowego = ścieżkaFolderuwyjściowego;
+     this.ListaGalaktykWFolderze = ListaObrazówWFolderze;
+     
+     
+     UstawGalaktykiZFolderu(ŚcieżkaFolderuWyjściowego,0);
+     ustawMiniaturęInicjacja(ListaGalaktyk.get(0).ObrazGalaktyki);
+     ustawOryginalInicjacja(ŁadujObraz(ListaGalaktykWFolderze.get(0)));
+     initComponents();
+     ButtonZapiszLubUsuń.setText("Usuń wybraną galaktykę");
+     LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+     Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*stosunekDługościOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*stosunekDługościOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*stosunekDługościOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*stosunekDługościOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*stosunekDługościOryginału));
+     LiczbaPlikówŹródłowych.setText(LiczbaPlikówŹródłowych.getText()+" "+ListaGalaktykWFolderze.size());
+     ustawDane(ListaGalaktyk.get(0));
+     InicjacjaListyPlików(ListaGalaktykWFolderze);
+     setVisible(true);
+    }
+    
+    public String pobierzNazwęZeŚcieżkiPliku(String Scieżka){
+        
+        Path p = Paths.get(Scieżka);
+        String NazwaPlikuŹródłowego = p.getFileName().toString().replaceFirst("[.][^.]+$", "");
+        return NazwaPlikuŹródłowego;
+    }
+    
+    
+    
+    public void UstawGalaktykiZFolderu(String ścieżka,int wybrany) throws IOException{
+     ArrayList<String> Lista = ListaPlikówWFolderze(ścieżka+"\\"+pobierzNazwęZeŚcieżkiPliku(ListaGalaktykWFolderze.get(wybrany)));
+     int rozmiar =  Lista.size();
+     ListaGalaktyk = new ArrayList<>();
+     for(int galaktyka = 0 ; galaktyka < rozmiar ;galaktyka++)
+        {
+            String AdresPliku = Lista.get(galaktyka);
+            String Rozszerzenie =PobierzRozszerzeniePliku(AdresPliku);
+            Galaktyka WczytywanaGalaktyka = new Galaktyka(ListaGalaktykWFolderze.get(wybrany), ŁadujObraz(AdresPliku));
+            String nazwaPliku = pobierzNazwęZeŚcieżkiPliku(AdresPliku);
+            String[] TablicaZDanymi = nazwaPliku.split("_");
+            WczytywanaGalaktyka.nazwaPlikuŹródłowego=nazwaPliku+"."+Rozszerzenie;
+            WczytywanaGalaktyka.setLiczbaJasnychPunktów(Integer.valueOf(TablicaZDanymi[1]));
+            WczytywanaGalaktyka.setLiczbaJąderGalaktyki(Integer.valueOf(TablicaZDanymi[2]));
+            WczytywanaGalaktyka.setPikseleBiałe(Double.valueOf(TablicaZDanymi[3]));
+            WczytywanaGalaktyka.setPikseleJasne(Double.valueOf(TablicaZDanymi[4]));
+            WczytywanaGalaktyka.setPunkty(new Point(Double.valueOf(TablicaZDanymi[5]),Double.valueOf(TablicaZDanymi[6])),new Point(Double.valueOf(TablicaZDanymi[7]),Double.valueOf(TablicaZDanymi[8])),new Point(Double.valueOf(TablicaZDanymi[9]),Double.valueOf(TablicaZDanymi[10])),new Point(Double.valueOf(TablicaZDanymi[11]),Double.valueOf(TablicaZDanymi[12])));
+            WczytywanaGalaktyka.setTypGalaktyki(TypGalaktyki.valueOf(TablicaZDanymi[13].replace(" ", "_")));
+            WczytywanaGalaktyka.setWidokNaGalaktyke(Widok.valueOf(TablicaZDanymi[14].replace(" ", "_")));
+            ListaGalaktyk.add(WczytywanaGalaktyka);
+        }
+    }
+    
+    
+    public String PobierzRozszerzeniePliku(String Scieżka){
+        String rozszerzenie = "";
+
+                int i = Scieżka.lastIndexOf('.');
+                if (i > 0) 
+                {
+                            rozszerzenie = Scieżka.substring(i+1);
+                }
+                return rozszerzenie;
+    }
+    
+    
+    public ArrayList<String> ListaPlikówWFolderze(String Ściezka) throws IOException{
+        ArrayList<String> ListaPlików = new ArrayList<>();
+        try(Stream<Path> paths = Files.walk(Paths.get(Ściezka))) {
+          paths.forEach((Path filePath) -> {
+        if (Files.isRegularFile(filePath)) {
+            
+            String temp = filePath.toString();
+            if((temp.endsWith("jpg")||temp.endsWith("png")||temp.endsWith("jpeg")||temp.endsWith("JPEG")||temp.endsWith("JPG")))
+            {
+                ListaPlików.add(filePath.toString());
+            }
+
+           }
+          });
+         }
+        return ListaPlików;
+    }
     
     public BufferedImage ŁadujObraz(String sciezka){
      BufferedImage img = null;
@@ -94,6 +189,24 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
             public String getElementAt(int i) { return strings[i]; }
         }); 
         
+    }
+    
+    public void InicjacjaListyPlików(ArrayList<String> Lista){
+       ArrayList<String> ListaPlików = new ArrayList<>();
+        int rozmiar = Lista.size();
+        
+        for(int i = 0 ; i < rozmiar;i++){
+            ListaPlików.add(Lista.get(i));
+        }
+       String[] stringsa = ListaPlików.toArray(new String[ListaPlików.size()]) ;
+        
+        ListOryginalneZdjęcia.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = stringsa;
+            @Override
+            public int getSize() { return strings.length; }
+            @Override
+            public String getElementAt(int i) { return strings[i]; }
+        });  
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,13 +242,19 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         jScrollPane1 = new javax.swing.JScrollPane();
         ListOryginalneZdjęcia = new javax.swing.JList<>();
         LabelListaOryginalnychZdjęć = new javax.swing.JLabel();
-        ButtonZapisz = new javax.swing.JButton();
+        ButtonZapiszLubUsuń = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         LiczbaPlikówŹródłowych = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelWyświetlaczLayout = new javax.swing.GroupLayout(PanelWyświetlacz);
         PanelWyświetlacz.setLayout(PanelWyświetlaczLayout);
@@ -220,10 +339,15 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
 
         LabelListaOryginalnychZdjęć.setText("Lista oryginalnych zdjęć oraz wyników zawartych z ich poszczególnej analizy:");
 
-        ButtonZapisz.setText("Zapisz Obraz wykrytej galaktyki");
-        ButtonZapisz.addMouseListener(new java.awt.event.MouseAdapter() {
+        ButtonZapiszLubUsuń.setText("Zapisz Obraz wykrytej galaktyki");
+        ButtonZapiszLubUsuń.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ButtonZapiszMouseClicked(evt);
+                ButtonZapiszLubUsuńMouseClicked(evt);
+            }
+        });
+        ButtonZapiszLubUsuń.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonZapiszLubUsuńActionPerformed(evt);
             }
         });
 
@@ -299,7 +423,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(PanelMiniatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonZapisz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ButtonZapiszLubUsuń, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(PanelWyświetlacz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -319,7 +443,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelMiniatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonZapisz))
+                        .addComponent(ButtonZapiszLubUsuń))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelŹródło)
@@ -365,7 +489,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonPoprzedniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonPoprzedniMouseClicked
-        galaktyka--;
+       galaktyka--;
         if(galaktyka<0){
             galaktyka = 0;
         }
@@ -391,9 +515,19 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     }//GEN-LAST:event_ButtonNastępnyMouseClicked
 
     private void ListOryginalneZdjęciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListOryginalneZdjęciaMouseClicked
-        ustawOryginal(ŁadujObraz(ListOryginalneZdjęcia.getSelectedValue()));
-        this.ListaGalaktyk = ListaGalaktykMasowa.get(ListOryginalneZdjęcia.getSelectedIndex());
+        
+        if(ŚcieżkaFolderuWyjściowego==null){
+            this.ListaGalaktyk = ListaGalaktykMasowa.get(ListOryginalneZdjęcia.getSelectedIndex());
+        }
+        else{
+           try {
+            UstawGalaktykiZFolderu(ŚcieżkaFolderuWyjściowego,ListOryginalneZdjęcia.getSelectedIndex());
+        } catch (IOException ex) {
+            Logger.getLogger(OknoListyGalaktyk.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        }
         galaktyka=0;
+        ustawOryginal(ŁadujObraz(ListOryginalneZdjęcia.getSelectedValue()));
         ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
         ustawDane(ListaGalaktyk.get(galaktyka));
         LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
@@ -401,17 +535,105 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
         Odswierzenie();
     }//GEN-LAST:event_ListOryginalneZdjęciaMouseClicked
 
-    private void ButtonZapiszMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonZapiszMouseClicked
-       ZapisPliku ZapisObrazu = new ZapisPliku(ListaGalaktyk.get(galaktyka).getŹródło(),galaktyka);
+    private void ButtonZapiszLubUsuńMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonZapiszLubUsuńMouseClicked
        
-        int returnVal = ZapisObrazu.WybieraczZapis.showSaveDialog(null);
-           if(returnVal == JFileChooser.APPROVE_OPTION) {
-           Panel.Konsola.append("\nWybrałeś tą ściężkę na wyjściowy zapis wykrytego obrazu galaktyki: " +
-            ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath()+"\n");
+        if(ŚcieżkaFolderuWyjściowego==null){
+                ZapisPliku ZapisObrazu = new ZapisPliku(ListaGalaktyk.get(galaktyka).getŹródło(),galaktyka);
+
+                int returnVal = ZapisObrazu.WybieraczZapis.showSaveDialog(null);
+                   if(returnVal == JFileChooser.APPROVE_OPTION) {
+                   Panel.Konsola.append("\nWybrałeś tą ściężkę na wyjściowy zapis wykrytego obrazu galaktyki: " +
+                    ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath()+"\n");
+
+                   }
+                writeImage(ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath(),ListaGalaktyk.get(galaktyka).ObrazGalaktyki); 
+                }
+        else{
             
-           }
-        writeImage(ZapisObrazu.WybieraczZapis.getSelectedFile().getAbsolutePath(),ListaGalaktyk.get(galaktyka).ObrazGalaktyki); // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonZapiszMouseClicked
+                File file = new File(ŚcieżkaFolderuWyjściowego+"\\"+pobierzNazwęZeŚcieżkiPliku(ListaGalaktyk.get(galaktyka).getŹródło())+"\\"+ListaGalaktyk.get(galaktyka).nazwaPlikuŹródłowego);
+
+    		if(file.delete()){
+                        ListaGalaktyk.remove(galaktyka);
+    			Panel.Konsola.append("\n"+file.getName() + " został usunięty!");
+                        if(ListaGalaktyk.isEmpty())
+                                {   
+                                    
+                                                int wybranyIndeks = ListOryginalneZdjęcia.getSelectedIndex();
+                                                ListaGalaktykWFolderze.remove(ListOryginalneZdjęcia.getSelectedIndex());
+                                                
+                                                        if(ListaGalaktykWFolderze.isEmpty()){
+                                                               ListaGalaktykWFolderze.add("Usunąłeś Wszystkie możliwe Galaktyki !!!!!!!!!");
+                                                               InicjacjaListyPlików(ListaGalaktykWFolderze);
+                                                        }
+
+                                                        else
+                                                        {
+                                                            InicjacjaListyPlików(ListaGalaktykWFolderze);    
+                                                            try 
+                                                                        {   
+
+                                                                            if(wybranyIndeks<1){
+                                                                              UstawGalaktykiZFolderu(ŚcieżkaFolderuWyjściowego,0);
+                                                                              galaktyka=0;
+                                                                              ListOryginalneZdjęcia.setSelectedIndex(wybranyIndeks-1);
+                                                                              ustawOryginal(ŁadujObraz(ListaGalaktykWFolderze.get(wybranyIndeks-1)));
+                                                                              ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
+                                                                              ustawDane(ListaGalaktyk.get(galaktyka));
+                                                                              LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+                                                                              Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*ProcentYWzględemOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*ProcentYWzględemOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*ProcentYWzględemOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*ProcentYWzględemOryginału));
+                                                                              Odswierzenie();
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                              UstawGalaktykiZFolderu(ŚcieżkaFolderuWyjściowego,wybranyIndeks-1);
+                                                                              galaktyka=0;
+                                                                              ListOryginalneZdjęcia.setSelectedIndex(wybranyIndeks-1);
+                                                                              ustawOryginal(ŁadujObraz(ListaGalaktykWFolderze.get(wybranyIndeks-1)));
+                                                                              ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
+                                                                              ustawDane(ListaGalaktyk.get(galaktyka));
+                                                                              LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+                                                                              Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*ProcentYWzględemOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*ProcentYWzględemOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*ProcentYWzględemOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*ProcentYWzględemOryginału));
+                                                                              Odswierzenie();
+                                                                            }
+
+                                                                        } 
+                                                                        catch (IOException ex) 
+                                                                        {
+                                                                            Logger.getLogger(OknoListyGalaktyk.class.getName()).log(Level.SEVERE, null, ex);
+                                                                        } 
+
+                                                        }
+                                            }
+                        else
+                                {
+                                    galaktyka--;
+                                     if(galaktyka<0)
+                                            {
+                                              galaktyka = 0;
+                                            }
+                                            ustawMiniaturę(ListaGalaktyk.get(galaktyka).getObraz());
+                                            ustawDane(ListaGalaktyk.get(galaktyka));
+                                            LabelPrzeglądanaGalaktyka.setText("Dana Wykryta galaktyka: "+String.valueOf(galaktyka+1)+" na: "+(ListaGalaktyk.size())+" ");
+                                            Wyświetlacz.UstawProstokąt((int)(ListaGalaktyk.get(galaktyka).Punkt1.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt1.y*ProcentYWzględemOryginału),    (int)(ListaGalaktyk.get(galaktyka).Punkt2.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt2.y*ProcentYWzględemOryginału),   (int)(ListaGalaktyk.get(galaktyka).Punkt3.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt3.y*ProcentYWzględemOryginału),      (int)(ListaGalaktyk.get(galaktyka).Punkt4.x*ProcentXWzględemOryginału),(int)(ListaGalaktyk.get(galaktyka).Punkt4.y*ProcentYWzględemOryginału));
+                                            Odswierzenie();
+                                }
+    		}
+                
+                
+                else
+                {
+    			Panel.Konsola.append("\nOperacja usunięcia pliku nie poszła pomyślnie");
+    		}
+        }
+    }//GEN-LAST:event_ButtonZapiszLubUsuńMouseClicked
+
+    private void ButtonZapiszLubUsuńActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonZapiszLubUsuńActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonZapiszLubUsuńActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       this.dispose();
+    }//GEN-LAST:event_formWindowClosed
     
     public void writeImage(String filePath,BufferedImage image){
         try{
@@ -614,7 +836,7 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonNastępny;
     private javax.swing.JButton ButtonPoprzedni;
-    private javax.swing.JButton ButtonZapisz;
+    private javax.swing.JButton ButtonZapiszLubUsuń;
     private javax.swing.JLabel LabelLiczbaJasnychPunktow;
     private javax.swing.JLabel LabelLiczbaJasnychPunktowWartość;
     private javax.swing.JLabel LabelLiczbaWykrytychJąderGalaktyki;
@@ -644,8 +866,5 @@ public class OknoListyGalaktyk extends JFrame implements ActionListener{
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
  
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }

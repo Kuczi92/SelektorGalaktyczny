@@ -25,7 +25,6 @@ public class Galaktyka {
     double PikseleBiałe;
     int LiczbaJasnychPunktów;
     int LiczbaJąderGalaktyki;
-    
     String nazwaPlikuŹródłowego;
     
     Point Punkt1; 

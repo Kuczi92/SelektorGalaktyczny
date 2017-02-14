@@ -55,9 +55,9 @@ public class AlgorytmSelekcjiMasowejWynikDoPlików extends AlgorytmSelekcjiMasow
                 if (!file.exists()) 
                 {
                            if (file.mkdir()) {
-                               System.out.println("Directory is created!");
+                              
                            } else {
-                               System.out.println("Failed to create directory!");
+                               
                            }
                 }
                String rozszerzenie = "";
@@ -83,8 +83,8 @@ public class AlgorytmSelekcjiMasowejWynikDoPlików extends AlgorytmSelekcjiMasow
                         strB.append("\\");
                         
                         //tworzenie unikatowej nazwy pliku odpowiadającej poszczególnym parametrom
-                        strB.append(NazwaPlikuŹródłowego);
-                        strB.append("_");
+                        //strB.append(NazwaPlikuŹródłowego);
+                        // strB.append("_");
                         strB.append(wykrytagalaktyka);
                         strB.append("_");
                         strB.append(ListaGalaktyk.get(wykrytagalaktyka).LiczbaJasnychPunktów);
@@ -150,7 +150,7 @@ public class AlgorytmSelekcjiMasowejWynikDoPlików extends AlgorytmSelekcjiMasow
                                 }
 
                         zapiszWynikiDoPliku(Algorytm.ListaWykrytychGalaktyk());
-
+                        Algorytm = null;
                 }
         
   

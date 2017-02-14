@@ -12,6 +12,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -102,7 +105,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <Component id="PanelMiniatura" alignment="0" max="32767" attributes="0"/>
-                  <Component id="ButtonZapisz" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ButtonZapiszLubUsuń" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -126,7 +129,7 @@
                   <Group type="102" attributes="0">
                       <Component id="PanelMiniatura" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="ButtonZapisz" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButtonZapiszLubUsuń" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -353,12 +356,13 @@
         <Property name="text" type="java.lang.String" value="Lista oryginalnych zdj&#x119;&#x107; oraz wynik&#xf3;w zawartych z ich poszczeg&#xf3;lnej analizy:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="ButtonZapisz">
+    <Component class="javax.swing.JButton" name="ButtonZapiszLubUsu&#x144;">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zapisz Obraz wykrytej galaktyki"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonZapiszMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonZapiszLubUsu&#x144;MouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonZapiszLubUsu&#x144;ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
