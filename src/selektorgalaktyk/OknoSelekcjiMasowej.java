@@ -5,6 +5,8 @@
  */
 package selektorgalaktyk;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -97,6 +99,10 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame {
          this.liczbaWątków  = liczbawątków;
          this.liczbaWszystkichObrazów = ListaPlików.size();
          initComponents();
+         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+         int width = (int) screenSize.getWidth();
+         int height = (int) screenSize.getHeight();
+         setLocation(width/3, height/3);
          this.setVisible(true);
          LabelLiczbaWątków.setText(LabelLiczbaWątków.getText()+" "+liczbawątków);
     }
@@ -221,7 +227,9 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame {
          
           
       }
-     
+    public ArrayList <ArrayList<Galaktyka>> PobierzListęGalaktyk(){
+       return ListaGalaktyk; 
+    }
      
      public void PrzenieśDaneDoArrayList() throws InterruptedException, ExecutionException{
          ListaGalaktyk = new ArrayList<>();
@@ -413,8 +421,8 @@ public class OknoSelekcjiMasowej extends javax.swing.JFrame {
                     .addComponent(LabelPostępProcentowy)
                     .addComponent(LabelCzasObliczeń))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(LabelPrzetwozonyObraz))

@@ -26,7 +26,9 @@ public class ZapisPliku extends javax.swing.JFrame {
   public ZapisPliku(String NazwaObrazu,int liczba) {
        initComponents(NazwaObrazu, liczba);
     }
-  
+  public ZapisPliku(String NazwaObrazu,boolean liczba){
+      initComponents(NazwaObrazu, liczba);
+  }
   private void initComponents(String nazwapliku, int liczba) {
 
         WybieraczZapis = new javax.swing.JFileChooser();
@@ -146,4 +148,30 @@ public class ZapisPliku extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JFileChooser WybieraczZapis;
     // End of variables declaration//GEN-END:variables
+
+    private void initComponents(String NazwaObrazu, boolean liczba) {
+     WybieraczZapis = new javax.swing.JFileChooser();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        WybieraczZapis.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        WybieraczZapis.setSelectedFile(new File(NazwaObrazu));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(WybieraczZapis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(WybieraczZapis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }
 }

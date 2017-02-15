@@ -8,11 +8,15 @@ package selektorgalaktyk;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.BRAK_PROGROWANIA;
@@ -111,6 +115,29 @@ public class WyświetlaczObraz extends JFrame implements ActionListener {
     void UstawObraz(ArrayList<BufferedImage> ListaGalaktyk) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    void zapiszObraz(String absolutePath, int x, int y) {
+       BufferedImage Obraz = ZmieńRozmiarObrazu(RGB.Image(),(int)(RGB.Image().getWidth()*x/100.0), (int) (RGB.Image().getHeight()*y/100.0));
+       writeImage( absolutePath,Obraz);
+    }
+   public void writeImage(String filePath,BufferedImage image){
+        try{
+            File f = new File(filePath);
+            String fileType = filePath.substring(filePath.lastIndexOf('.')+1);
+            ImageIO.write(image, fileType, f);
+        }catch(IOException e){
+            
+        }
+    } 
+   public static BufferedImage ZmieńRozmiarObrazu(BufferedImage img, int newW, int newH) { 
+            java.awt.Image tmp = img.getScaledInstance(newW, newH, java.awt.Image.SCALE_SMOOTH);
+            BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_3BYTE_BGR);
+            Graphics2D g2d = dimg.createGraphics();
+            g2d.drawImage(tmp, 0, 0, null);
+            g2d.dispose();
+
+    return dimg;
+ }
    
    public enum RodzajeProgowania {
     EFEKT_ROZJASNIAJACY, EFEKT_PRZYCIEMNAJACY, PROGOWANIE,BRAK_PROGROWANIA;
