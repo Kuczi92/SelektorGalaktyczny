@@ -15,9 +15,11 @@ public class OknoSelekcjiMasowejWynikDoPlików extends OknoSelekcjiMasowej imple
     String ScieżkaFolderu;
     ArrayList<String>  TempListaPlików;
     AlgorytmSelekcjiMasowejWynikDoPlików Algorytm;
-    public OknoSelekcjiMasowejWynikDoPlików(String ScieżkaFolderu,int liczbawątków, ArrayList<String> ListaPlików, double czerwien, double zielen, double niebieski, double kontrast, WyświetlaczObraz.RodzajeProgowania progowanie, int wartoscprogujaca) {
+    PanelSterowania Panel;
+    public OknoSelekcjiMasowejWynikDoPlików(PanelSterowania Panel,String ScieżkaFolderu,int liczbawątków, ArrayList<String> ListaPlików, double czerwien, double zielen, double niebieski, double kontrast, WyświetlaczObraz.RodzajeProgowania progowanie, int wartoscprogujaca) {
         super(liczbawątków, ListaPlików, czerwien, zielen, niebieski, kontrast, progowanie, wartoscprogujaca);
         this.ScieżkaFolderu = ScieżkaFolderu;
+        this.Panel= Panel;
         TempListaPlików=this.ListaPlików;
         ustawTrybPracyZapisuDoPliku(true);
     }
@@ -30,7 +32,7 @@ public class OknoSelekcjiMasowejWynikDoPlików extends OknoSelekcjiMasowej imple
             
             if(wątek<liczbaWątków-1)
             {
-                Algorytm = new AlgorytmSelekcjiMasowejWynikDoPlików(ScieżkaFolderu,progressLock,this,new ArrayList<>(TempListaPlików.subList(0, (int) liczbaWszystkichObrazów/liczbaWątków)),czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
+                Algorytm = new AlgorytmSelekcjiMasowejWynikDoPlików(Panel,ScieżkaFolderu,progressLock,this,new ArrayList<>(TempListaPlików.subList(0, (int) liczbaWszystkichObrazów/liczbaWątków)),czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
                 Algorytm.ustawParametrySystemuDecyzyjnego(plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna, plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata, pelny_procent_zapelnienia_jasnymi_prog_karlowata, pelny_procent_zapelnienia_bialymi_prog_karlowata,pelny_procent_zapelnienia_jasnymi_prog_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Spiralna,pelny_liczba_jasnych_obiektow_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,rozmycie_prog_Nieregularna,prog_jasnosci_Nieregularna);
                 Algorytm.ustawParametryDlaPreProcessingu(jasnosc,kontrast,Wartosc_Progowa,rozmycie,czulosc,min_wielkoscx,min_wielkoscy);
                 TempListaPlików.removeAll(new ArrayList<>(TempListaPlików.subList(0, (int) liczbaWszystkichObrazów/liczbaWątków)));
@@ -39,7 +41,7 @@ public class OknoSelekcjiMasowejWynikDoPlików extends OknoSelekcjiMasowej imple
             
             else 
             {
-                Algorytm = new AlgorytmSelekcjiMasowejWynikDoPlików(ScieżkaFolderu,progressLock,this,TempListaPlików,czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
+                Algorytm = new AlgorytmSelekcjiMasowejWynikDoPlików(Panel,ScieżkaFolderu,progressLock,this,TempListaPlików,czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
                 Algorytm.ustawParametrySystemuDecyzyjnego(plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna, plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata, pelny_procent_zapelnienia_jasnymi_prog_karlowata, pelny_procent_zapelnienia_bialymi_prog_karlowata,pelny_procent_zapelnienia_jasnymi_prog_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Spiralna,pelny_liczba_jasnych_obiektow_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,rozmycie_prog_Nieregularna,prog_jasnosci_Nieregularna);
                 Algorytm.ustawParametryDlaPreProcessingu(jasnosc,kontrast,Wartosc_Progowa,rozmycie,czulosc,min_wielkoscx,min_wielkoscy);
                 Wątki.add(new Thread(Algorytm));

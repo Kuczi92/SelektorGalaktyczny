@@ -47,8 +47,8 @@ public class AlgorytmSelekcji {
     ArrayList<Galaktyka> DanaGalaktyka = new ArrayList<>();
     
     
-    
-    static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
+   
+
 
 
 
@@ -124,7 +124,18 @@ public class AlgorytmSelekcji {
      * @param progowanie rodzaj Progowania dla maski wykrywającej galaktyki
      * @param wartoscprogujaca wartość od której będzie progowanie
      */
-    public AlgorytmSelekcji(String Źródło,double czerwien,double zielen,double niebieski,double kontrast,WyświetlaczObraz.RodzajeProgowania progowanie,int wartoscprogujaca){
+                                                
+                                                
+                                             
+    public AlgorytmSelekcji(PanelSterowania Panel,String Źródło,double czerwien,double zielen,double niebieski,double kontrast,WyświetlaczObraz.RodzajeProgowania progowanie,int wartoscprogujaca){
+  
+    try {
+       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    } catch (UnsatisfiedLinkError e) {
+      Panel.Konsola.append("\nBrak załadowanej poprawnie biblioteki openCV spróbuj ją dać w odpowiednie miejsce!\n" + e);
+      
+    }
+  
     this.origin = readImage(Źródło);
     this.height = origin.getHeight();
     this.width = origin.getWidth();
@@ -139,6 +150,8 @@ public class AlgorytmSelekcji {
     this.image = ZwróćObrazZTablicyJednowymiarowej(ModyfikujKoloryWKanaleRGB(czerwien,zielen,niebieski,kontrast,progowanie,wartoscprogujaca));
     }
     
+    
+
  
     /** 
      * Zmiana parametrów służacych do selekcji galaktyk

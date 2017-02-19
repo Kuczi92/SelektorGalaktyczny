@@ -59,8 +59,8 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private OknoListyGalaktyk OknoListyGalaktyk;
     private OknoListyGalaktyk MasoweOknoListyGalaktyk;
     ExecutorService service = Executors.newSingleThreadExecutor();
-   private OknoSelekcjiMasowejWynikDoProgramu OknoSelekcjiMasowejDoProgramu;
-   private OknoSelekcjiMasowejWynikDoPlików OknoSelekcjiMasowejDoPlików; 
+    private OknoSelekcjiMasowejWynikDoProgramu OknoSelekcjiMasowejDoProgramu;
+    private OknoSelekcjiMasowejWynikDoPlików OknoSelekcjiMasowejDoPlików; 
    
    private MasowyZapisPlików MasowyZapisPlików;
     public PanelSterowania() {
@@ -2076,7 +2076,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
 
     private void WykonanieSelekcjiPojedynczejMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WykonanieSelekcjiPojedynczejMouseClicked
      if(OknoWyświetlOryginał!=null){
-        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(OknoWyświetlOryginał.pobierzSciezkePliku(),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(this,OknoWyświetlOryginał.pobierzSciezkePliku(),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
         Algorytm.ustawParametrySystemuDecyzyjnego( SliderPlaskiPPProcentZapelnieniaJasnymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelneiniaBialymiProgSoczewkowata.getValue(),SliderPlaskiPPProcentZapelnieniaJasnymiProgSpiralna.getValue(),  SliderPlaskiSymProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaBialymiProgSpiralna.getValue(), SliderPlaskiSymProcentZapelnieniaJasnymiProgSoczewkowata.getValue(), SliderPlaskiSymProcentZapelnieniaBiałymiProgSoczewkowata.getValue(), SliderPelnyProcentZapelnieniaJasnymiProgKarlowata.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgKarlowata.getValue()/1000, SliderPelnyProcentZapelnieniaJasnymiProgSpiralna.getValue(), SliderPelnyProcentZapelnieniaBiałymiProgSpiralna.getValue(),  SliderPelnyLiczbaJasnychProgObiektow.getValue(),SliderPelnyProcentZapelnieniaBiałymiProgEliptyczna.getValue(), SliderNieregularnaProgRozmycie.getValue(), SliderNieregularnaProgJasnosc.getValue());
         Algorytm.rozpoznanie(SliderRozmycie.getValue(), SliderCzulosc.getValue(), SliderMinWielkoscX.getValue(), SliderMinWielkoscY.getValue());
         PojedynczaSelekcja = Algorytm.ListaWykrytychGalaktyk();
@@ -2104,7 +2104,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
       if(CheckBoxZapisDoProgramu.isSelected()&&!(ScieszkaWybranyFolderWejscia==null)&&(OknoSelekcjiMasowejDoProgramu==null))
       {
             try {
-                OknoSelekcjiMasowejDoProgramu = new OknoSelekcjiMasowejWynikDoProgramu(Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+                OknoSelekcjiMasowejDoProgramu = new OknoSelekcjiMasowejWynikDoProgramu(this,Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
             } catch (IOException ex) {
                 Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
                Konsola.append("\nBłąd podczas pobierania folderu źródłowego!");
@@ -2119,7 +2119,7 @@ public class PanelSterowania extends JFrame implements ActionListener {
       else if (CheckBoxZapisDoPlików.isSelected()&&!(ScieszkaWybranyFolderWyjscia==null)&&!(ScieszkaWybranyFolderWejscia==null)&&(OknoSelekcjiMasowejDoPlików==null))
       {
             try {
-                OknoSelekcjiMasowejDoPlików = new OknoSelekcjiMasowejWynikDoPlików(ScieszkaWybranyFolderWyjscia,Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
+                OknoSelekcjiMasowejDoPlików = new OknoSelekcjiMasowejWynikDoPlików(this,ScieszkaWybranyFolderWyjscia,Integer.valueOf(ComboBoxLiczbaWątkówWSelekcjiMasowej.getSelectedItem().toString()),ListaPlikówWFolderze(ScieszkaWybranyFolderWejscia),SliderCzerwony.getValue()+SliderJasnosc.getValue(), SliderZielony.getValue()+SliderJasnosc.getValue(), SliderNiebieski.getValue()+SliderJasnosc.getValue(),SliderKontrast.getValue()/1000.0,ZastosujProgowanie,SliderWartoscProgowa.getValue());
             } catch (IOException ex) {
                 Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
                 Konsola.append("\nBłąd podczas pobierania folderu źródłowego!");

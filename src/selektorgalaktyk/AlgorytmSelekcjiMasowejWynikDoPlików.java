@@ -23,9 +23,11 @@ import javax.imageio.ImageIO;
  */
 public class AlgorytmSelekcjiMasowejWynikDoPlików extends AlgorytmSelekcjiMasowej implements Runnable {
     String ScieżkaFolderuZapisu;
-    public AlgorytmSelekcjiMasowejWynikDoPlików(String SciezkaFolderu,Semaphore progressLock, selektorgalaktyk.OknoSelekcjiMasowej OknoSelekcjiMasowej, ArrayList<String> ListaPlików, double czerwien, double zielen, double niebieski, double kontrast, WyświetlaczObraz.RodzajeProgowania progowanie, int wartoscprogujaca) {
+    PanelSterowania Panel;
+    public AlgorytmSelekcjiMasowejWynikDoPlików(PanelSterowania Panel,String SciezkaFolderu,Semaphore progressLock, selektorgalaktyk.OknoSelekcjiMasowej OknoSelekcjiMasowej, ArrayList<String> ListaPlików, double czerwien, double zielen, double niebieski, double kontrast, WyświetlaczObraz.RodzajeProgowania progowanie, int wartoscprogujaca) {
         super(progressLock, OknoSelekcjiMasowej, ListaPlików, czerwien, zielen, niebieski, kontrast, progowanie, wartoscprogujaca);
         this.ScieżkaFolderuZapisu = SciezkaFolderu;
+        this.Panel = Panel;
     }
 
 
@@ -127,7 +129,7 @@ public class AlgorytmSelekcjiMasowejWynikDoPlików extends AlgorytmSelekcjiMasow
         ListaGalaktyk = new ArrayList<>();
         for (int obraz = 0 ; obraz < liczbaplikow;obraz ++)
                 {
-                        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(ListaPlików.get(obraz),czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
+                        AlgorytmSelekcji Algorytm = new AlgorytmSelekcji(Panel,ListaPlików.get(obraz),czerwony, zielony, niebieski,kontrast,progowanie,Wartosc_Progowa);
                         Algorytm.ustawParametrySystemuDecyzyjnego(plaskipp_procent_zapelnienia_jasnymi_prog_Soczewowata,plaskipp_procent_zapelnienia_bialymi_prog_Soczewowata,plaskipp_procent_zapelnienia_jasnymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_karlowata,plaskisym_procent_zapelnienia_jasnymi_prog_Spiralna, plaskisym_procent_zapelnienia_bialymi_prog_Spiralna,plaskisym_procent_zapelnienia_jasnymi_prog_Soczewkowata,plaskisym_procent_zapelnienia_bialymi_prog_Soczewkowata, pelny_procent_zapelnienia_jasnymi_prog_karlowata, pelny_procent_zapelnienia_bialymi_prog_karlowata,pelny_procent_zapelnienia_jasnymi_prog_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Spiralna,pelny_liczba_jasnych_obiektow_Spiralna,pelny_procent_zapelnienia_bialymi_prog_Eliptyczna,rozmycie_prog_Nieregularna,prog_jasnosci_Nieregularna);
                         Algorytm.rozpoznanie(rozmycie,czulosc,min_wielkoscx,min_wielkoscy);
                                 try

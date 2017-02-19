@@ -39,6 +39,7 @@ public class TworzeniePDF extends javax.swing.JFrame implements Runnable {
    double Kontrast;
    int wartośćProgowa;
    String RodzajProgowania;
+   
     public TworzeniePDF(BufferedImage Obraz,String ścieżkaZapisu,int Czerwony,int Zielony,int Niebieski,int Jasność, double Kontrast, int wartośćProgowa,String RodzajProgowania) {
         this.Obraz = ustawOryginal(Obraz,520,520);
         this.ścieżkaZapisu = ścieżkaZapisu;
