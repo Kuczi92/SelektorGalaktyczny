@@ -8,8 +8,6 @@ package selektorgalaktyk;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,7 +33,7 @@ import static selektorgalaktyk.WyświetlaczObraz.RodzajeProgowania.PROGOWANIE;
  *
  * @author Norbert
  */
-public class PanelSterowania extends JFrame implements ActionListener {
+public class PanelSterowania extends JFrame  {
    
     
     public BufferedImage ObrazEdytowalny;
@@ -1771,20 +1769,19 @@ public class PanelSterowania extends JFrame implements ActionListener {
     }
     private void WybierzFolderZrodlowyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WybierzFolderZrodlowyMouseClicked
         WybranyFolderWejscia = new WyborFolderu();
-          int returnVal = WybranyFolderWejscia.WybieraczFolderu.showOpenDialog(null);
+        try{
+            int returnVal = WybranyFolderWejscia.WybieraczFolderu.showOpenDialog(null);
            if(returnVal == JFileChooser.APPROVE_OPTION) {
            Konsola.append("\nWybrałes ten folder jako źródłowy: " +
            WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath()+"\n");
            ScieszkaWybranyFolderWejscia = WybranyFolderWejscia.WybieraczFolderu.getSelectedFile().getAbsolutePath();
-           }
-        try 
-        {
            ListaObrazówWFolderze = WybranyFolderWejscia.ListaPlikówWFolderze();
-           
-        } 
-        catch (IOException ex) {
-            Logger.getLogger(PanelSterowania.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
+        catch(NullPointerException | IOException e){
+            Konsola.append("\nNie dokonałeś wyboru żadnego folderu");
+        }
+  
         for (int i = 0 ; i< ListaObrazówWFolderze.size();i++){
             
             Konsola.append("\n Nr Pliku: "+(i+1)+" - "+ListaObrazówWFolderze.get(i)); 
@@ -2486,10 +2483,4 @@ public class PanelSterowania extends JFrame implements ActionListener {
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
 }

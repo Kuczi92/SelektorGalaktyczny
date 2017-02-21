@@ -7,6 +7,7 @@ package selektorgalaktyk;
 
 
 import java.awt.Graphics;
+import java.awt.color.CMMException;
 import static java.awt.geom.Point2D.distance;
 import org.opencv.core.*;
 
@@ -14,6 +15,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import org.opencv.imgproc.Imgproc;
@@ -46,7 +49,7 @@ public class AlgorytmSelekcji {
     
     ArrayList<Galaktyka> DanaGalaktyka = new ArrayList<>();
     
-    
+  
    
 
 
@@ -62,7 +65,7 @@ public class AlgorytmSelekcji {
     String Źródło;
     /** Store the image width and height */
     private int width, height;
-    
+    PanelSterowania Panel;
     /** Pixels value - ARGB */
     private int pixels[];
     
@@ -128,9 +131,11 @@ public class AlgorytmSelekcji {
                                                 
                                              
     public AlgorytmSelekcji(PanelSterowania Panel,String Źródło,double czerwien,double zielen,double niebieski,double kontrast,WyświetlaczObraz.RodzajeProgowania progowanie,int wartoscprogujaca){
-  
+    this.Panel = Panel;
+    Thread.currentThread().getContextClassLoader();
+    ImageIO.scanForPlugins();
     try {
-       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+      System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     } catch (UnsatisfiedLinkError e) {
       Panel.Konsola.append("\nBrak załadowanej poprawnie biblioteki openCV spróbuj ją dać w odpowiednie miejsce!\n" + e);
       
@@ -958,16 +963,24 @@ public class AlgorytmSelekcji {
      */
     public BufferedImage readImage(String filePath){
         BufferedImage image = null;
+        
         try{
-            File f = new File(filePath);
-            image = ImageIO.read(f);
-            String fileType = filePath.substring(filePath.lastIndexOf('.')+1);
+         
+            image = ImageIO.read(Files.newInputStream(Paths.get(filePath)));
+          
             
+          
+        }
+        catch(IOException e){
+           Panel.Konsola.append( ("\nWykryto błąd podczas ładowania pliku!"+e));
+        }
+        catch(CMMException e){
+           Panel.Konsola.append( ("\nWykryto błąd podczas enkodowania struktury pliku!"+e));
+        }
+        finally{
             this.width = image.getWidth();
             this.height = image.getHeight();
            
-        }catch(IOException e){
-            System.out.println("Error Occurred!\n"+e);
         }
         return image;
     }

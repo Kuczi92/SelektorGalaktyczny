@@ -27,9 +27,8 @@ public class SelektorGalaktyk {
         int height = (int) screenSize.getHeight();
         PanelGlowny.setLocation(width/4, height/4);
         PanelGlowny.setVisible(true);
-      
-        
     }
+    
    public static void addLibraryPath(String pathToAdd) throws Exception {
    final Field usrPathsField = ClassLoader.class.getDeclaredField("usr_paths");
     usrPathsField.setAccessible(true);
@@ -50,3 +49,4 @@ public class SelektorGalaktyk {
     usrPathsField.set(null, newPaths);
 }    
 }
+    

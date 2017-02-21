@@ -12,6 +12,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -64,6 +66,7 @@ public final class Obraz extends JPanel  {
     }
     
     public Obraz(String filePath){
+    
        readImage(filePath);
     }
     
@@ -144,8 +147,9 @@ public final class Obraz extends JPanel  {
      */
     public void readImage(String filePath){
         try{
-            File f = new File(filePath);
-            image = ImageIO.read(f);
+            
+           
+            image = ImageIO.read(Files.newInputStream(Paths.get(filePath)));
             String fileType = filePath.substring(filePath.lastIndexOf('.')+1);
             if("jpg".equals(fileType)){
                 imgType = ImageType.JPG;
